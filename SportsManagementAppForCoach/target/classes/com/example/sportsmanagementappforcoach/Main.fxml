@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.Controller">
+   <children>
+      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="loginButton" layoutX="255.0" layoutY="253.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="26.0" prefWidth="90.0" text="Login" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="254.60000000000002" />
+      <TextField fx:id="Password" layoutX="225.0" layoutY="200.0" onAction="#getPassword" promptText="Password" />
+      <TextField fx:id="CoachName" layoutX="225.0" layoutY="161.0" onAction="#getCoachName" promptText="Coach Name" />
+      <Label fx:id="wrongLoginInformation" layoutX="286.0" layoutY="226.0" />
+   </children>
+</AnchorPane>
