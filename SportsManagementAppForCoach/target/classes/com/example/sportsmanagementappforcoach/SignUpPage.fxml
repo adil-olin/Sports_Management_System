@@ -2,15 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.SignUpPage">
+<AnchorPane prefHeight="395.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.SignUpPage">
    <children>
-      <Button fx:id="Back" layoutX="548.0" layoutY="2.0" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="26.0" prefWidth="51.0" text="Back" />
-      <TextField layoutX="24.0" layoutY="50.0" promptText="User Name" />
-      <TextField layoutX="25.0" layoutY="101.0" promptText="Email Id" />
-      <TextField layoutX="26.0" layoutY="155.0" promptText="Password" />
-      <TextField layoutX="26.0" layoutY="212.0" promptText="Confirm Password" />
-      <Button fx:id="Submit" layoutX="262.0" layoutY="269.0" mnemonicParsing="false" onAction="#SubmitButtonPressed" prefHeight="26.0" prefWidth="81.0" text="Submit" />
+      <Button fx:id="Back" contentDisplay="CENTER" defaultButton="true" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="26.0" prefWidth="33.0" text="Back">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Parvez/Documents/GitHub/Sports_Management_System/SportsManagementAppForCoach/30px-Back_Arrow.svg.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <TextField layoutX="118.0" layoutY="90.0" prefHeight="34.0" prefWidth="218.0" promptText="User Name" />
+      <TextField layoutX="118.0" layoutY="147.0" prefHeight="34.0" prefWidth="218.0" promptText="Email Id / phone Number" />
+      <TextField layoutX="118.0" layoutY="208.0" prefHeight="34.0" prefWidth="218.0" promptText="Password" />
+      <TextField layoutX="118.0" layoutY="264.0" prefHeight="33.0" prefWidth="218.0" promptText="Confirm Password" />
+      <Button fx:id="Submit" layoutX="458.0" layoutY="332.0" mnemonicParsing="false" onAction="#SubmitButtonPressed" prefHeight="26.0" prefWidth="81.0" text="Submit" />
    </children>
 </AnchorPane>
