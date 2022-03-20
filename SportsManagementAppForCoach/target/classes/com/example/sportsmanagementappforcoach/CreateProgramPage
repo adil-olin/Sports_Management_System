@@ -18,7 +18,7 @@ public class CreateProgramPage {
     @FXML
     private Next;
 
-    public FirstPage() {
+    public CreateProgramPage() {
     }
 
     public void Create_ProgramButtonPressed(ActionEvent event) throws IOException {

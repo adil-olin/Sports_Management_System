@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a02f99eb-457a-4b3a-97ac-35b1f1c8c0a3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SportsManagementAppForCoach/target/classes/com/example/sportsmanagementappforcoach/FirstPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SportsManagementAppForCoach/target/classes/com/example/sportsmanagementappforcoach/FirstPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SportsManagementAppForCoach/target/classes/com/example/sportsmanagementappforcoach/CreateProgramPage" beforeDir="false" afterPath="$PROJECT_DIR$/SportsManagementAppForCoach/target/classes/com/example/sportsmanagementappforcoach/CreateProgramPage" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
