@@ -6,6 +6,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.LoginPage">
@@ -29,10 +31,17 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="loginButton" layoutX="255.0" layoutY="253.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="26.0" prefWidth="90.0" text="Login" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="254.60000000000002" />
-      <TextField fx:id="Password" layoutX="225.0" layoutY="200.0" onAction="#getPassword" promptText="Password" />
-      <TextField fx:id="CoachName" layoutX="225.0" layoutY="161.0" onAction="#getCoachName" promptText="Coach Name" />
+      <Button fx:id="loginButton" layoutX="241.0" layoutY="258.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="26.0" prefWidth="90.0" text="Login" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="268.6" />
+      <TextField fx:id="Password" layoutX="179.0" layoutY="200.0" onAction="#getPassword" prefHeight="26.0" prefWidth="214.0" promptText="Password" />
+      <TextField fx:id="CoachName" layoutX="179.0" layoutY="158.0" onAction="#getCoachName" prefHeight="26.0" prefWidth="214.0" promptText="Username" />
       <Label fx:id="wrongLoginInformation" layoutX="286.0" layoutY="226.0" />
-      <Button fx:id="Back" layoutX="548.0" layoutY="26.0" mnemonicParsing="false" onAction="#BackButtonPressed" text="Back" />
+      <Button fx:id="Back" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="26.0" prefWidth="30.0" text="Back">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Parvez/Documents/GitHub/Sports_Management_System/SportsManagementAppForCoach/30px-Back_Arrow.svg.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
    </children>
 </AnchorPane>
