@@ -17,6 +17,7 @@ public class Controller {
     @FXML
     private Button loginButton;
 
+
     @FXML
     String getCoachName() {
         return CoachName.getText();
@@ -36,4 +37,6 @@ public class Controller {
         String UserPassword = getPassword();
         wrongLoginInformation.setText("Your Password of User Name is incorrect");
     }
+
+
 }

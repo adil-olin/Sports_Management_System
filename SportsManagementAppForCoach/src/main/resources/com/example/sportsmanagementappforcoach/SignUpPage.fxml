@@ -8,9 +8,7 @@
    <children>
       <Button fx:id="Back" layoutX="548.0" layoutY="2.0" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="26.0" prefWidth="51.0" text="Back" />
       <TextField fx:id="UserName" layoutX="24.0" layoutY="50.0" promptText="User Name" />
-      <TextField layoutX="25.0" layoutY="101.0" promptText="Email Id" />
       <TextField fx:id="UserPassword" layoutX="26.0" layoutY="155.0" promptText="Password" />
-      <TextField layoutX="26.0" layoutY="212.0" promptText="Confirm Password" />
       <Button fx:id="Submit" layoutX="262.0" layoutY="269.0" mnemonicParsing="false" onAction="#SubmitButtonPressed" prefHeight="26.0" prefWidth="81.0" text="Submit" />
    </children>
 </AnchorPane>
