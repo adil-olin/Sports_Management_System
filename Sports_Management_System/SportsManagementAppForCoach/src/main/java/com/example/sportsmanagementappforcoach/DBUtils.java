@@ -3,49 +3,42 @@ package com.example.sportsmanagementappforcoach;
 import java.sql.*;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.Objects;
-
 import javafx.scene.Node;
 
 public class DBUtils {
-    public static void change_scene(ActionEvent event, String fxmlFile,String title, String username)
-    {
+    public static void change_scene(ActionEvent event, String fxmlFile,String title, String username) {
         Parent root = null;
-        if(username!=null) {
+        if (username != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root = loader.load();
                 LoggedInController loggedincontroller = loader.getController();
-                loggedincontroller.setUserInforation(username);
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else
-        {
-           try{
-               root=FXMLLoader.load(DBUtils.class.getResource(fxmlFile));
-           }
-           catch (IOException e)
-           {
-               e.printStackTrace();
-           }
+        } else {
+            try {
+                root = FXMLLoader.load(DBUtils.class.getResource(fxmlFile));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
-        stage.setScene(new Scene(root,600,400));
+        stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }
     public static void signup(ActionEvent event, String username, String password)
     {
+
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psCheckUserExist = null;
@@ -55,8 +48,7 @@ public class DBUtils {
             connection = DriverManager.getConnection("jdbc:sqlite:/home/galib/IdeaProjects/Sports_Management_System/SportsManagementAppForCoach/src/main/resources/com/example/sportsmanagementappforcoach/sportsmanagement.db");
             psCheckUserExist = connection.prepareStatement("SELECT * FROM users where username =?");
             psCheckUserExist.setString(1,username);
-            psCheckUserExist.executeQuery();
-
+            resultSet = psCheckUserExist.executeQuery();
             if(resultSet.isBeforeFirst())
             {
                 resultSet=null;
@@ -67,13 +59,12 @@ public class DBUtils {
             }
             else
             {
-                Statement stem = null;
-                stem = connection.createStatement();
-                System.out.println("yes");
-                stem.executeQuery("INSERT INTO users('username','password') VALUES (?,?)");
-
+                psInsert = connection.prepareStatement("INSERT INTO users ('username','password') VALUES (?,?)");
+                psInsert.setString(1,username);
+                psInsert.setString(2,password);
+                psInsert.execute();
                 System.out.println("yes"+password);
-                change_scene(event,"Logout.fxml","Welcome",username);
+                change_scene(event,"Loggedin.fxml","Welcome",username);
             }
         }
         catch (SQLException e)

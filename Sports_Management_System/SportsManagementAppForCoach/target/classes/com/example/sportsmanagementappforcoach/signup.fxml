@@ -12,5 +12,6 @@
       <Label fx:id="LabelUsername" layoutX="95.0" layoutY="74.0" prefHeight="29.0" prefWidth="68.0" text="Usernmae" />
       <Label layoutX="95.0" layoutY="139.0" prefHeight="24.0" prefWidth="82.0" text="Password" />
       <Button fx:id="SignUpButton" layoutX="161.0" layoutY="188.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="164.0" text="SignUp" />
+      <Button fx:id="loginButton" layoutX="161.0" layoutY="244.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="131.0" text="Login" />
    </children>
 </AnchorPane>

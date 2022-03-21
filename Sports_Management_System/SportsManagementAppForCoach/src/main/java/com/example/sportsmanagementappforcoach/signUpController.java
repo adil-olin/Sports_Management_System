@@ -19,7 +19,8 @@ public class signUpController implements Initializable {
     private TextField TextFieldUsername;
     @FXML
     private TextField TextFieldPassword;
-
+    @FXML
+    private Button loginButton;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SignUpButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -36,6 +37,12 @@ public class signUpController implements Initializable {
                     alert.setContentText("Fill all information");
                     alert.show();
                 }
+            }
+        });
+        loginButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.change_scene(event,"Main.fxml","login",null);
             }
         });
     }

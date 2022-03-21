@@ -21,12 +21,9 @@ public class LoggedInController implements Initializable {
         logoutButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                DBUtils.change_scene(event,"Main.fxml","Login", null);
             }
         });
     }
-    public void setUserInforation(String username)
-    {
-        LabelWelcome.setText(username);
-    }
+
 }
