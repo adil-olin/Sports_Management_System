@@ -3,8 +3,10 @@ package com.example.sportsmanagementappforcoach;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class SignUpPage {
     @FXML
@@ -12,6 +14,12 @@ public class SignUpPage {
 
     @FXML
     private Button Submit;
+
+    @FXML
+    private TextField UserName;
+
+    @FXML
+    private TextField UserPassword;
 
     public SignUpPage() {
     }
