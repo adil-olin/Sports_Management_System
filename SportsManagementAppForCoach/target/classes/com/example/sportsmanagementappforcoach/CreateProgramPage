@@ -11,12 +11,68 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class CreateProgramPage {
-    @FXML
-    private Button Choose;
-    @FXML
-    private Button Create_Program;
-    @FXML
-    private Next;
+    import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+
+    public class PleaseProvideControllerClassName {
+
+        @FXML
+        private MenuItem Archery;
+
+        @FXML
+        private MenuItem Badminton;
+
+        @FXML
+        private MenuItem Baseball;
+
+        @FXML
+        private MenuItem Basketball;
+
+        @FXML
+        private MenuItem Boxing;
+
+        @FXML
+        private MenuItem Chess;
+
+        @FXML
+        private MenuButton Choose;
+
+        @FXML
+        private Button Creat_Program;
+
+        @FXML
+        private MenuItem Cricket;
+
+        @FXML
+        private MenuItem Cycling;
+
+        @FXML
+        private MenuItem Football;
+
+        @FXML
+        private MenuItem Golf;
+
+        @FXML
+        private MenuItem Hockey;
+
+        @FXML
+        private Button Next;
+
+        @FXML
+        private MenuItem Table_Tennis;
+
+        @FXML
+        private DialogPane Title;
+
+        @FXML
+        private DialogPane Title1;
+
+        @FXML
+        private MenuItem Volleyball;
+
 
     public CreateProgramPage() {
     }

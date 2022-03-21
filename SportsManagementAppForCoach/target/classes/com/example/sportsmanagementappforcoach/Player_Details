@@ -1,0 +1,31 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package com.example.sportsmanagementappforcoach;
+
+import java.io.IOException;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+
+public class Player_Details {
+    @FXML
+    private Button Back;
+    @FXML
+    private Button Next;
+
+    public Player_Details() {
+    }
+
+    public void BackButtonPressed(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToFirstPage(event);
+    }
+
+    public void NextButtonPressed(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToFirstPage(event);
+    }
+}
