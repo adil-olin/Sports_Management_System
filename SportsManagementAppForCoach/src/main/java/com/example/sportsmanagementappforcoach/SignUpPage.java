@@ -2,14 +2,29 @@ package com.example.sportsmanagementappforcoach;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 
-public class SignUpPage {
+public class SignUpPage implements Initializable {
+    SignUpModel signUpModel = new SignUpModel();
+
+    @FXML
+    private TextField ConfirmPasswordTextField;
+
+    @FXML
+    private Label ShowStatusLabel;
+
+    @FXML
+    private Label dbStatus;
+
+    @FXML
+    private TextField EmailIdLabel;
+
     @FXML
     private Button Back;
 
@@ -22,60 +37,46 @@ public class SignUpPage {
     @FXML
     private TextField UserPassword;
 
-    public static void Signup(ActionEvent event, String username, String password)
-    {
-        Connection connection = null;
-        PreparedStatement check = null;
-        PreparedStatement coachInsert = null;
-        ResultSet resultSet = null;
-        try
-        {
-            connection = DriverManager.getConnection("jdbc:sqlite:/home/galib/Documents/GitHub/Sports_Management_System/SportsManagementAppForCoach/src/main/resources/com/example/sportsmanagementappforcoach/sports.db");
-            //change url link from database setting.
-            check = connection.prepareStatement("SELECT * FROM Coach where UserId = ?");
-            check.setString(1,username);
-            resultSet = check.executeQuery();
-            if(resultSet.isBeforeFirst())
-            {
-                System.out.println("User already exist");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You cannot use this username");
-                alert.show();
-            }
-            else
-            {
-                coachInsert = connection.prepareStatement("INSERT INTO Coach('UserID','Password') VALUES (?,?)");
-                coachInsert.setString(1,username);
-                coachInsert.setString(2,password);
-                coachInsert.execute();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            resultSet=null;
-            coachInsert=null;
-            check=null;
-            connection=null;
-        }
-    }
     public void BackButtonPressed(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
         sceneController.SwitchToFirstPage(event);
     }
-    public void SubmitButtonPressed(ActionEvent event) throws IOException {
-        if(!UserName.getText().trim().isEmpty() && !UserPassword.getText().trim().isEmpty())
+    public void SubmitButtonPressed(ActionEvent event) throws IOException, SQLException {
+        if(!UserName.getText().trim().isEmpty() && !UserPassword.getText().trim().isEmpty() && !EmailIdLabel.getText().trim().isEmpty() && !ConfirmPasswordTextField.getText().trim().isEmpty())
         {
-            Signup(event,UserName.getText(), UserPassword.getText());
+            if(!UserPassword.getText().equals( ConfirmPasswordTextField.getText()))
+            {
+                ShowStatusLabel.setText("Password didn't match");
+            }
+            else
+            {
+                if(this.signUpModel.Signup(event,UserName.getText(),EmailIdLabel.getText(), UserPassword.getText()))
+                {
+                    SceneController sceneController = new SceneController();
+                    sceneController.SwitchToFirstPage(event);
+                }
+                else
+                {
+                    ShowStatusLabel.setText("This Email already exists");
+                }
+
+            }
         }
         else
         {
-            Alert alert= new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Fill Information");
-            alert.show();
+            ShowStatusLabel.setText("Fill up all the data");
         }
-        SceneController sceneController = new SceneController();
-        sceneController.SwitchToFirstPage(event);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(this.signUpModel.isDataBaseConnected())
+        {
+            this.dbStatus.setText("Connected");
+        }
+        else
+        {
+            this.dbStatus.setText("Not Connected");
+        }
+    }
 }

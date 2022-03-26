@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -30,9 +31,11 @@
         </menus>
       </MenuBar>
       <Button fx:id="loginButton" layoutX="255.0" layoutY="253.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="26.0" prefWidth="90.0" text="Login" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="254.60000000000002" />
-      <TextField fx:id="Password" layoutX="225.0" layoutY="200.0" onAction="#getPassword" promptText="Password" />
       <TextField fx:id="CoachName" layoutX="225.0" layoutY="161.0" onAction="#getCoachName" promptText="Coach Name" />
       <Label fx:id="wrongLoginInformation" layoutX="286.0" layoutY="226.0" />
       <Button fx:id="Back" layoutX="548.0" layoutY="26.0" mnemonicParsing="false" onAction="#BackButtonPressed" text="Back" />
+      <Label layoutX="14.0" layoutY="30.0" prefHeight="18.0" prefWidth="41.0" text="DB test" />
+      <Label fx:id="dbStatus" layoutX="56.0" layoutY="31.0" prefHeight="18.0" prefWidth="84.0" />
+      <PasswordField fx:id="Password" layoutX="226.0" layoutY="200.0" onAction="#getPassword" promptText="Password" />
    </children>
 </AnchorPane>
