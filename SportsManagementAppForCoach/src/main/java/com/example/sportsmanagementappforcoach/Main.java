@@ -1,5 +1,6 @@
 package com.example.sportsmanagementappforcoach;
 
+import DBUtil.DBResources;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

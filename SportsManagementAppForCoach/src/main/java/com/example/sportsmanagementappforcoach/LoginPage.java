@@ -51,7 +51,7 @@ public class LoginPage implements Initializable {
         if(this.loginModel.isLogin(UserName,UserPassword))
         {
             SceneController sceneController = new SceneController();
-            sceneController.SwitchToHomePage(event);
+            sceneController.SwitchToHomePage(event,UserName);
         }
         else
         {
