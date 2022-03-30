@@ -22,6 +22,39 @@ public class DBResources {
             System.out.println("Connected");
         }
     }
+    public void InsertIntoTable(String mailid,String tablename) throws SQLException {
+        String sql = "INSERT INTO "+tablename+" ( Emailid ) VALUES ( '"+mailid+"' )";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        System.out.println(sql);
+        stmt.executeUpdate();
+
+        stmt.close();
+
+    }
+    public void UpdateTable(String tablename,String mailid,String columnname,String val) throws SQLException {
+        String sql = "UPDATE "+tablename+" SET "+columnname+" = ? , " + "WHERE Emailid = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        stmt.setString(1,val);
+        stmt.setString(2,mailid);
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    public void UpdateTable(String tablename,String mailid,String columnname,int val) throws SQLException {
+        String sql = "UPDATE "+tablename+" SET "+columnname+" = ? , " + "WHERE Emailid = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        stmt.setInt(1,val);
+        stmt.setString(2,mailid);
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    public void AddTeamForCoach(String teamname,Coach coach) throws SQLException {
+        String sql = "INSERT INTO TeamForCoach (Emailid,TeamName) VALUES(?,?)";
+        PreparedStatement pstmt = this.connection.prepareStatement(sql);
+        pstmt.setString(1, coach.getEmailId());
+        pstmt.setString(2, teamname);
+        pstmt.executeUpdate();
+
+}
     public ResultSet getDATA(String x,String y,String val) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
@@ -57,7 +90,6 @@ public class DBResources {
         coach.setId(resultSet.getInt("Id"));
         coach.setName(resultSet.getString("Username"));
         coach.setEmailId(resultSet.getString("Emailid"));
-
         return coach;
     }
     public Coach getCoachData(int id) throws SQLException {
