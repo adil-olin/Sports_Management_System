@@ -19,14 +19,27 @@ public class HomePage {
     private Label UserNameLabel;
 
     @FXML
+    private Button HomePageAddTeamButton;
+
+    private Coach coach;
+
+    @FXML
+    void OnHomePageAddTeamButtonClick(ActionEvent event) throws SQLException, IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToAddTeamPage(event,coach.getEmailId());
+
+    }
+
+
+    @FXML
     void OnFirstPageClick(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
         sceneController.SwitchToFirstPage(event);
     }
     void setUserNameLabel(String mailid) throws SQLException {
         DBResources dbResources = new DBResources();
-        String name = dbResources.getCoachData(mailid).getName();
-        this.UserNameLabel.setText(name);
+        coach = dbResources.getCoachData(mailid);
+        this.UserNameLabel.setText(coach.getName());
     }
     String getUserNameLabel()
     {

@@ -48,4 +48,14 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+    public void SwitchToAddTeamPage(ActionEvent event ,String mailid) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddTeam.fxml"));
+        root = loader.load();
+        AddTeam addTeam = loader.getController();
+        addTeam.AddTeamSetCoach(mailid);
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
