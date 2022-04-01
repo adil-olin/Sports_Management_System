@@ -4,10 +4,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddTeam">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddTeam">
    <children>
       <TextField fx:id="AddTeamTeamNameTextField" layoutX="226.0" layoutY="96.0" promptText="Team Name" />
-      <Button fx:id="AddTeamAddButton" layoutX="275.0" layoutY="187.0" mnemonicParsing="false" onAction="#OnAddButtonClick" text="Add" />
+      <Button fx:id="AddTeamAddButton" layoutX="512.0" layoutY="324.0" mnemonicParsing="false" onAction="#OnAddButtonClick" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Confirm" />
+      <Button layoutX="512.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Abort" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Back" />
    </children>
 </AnchorPane>
