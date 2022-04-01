@@ -12,37 +12,37 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.LoginPage">
-   <children>
-      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Button fx:id="loginButton" layoutX="255.0" layoutY="278.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Login" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="254.60000000000002" />
-      <TextField fx:id="CoachName" layoutX="184.0" layoutY="161.0" onAction="#getCoachName" prefHeight="26.0" prefWidth="254.0" promptText="Coach Name" />
-      <Label fx:id="wrongLoginInformation" layoutX="286.0" layoutY="226.0" />
-      <Button fx:id="Back" layoutX="521.0" layoutY="353.0" mnemonicParsing="false" onAction="#BackButtonPressed" style="-fx-background-color: orange;" text="cancel" />
-      <Label layoutX="266.0" layoutY="86.0" prefHeight="18.0" prefWidth="90.0" text="Welcome Coach!" />
-      <Label fx:id="dbStatus" layoutX="56.0" layoutY="31.0" prefHeight="18.0" prefWidth="84.0" />
-      <PasswordField fx:id="Password" layoutX="184.0" layoutY="200.0" onAction="#getPassword" prefHeight="26.0" prefWidth="254.0" promptText="Password" />
-      <CheckBox layoutX="346.0" layoutY="236.0" mnemonicParsing="false" text="Show Password">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </CheckBox>
-   </children>
+    <children>
+        <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Button fx:id="loginButton" layoutX="255.0" layoutY="278.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Login" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="254.60000000000002" />
+        <TextField fx:id="CoachName" layoutX="184.0" layoutY="161.0" onAction="#getCoachName" prefHeight="26.0" prefWidth="254.0" promptText="Coach Name" />
+        <Label fx:id="wrongLoginInformation" layoutX="286.0" layoutY="226.0" />
+        <Button fx:id="Back" layoutX="521.0" layoutY="353.0" mnemonicParsing="false" onAction="#BackButtonPressed" style="-fx-background-color: orange;" text="cancel" />
+        <Label layoutX="266.0" layoutY="86.0" prefHeight="18.0" prefWidth="90.0" text="Welcome Coach!" />
+        <Label fx:id="dbStatus" layoutX="56.0" layoutY="31.0" prefHeight="18.0" prefWidth="84.0" />
+        <PasswordField fx:id="Password" layoutX="184.0" layoutY="200.0" onAction="#getPassword" prefHeight="26.0" prefWidth="254.0" promptText="Password" />
+        <CheckBox layoutX="346.0" layoutY="236.0" mnemonicParsing="false" text="Show Password">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </CheckBox>
+    </children>
 </AnchorPane>
