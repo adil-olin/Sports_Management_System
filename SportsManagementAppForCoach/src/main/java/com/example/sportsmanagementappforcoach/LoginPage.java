@@ -59,7 +59,8 @@ public class LoginPage implements Initializable {
         }
 
     }
-    public void BackButtonPressed(ActionEvent event) throws IOException {
+    public void BackButtonPressed(ActionEvent event) throws IOException, SQLException {
+        this.loginModel.connection.close();
         SceneController sceneController = new SceneController();
         sceneController.SwitchToFirstPage(event);
     }

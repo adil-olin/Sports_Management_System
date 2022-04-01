@@ -59,7 +59,6 @@ public class SignUpPage implements Initializable {
                 {
                     ShowStatusLabel.setText("This Email already exists");
                 }
-
             }
         }
         else
