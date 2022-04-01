@@ -30,7 +30,6 @@ public class HomePage {
 
     }
 
-
     @FXML
     void OnFirstPageClick(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();

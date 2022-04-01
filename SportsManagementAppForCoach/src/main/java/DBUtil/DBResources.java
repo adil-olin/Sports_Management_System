@@ -48,13 +48,14 @@ public class DBResources {
         stmt.close();
     }
     public void AddTeamForCoach(String teamname,Coach coach) throws SQLException {
-        String sql = "INSERT INTO TeamForCoach (Emailid,TeamName) VALUES(?,?)";
-        PreparedStatement pstmt = this.connection.prepareStatement(sql);
-        pstmt.setString(1, coach.getEmailId());
-        pstmt.setString(2, teamname);
-        pstmt.executeUpdate();
+        String sqlInsert = "INSERT INTO TeamForCoach (Emailid , TeamName) VALUES (?, ?)";
+        PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
+        stmt.setString(1,coach.getEmailId());
+        stmt.setString(2,teamname);
+        stmt.executeUpdate();
 
-}
+
+    }
     public ResultSet getDATA(String x,String y,String val) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
@@ -63,9 +64,14 @@ public class DBResources {
             pr = this.connection.prepareStatement(sql);
             pr.setString(1,val);
             rs = pr.executeQuery();
-            return rs;
+            ResultSet ans = rs;
+            return ans;
         } catch (SQLException e) {
             return null;
+        }
+        finally {
+//            rs.close();
+//            pr.close();
         }
     }
     public ResultSet getDATA(String x,String y,int val) throws SQLException {
@@ -90,6 +96,7 @@ public class DBResources {
         coach.setId(resultSet.getInt("Id"));
         coach.setName(resultSet.getString("Username"));
         coach.setEmailId(resultSet.getString("Emailid"));
+        resultSet.close();
         return coach;
     }
     public Coach getCoachData(int id) throws SQLException {
