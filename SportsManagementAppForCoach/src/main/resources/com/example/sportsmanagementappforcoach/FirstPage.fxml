@@ -5,8 +5,8 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.FirstPage">
    <children>
-      <Button fx:id="SignUp" defaultButton="true" layoutX="255.0" layoutY="200.0" mnemonicParsing="false" onAction="#FirstPageSignUpButtonPressed" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Sign Up" />
-      <Button fx:id="FirstPageLoginButton" defaultButton="true" layoutX="255.0" layoutY="147.0" mnemonicParsing="false" onAction="#LoginButtonPressed" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Login" />
-      <Button layoutX="282.0" layoutY="254.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Exit" />
+      <Button fx:id="FirstPageSignUpButton" defaultButton="true" layoutX="255.0" layoutY="200.0" mnemonicParsing="false" onAction="#OnFirstPageSignUpButtonClick" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Sign Up" />
+      <Button fx:id="FirstPageLoginButton" defaultButton="true" layoutX="255.0" layoutY="147.0" mnemonicParsing="false" onAction="#OnFirstPageLoginButtonClick" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Login" />
+      <Button fx:id="FirstPageExitButton" layoutX="282.0" layoutY="254.0" mnemonicParsing="false" onAction="#OnFirstPageExitButtonClick" style="-fx-background-color: orange;" text="Exit" />
    </children>
 </AnchorPane>

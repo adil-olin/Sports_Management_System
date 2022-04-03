@@ -16,7 +16,7 @@
       <TextField fx:id="EmailIdLabel" layoutX="210.0" layoutY="152.0" prefHeight="26.0" prefWidth="220.0" promptText="Email" />
       <Label layoutX="210.0" layoutY="76.0" prefHeight="18.0" prefWidth="62.0" text="DB TEST : " />
       <Label fx:id="dbStatus" layoutX="72.0" layoutY="15.0" prefHeight="18.0" prefWidth="108.0" />
-      <Label fx:id="ShowStatusLabel" layoutX="210.0" layoutY="207.0" prefHeight="18.0" prefWidth="220.0" />
+      <Label fx:id="ShowStatusLabel" layoutX="210.0" layoutY="319.0" prefHeight="18.0" prefWidth="220.0" />
       <TextField fx:id="ConfirmPasswordTextField" layoutX="210.0" layoutY="261.0" prefHeight="26.0" prefWidth="220.0" promptText="Confirm Password" />
       <CheckBox layoutX="385.0" layoutY="236.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="62.0" text="Show">
          <font>

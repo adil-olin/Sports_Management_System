@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("FirstPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Sports Management App for Coach");
         stage.setScene(scene);
         stage.show();

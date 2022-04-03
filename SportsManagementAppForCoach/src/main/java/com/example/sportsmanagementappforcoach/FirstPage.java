@@ -6,20 +6,28 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+import static java.lang.System.exit;
+
 public class FirstPage {
     @FXML
     private Button FirstPageLoginButton;
 
     @FXML
-    private Button SignUp;
+    private Button FirstPageSignUpButton;
 
-    public void LoginButtonPressed(ActionEvent event) throws IOException {
+    @FXML
+    private Button FirstPageExitButton;
+
+    public void OnFirstPageLoginButtonClick(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
         sceneController.SwitchToLoginPage(event);
     }
-    public void FirstPageSignUpButtonPressed(ActionEvent event) throws IOException {
+    public void OnFirstPageSignUpButtonClick(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
         sceneController.SwitchToSignUpPage(event);
     }
-
+    public void OnFirstPageExitButtonClick(ActionEvent event)
+    {
+        exit(1);
+    }
 }

@@ -3,10 +3,7 @@ package com.example.sportsmanagementappforcoach;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,64 +12,73 @@ import java.util.ResourceBundle;
 
 public class LoginPage implements Initializable {
 
-    LoginModel loginModel = new LoginModel();
-    @FXML
-    private Label dbStatus;
+    LoginModel LoginPageloginModel = new LoginModel();
 
     @FXML
-    private TextField CoachName;
+    private TextField LoginPagePasswordTextField;
 
     @FXML
-    private PasswordField Password;
+    private TextField LoginPageEmailidTextField;
 
     @FXML
-    private Button loginButton;
+    private PasswordField LoginPagePasswordPasswordField;
 
     @FXML
-    String getCoachName() {
-        return CoachName.getText();
+    private Button LoginPageLoginButton;
+
+    @FXML
+    private Label LoginPageWrongLoginInformation;
+
+    @FXML
+    private Button LoginPageCancelButton;
+
+    @FXML
+    private CheckBox LoginPageShowPasswordCheckBox;
+    @FXML
+    void OnLoginPageShowPasswordCheckBoxClick(ActionEvent event) {
+        if(LoginPageShowPasswordCheckBox.isSelected())
+        {
+            LoginPagePasswordTextField.setText(LoginPagePasswordPasswordField.getText());
+            LoginPagePasswordPasswordField.setVisible(false);
+            LoginPagePasswordTextField.setVisible(true);
+            return;
+        }
+        LoginPagePasswordPasswordField.setText(LoginPagePasswordTextField.getText());
+        LoginPagePasswordTextField.setVisible(false);
+        LoginPagePasswordPasswordField.setVisible(true);
     }
-
     @FXML
-    String getPassword() {
-        return Password.getText();
-    }
-
-    @FXML
-    private Label wrongLoginInformation;
-
-    @FXML
-    private Button Back;
-
-    @FXML
-    public void onLoginClick(ActionEvent event) throws SQLException, IOException {
-        String UserName = getCoachName();
-        String UserPassword = getPassword();
-        if(this.loginModel.isLogin(UserName,UserPassword))
+    public void OnLoginPageLoginButtonClick(ActionEvent event) throws SQLException, IOException {
+        String UserName = LoginPageEmailidTextField.getText();
+        String UserPassword = LoginPagePasswordPasswordField.getText();
+        if(this.LoginPageloginModel.isLogin(UserName,UserPassword))
         {
             SceneController sceneController = new SceneController();
             sceneController.SwitchToHomePage(event,UserName);
         }
         else
         {
-            wrongLoginInformation.setText("Your Password or User Name is incorrect");
+            LoginPageWrongLoginInformation.setText("Your Password or User Name is incorrect");
         }
-
     }
-    public void BackButtonPressed(ActionEvent event) throws IOException, SQLException {
-        this.loginModel.connection.close();
+    public void OnLoginPageCancelButtonClick(ActionEvent event) throws IOException, SQLException {
+        this.LoginPageloginModel.connection.close();
+        System.out.println("Login Page DataBase is not DisConnected");
         SceneController sceneController = new SceneController();
         sceneController.SwitchToFirstPage(event);
     }
     public void initialize(URL url, ResourceBundle rb)
     {
-        if(this.loginModel.isDataBaseConnected())
+        LoginPagePasswordPasswordField.setVisible(true);
+        LoginPagePasswordTextField.setVisible(false);
+
+        if(this.LoginPageloginModel.isDataBaseConnected())
         {
-            this.dbStatus.setText("Connected");
+            System.out.println("Login Page DataBase is Connected");
         }
         else
         {
-            this.dbStatus.setText("Not Connected");
+            System.out.println("Login Page DataBase is not Connected");
         }
     }
 }
