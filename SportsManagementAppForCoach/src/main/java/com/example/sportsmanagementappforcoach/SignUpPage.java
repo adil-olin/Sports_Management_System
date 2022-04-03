@@ -14,68 +14,122 @@ public class SignUpPage implements Initializable {
     SignUpModel signUpModel = new SignUpModel();
 
     @FXML
-    private TextField ConfirmPasswordTextField;
+    private Button SignUpPageBackButton;
 
     @FXML
-    private Label ShowStatusLabel;
+    private PasswordField SignUpPageConfirmPasswordPasswordField;
 
     @FXML
-    private Label dbStatus;
+    private TextField SignUpPageConfirmPasswordTextField;
 
     @FXML
-    private TextField EmailIdLabel;
+    private TextField SignUpPageEmailTextField;
 
     @FXML
-    private Button Back;
+    private PasswordField SignUpPagePasswordPasswordField;
 
     @FXML
-    private Button Submit;
+    private TextField SignUpPagePasswordTextField;
 
     @FXML
-    private TextField UserName;
+    private CheckBox SignUpPageShowConfirmPasswordCheckBox;
 
     @FXML
-    private TextField UserPassword;
+    private CheckBox SignUpPageShowPasswordCheckBox;
 
-    public void BackButtonPressed(ActionEvent event) throws IOException {
-        SceneController sceneController = new SceneController();
-        sceneController.SwitchToFirstPage(event);
-    }
-    public void SubmitButtonPressed(ActionEvent event) throws IOException, SQLException {
-        if(!UserName.getText().trim().isEmpty() && !UserPassword.getText().trim().isEmpty() && !EmailIdLabel.getText().trim().isEmpty() && !ConfirmPasswordTextField.getText().trim().isEmpty())
+    @FXML
+    private Label SignUpPageShowStatusLabel;
+
+    @FXML
+    private Button SignUpPageSubmitButton;
+
+    @FXML
+    private TextField SignUpPageUserNameTextField;
+
+    @FXML
+    void OnSignUpPageShowConfirmPasswordCheckBoxClick(ActionEvent event) {
+        if(SignUpPageShowConfirmPasswordCheckBox.isSelected())
         {
-            if(!UserPassword.getText().equals( ConfirmPasswordTextField.getText()))
+            SignUpPageConfirmPasswordTextField.setText(SignUpPageConfirmPasswordPasswordField.getText());
+            SignUpPageConfirmPasswordPasswordField.setVisible(false);
+            SignUpPageConfirmPasswordTextField.setVisible(true);
+            return;
+        }
+        SignUpPageConfirmPasswordPasswordField.setText(SignUpPageConfirmPasswordTextField.getText());
+        SignUpPageConfirmPasswordTextField.setVisible(false);
+        SignUpPageConfirmPasswordPasswordField.setVisible(true);
+        return;
+    }
+
+    @FXML
+    void OnSignUpPageShowPasswordCheckBoxClick(ActionEvent event) {
+        if(SignUpPageShowPasswordCheckBox.isSelected())
+        {
+            SignUpPagePasswordTextField.setText(SignUpPagePasswordPasswordField.getText());
+            SignUpPagePasswordPasswordField.setVisible(false);
+            SignUpPagePasswordTextField.setVisible(true);
+            return;
+        }
+        SignUpPagePasswordPasswordField.setText(SignUpPagePasswordTextField.getText());
+        SignUpPagePasswordTextField.setVisible(false);
+        SignUpPagePasswordPasswordField.setVisible(true);
+        return;
+    }
+
+    @FXML
+    void OnSignUpPageSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
+        if(!SignUpPageShowPasswordCheckBox.isSelected())
+        {
+            SignUpPagePasswordTextField.setText(SignUpPagePasswordPasswordField.getText());
+        }
+        if(!SignUpPageShowConfirmPasswordCheckBox.isSelected())
+        {
+            SignUpPageConfirmPasswordTextField.setText(SignUpPageConfirmPasswordPasswordField.getText());
+        }
+        if(!SignUpPageUserNameTextField.getText().trim().isEmpty() && !SignUpPagePasswordTextField.getText().trim().isEmpty() && !SignUpPageEmailTextField.getText().trim().isEmpty() && !SignUpPageConfirmPasswordTextField.getText().trim().isEmpty())
+        {
+            if(!SignUpPagePasswordTextField.getText().equals( SignUpPageConfirmPasswordTextField.getText()))
             {
-                ShowStatusLabel.setText("Password didn't match");
+                SignUpPageShowStatusLabel.setText("Password didn't match");
             }
             else
             {
-                if(this.signUpModel.Signup(event,UserName.getText(),EmailIdLabel.getText(), UserPassword.getText()))
+                if(this.signUpModel.Signup(event,SignUpPageUserNameTextField.getText(),SignUpPageEmailTextField.getText(), SignUpPagePasswordTextField.getText()))
                 {
                     SceneController sceneController = new SceneController();
                     sceneController.SwitchToFirstPage(event);
                 }
                 else
                 {
-                    ShowStatusLabel.setText("This Email already exists");
+                    SignUpPageShowStatusLabel.setText("This Email already exists");
                 }
             }
         }
         else
         {
-            ShowStatusLabel.setText("Fill up all the data");
+            SignUpPageShowStatusLabel.setText("Fill up all the data");
         }
+    }
+
+    @FXML
+    void OnSignupPageBackButtonClick(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToFirstPage(event);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        SignUpPageConfirmPasswordPasswordField.setVisible(true);
+        SignUpPageConfirmPasswordTextField.setVisible(false);
+        SignUpPagePasswordTextField.setVisible(false);
+        SignUpPagePasswordPasswordField.setVisible(true);
         if(this.signUpModel.isDataBaseConnected())
         {
-            this.dbStatus.setText("Connected");
+            System.out.println("DataBase is connected in Signup Page");
         }
         else
         {
-            this.dbStatus.setText("Not Connected");
+            System.out.println("DataBase is not connected in Signup Page");
         }
     }
 }

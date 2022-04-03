@@ -20,7 +20,7 @@ public class AddTeam implements Initializable {
 
     AddTeamModel addTeamModel = new AddTeamModel();
     @FXML
-    private Button AddTeamAddButton;
+    private Button AddTeamConfirmButton;
 
     @FXML
     private TextField AddTeamTeamNameTextField;
@@ -32,9 +32,13 @@ public class AddTeam implements Initializable {
     @FXML
     private Label AddTeamInsertNameLabel;
 
-
     @FXML
-    void OnAddButtonClick(ActionEvent event) throws SQLException, IOException {
+    void OnAddTeamBackButtonClick(ActionEvent event) throws SQLException, IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToHomePage(event,coach.getEmailId());
+    }
+    @FXML
+    void OnAddTeamConfirmButtonClick(ActionEvent event) throws SQLException, IOException {
         if(AddTeamTeamNameTextField.getText().trim().isEmpty())
         {
             AddTeamInsertNameLabel.setText("Put a name to the text field");

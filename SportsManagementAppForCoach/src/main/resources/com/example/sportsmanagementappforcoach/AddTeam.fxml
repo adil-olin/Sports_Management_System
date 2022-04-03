@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddTeam">
    <children>
       <TextField fx:id="AddTeamTeamNameTextField" layoutX="226.0" layoutY="96.0" promptText="Team Name" />
-      <Button fx:id="AddTeamAddButton" layoutX="512.0" layoutY="324.0" mnemonicParsing="false" onAction="#OnAddButtonClick" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Confirm" />
-      <Button layoutX="512.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Abort" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Back" />
+      <Button fx:id="AddTeamConfirmButton" layoutX="268.0" layoutY="158.0" mnemonicParsing="false" onAction="#OnAddTeamConfirmButtonClick" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Confirm" />
+      <Button fx:id="AddTeamBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnAddTeamBackButtonClick" style="-fx-background-color: orange;" text="Back" />
+      <Label fx:id="AddTeamInsertNameLabel" layoutX="226.0" layoutY="135.0" prefHeight="18.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
