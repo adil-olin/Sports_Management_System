@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.HomePage">
@@ -16,5 +17,6 @@
          </font>
       </Label>
       <Button fx:id="HomePageAddTeamButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnHomePageAddTeamButtonClick" style="-fx-background-color: orange;" text="Add Team" />
+      <VBox fx:id="HomePageAddTeamButtonVBox" layoutX="173.0" layoutY="116.0" onMouseClicked="#OnHomePageVboxMouseClick" prefHeight="257.0" prefWidth="230.0" />
    </children>
 </AnchorPane>
