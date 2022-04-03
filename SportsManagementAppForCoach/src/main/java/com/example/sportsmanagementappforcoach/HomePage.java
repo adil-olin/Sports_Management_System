@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class HomePage {
 
@@ -20,6 +22,8 @@ public class HomePage {
 
     @FXML
     private Label HomePageUserNameLabel;
+
+    ArrayList<String>HomePageTeamNames;
 
     @FXML
     void OnHomePageAddTeamButtonClick(ActionEvent event) throws SQLException, IOException {
@@ -38,6 +42,7 @@ public class HomePage {
 
     void setUserNameLabel(String mailid) throws SQLException {
         DBResources dbResources = new DBResources();
+        HomePageTeamNames = dbResources.getTeamLists(mailid);
         coach = dbResources.getCoachData(mailid);
         this.HomePageUserNameLabel.setText(coach.getName());
     }

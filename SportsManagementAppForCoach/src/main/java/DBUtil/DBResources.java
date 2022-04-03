@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DBResources {
 
@@ -106,5 +107,19 @@ public class DBResources {
         coach.setName(rs.getString("Username"));
         coach.setEmailId(rs.getString("Emailid"));
         return coach;
+    }
+    public ArrayList<String> getTeamLists(String maild) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From TeamForCoach where Emailid = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,maild);
+        rs = pr.executeQuery();
+        ArrayList<String> arr = new ArrayList<String>();
+        while (rs.next())
+        {
+            arr.add(rs.getString("TeamName"));
+        }
+        rs.close();
+        return  arr;
     }
 }
