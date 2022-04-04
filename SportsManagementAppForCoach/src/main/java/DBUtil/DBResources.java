@@ -135,6 +135,7 @@ public class DBResources {
             arr.add(rs.getString("PlayerName"));
         }
         rs.close();
+
         return  arr;
     }
     public ArrayList<String>getSkillList(String emailid ,String teamname) throws SQLException {

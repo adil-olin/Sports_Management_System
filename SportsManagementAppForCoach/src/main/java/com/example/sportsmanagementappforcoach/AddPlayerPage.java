@@ -17,6 +17,7 @@ public class AddPlayerPage {
 
     Coach AddPlayerCoach;
     String AddPlayerTeamName;
+
     @FXML
     private Button AddPlayerBackButton;
 
@@ -38,12 +39,12 @@ public class AddPlayerPage {
     @FXML
     void OnAddPlayerSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
         DBResources dbResources = new DBResources();
-        System.out.println(AddPlayerNameTextField.getText());
-        if(AddPlayerNameTextField.getText().trim().isEmpty())
+        String name = AddPlayerNameTextField.getText();
+        if(name.isEmpty())
         {
             AddPlayerPageCheckLabel.setText("Please Insert A name");
         }
-        else if(dbResources.insertPlayer(AddPlayerCoach.getEmailId(),AddPlayerTeamName,AddPlayerNameTextField.getText()))
+        else if(dbResources.insertPlayer(AddPlayerCoach.getEmailId(),AddPlayerTeamName,name))
         {
             SceneController sceneController = new SceneController();
             sceneController.SwitchToPlayerList(event,AddPlayerCoach.getEmailId(),AddPlayerTeamName);
@@ -52,7 +53,10 @@ public class AddPlayerPage {
         {
             AddPlayerPageCheckLabel.setText("This player Alredy exists on this team");
         }
+
     }
+
+
     public void AddPlayerSetData(String emailid,String teamname) throws SQLException {
         DBResources dbResources = new DBResources();
         AddPlayerTeamName = teamname;

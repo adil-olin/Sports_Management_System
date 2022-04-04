@@ -65,21 +65,15 @@ public class PlayerList {
         PlayerListTeamNameLabel.setText(PlayerListTeamName);
         PlayerListcoach = dbResources.getCoachData(emailid);
         PlayerListPlayerNames = dbResources.getPlayerLists(emailid,PlayerListTeamName);
-        for(int i=0;i<PlayerListPlayerNameButtonVbox.getChildren().size();i++)
+        for(int i=0;i<PlayerListPlayerNames.size();i++)
         {
+            System.out.println(PlayerListPlayerNames.get(i));
             Button tempButton = new Button(PlayerListPlayerNames.get(i));
             tempButton.setMaxWidth(Double.MAX_VALUE);
 
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent event) {
-                    SceneController sceneController = new SceneController();
-                    try {
-                        sceneController.SwitchToPlayerList(event,PlayerListcoach.getEmailId(),tempButton.getText());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    System.out.println("You pressed the button "+tempButton.getText());
                 }
             });
 
