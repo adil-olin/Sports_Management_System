@@ -122,4 +122,68 @@ public class DBResources {
         rs.close();
         return  arr;
     }
+    public ArrayList<String>getPlayerLists(String emailid,String teamname) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From PlayerNameForTeam where Emailid = ? and TeamName = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,emailid);
+        pr.setString(2,teamname);
+        rs = pr.executeQuery();
+        ArrayList<String> arr = new ArrayList<String>();
+        while (rs.next())
+        {
+            arr.add(rs.getString("PlayerName"));
+        }
+        rs.close();
+        return  arr;
+    }
+    public ArrayList<String>getSkillList(String emailid ,String teamname) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From SkillsForTeam where Emailid = ? and TeamName = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,emailid);
+        pr.setString(2,teamname);
+        rs = pr.executeQuery();
+        ArrayList<String> arr = new ArrayList<String>();
+        while (rs.next())
+        {
+            arr.add(rs.getString("SkillName"));
+        }
+        rs.close();
+        return  arr;
+    }
+    public Boolean insertPlayer(String emailid, String teamname, String playername) throws SQLException {
+        PreparedStatement pr = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM PlayerNameForTeam where Emailid = ? and TeamName = ? and PlayerName = ?";
+        try
+        {
+            pr = this.connection.prepareStatement(sql);
+            pr.setString(1,emailid);
+            pr.setString(2,teamname);
+            pr.setString(3,playername);
+            rs = pr.executeQuery();
+            if(rs.next())
+            {
+                return false;
+            }
+            else
+            {
+                String sqlInsert = "INSERT INTO PlayerNameForTeam (Emailid , TeamName , PlayerName) VALUES (?, ?, ?)";
+                PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
+                stmt.setString(1,emailid);
+                stmt.setString(2,teamname);
+                stmt.setString(3,playername);
+                stmt.executeUpdate();
+                stmt.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            pr.close();
+            rs.close();
+        }
+        return false;
+    }
 }

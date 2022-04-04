@@ -148,7 +148,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="11.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Back" />
+      <Button layoutX="11.0" layoutY="8.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Back" />
       <Button layoutX="541.0" layoutY="381.0" mnemonicParsing="false" style="-fx-background-color: grey; -fx-border-color: navy;" text="Update" />
    </children>
 </AnchorPane>

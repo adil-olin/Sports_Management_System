@@ -50,6 +50,10 @@ public class LoginPage implements Initializable {
     @FXML
     public void OnLoginPageLoginButtonClick(ActionEvent event) throws SQLException, IOException {
         String UserName = LoginPageEmailidTextField.getText();
+        if(LoginPageShowPasswordCheckBox.isSelected())
+        {
+            LoginPagePasswordPasswordField.setText(LoginPagePasswordTextField.getText());
+        }
         String UserPassword = LoginPagePasswordPasswordField.getText();
         if(this.LoginPageloginModel.isLogin(UserName,UserPassword))
         {

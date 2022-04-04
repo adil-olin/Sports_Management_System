@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddPlayerPage">
+   <children>
+      <Button fx:id="AddPlayerBackButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnAddPlayerBackButtonClick" text="Back" />
+      <Button fx:id="AddPlayerSubmitButton" layoutX="278.0" layoutY="191.0" mnemonicParsing="false" onAction="#OnAddPlayerSubmitButtonClick" text="Submit" />
+      <TextField fx:id="AddPlayerPagePlayerNameTextField" layoutX="175.0" layoutY="113.0" prefHeight="26.0" prefWidth="262.0" promptText="Player Name" />
+      <Label fx:id="AddPlayerPageCheckLabel" layoutX="183.0" layoutY="159.0" prefHeight="18.0" prefWidth="262.0" />
+   </children>
+</AnchorPane>
