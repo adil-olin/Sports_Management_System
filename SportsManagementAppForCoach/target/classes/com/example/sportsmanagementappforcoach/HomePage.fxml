@@ -11,26 +11,22 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.HomePage">
    <children>
       <Button fx:id="HomePageLogOutButton" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnHomePageLogOutButtonClick" style="-fx-background-color: orange;" text="Log out" />
-      <Label layoutX="165.0" layoutY="40.0" prefHeight="18.0" prefWidth="138.0" text="Welcome Back, Coach! " />
-      <Label fx:id="HomePageUserNameLabel" layoutX="291.0" layoutY="40.0" prefHeight="18.0" prefWidth="230.0" />
+      <Label layoutX="208.0" layoutY="40.0" prefHeight="18.0" prefWidth="122.0" text="Welcome Back Coach, " />
+      <Label fx:id="HomePageUserNameLabel" layoutX="330.0" layoutY="40.0" prefHeight="18.0" prefWidth="106.0" />
       <Label alignment="CENTER" graphicTextGap="10.0" layoutX="234.0" layoutY="58.0" prefHeight="46.0" prefWidth="132.0" text="Team" underline="true" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="234.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <Button fx:id="HomePageAddTeamButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnHomePageAddTeamButtonClick" style="-fx-background-color: orange;" text="Add Team" />
-      <ScrollPane layoutX="141.0" layoutY="160.0" prefHeight="298.0" prefWidth="600.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="598.0">
-               <children>
-                  <VBox fx:id="HomePageTeamButtonVbox" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: Grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </content>
+      <ScrollPane hbarPolicy="NEVER" layoutY="160.0" prefHeight="298.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <content>
+            <VBox fx:id="HomePageTeamButtonVbox" alignment="TOP_CENTER" prefHeight="298.0" prefWidth="599.0" spacing="10.0" style="-fx-background-color: Grey;">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
       </ScrollPane>
    </children>
 </AnchorPane>

@@ -11,8 +11,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.HomePage">
    <children>
       <Button fx:id="HomePageLogOutButton" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnHomePageLogOutButtonClick" style="-fx-background-color: orange;" text="Log out" />
-      <Label layoutX="165.0" layoutY="40.0" prefHeight="18.0" prefWidth="138.0" text="Welcome Back, Coach! " />
-      <Label fx:id="HomePageUserNameLabel" layoutX="291.0" layoutY="40.0" prefHeight="18.0" prefWidth="230.0" />
+      <Label layoutX="191.0" layoutY="40.0" prefHeight="18.0" prefWidth="86.0" text="Welcome Back, " />
+      <Label fx:id="HomePageUserNameLabel" layoutX="277.0" layoutY="40.0" prefHeight="18.0" prefWidth="70.0" />
       <Label alignment="CENTER" graphicTextGap="10.0" layoutX="234.0" layoutY="58.0" prefHeight="46.0" prefWidth="132.0" text="Team" underline="true" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="234.0">
          <font>
             <Font size="20.0" />
@@ -32,5 +32,6 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Label fx:id="HomePageUserNameLabel1" layoutX="355.0" layoutY="40.0" prefHeight="18.0" prefWidth="42.0" text="coach!" />
    </children>
 </AnchorPane>

@@ -97,7 +97,7 @@ public class SignUpPage implements Initializable {
                 if(this.signUpModel.Signup(event,SignUpPageUserNameTextField.getText(),SignUpPageEmailTextField.getText(), SignUpPagePasswordTextField.getText()))
                 {
                     SceneController sceneController = new SceneController();
-                    sceneController.SwitchToFirstPage(event);
+                    sceneController.SwitchToHomePage(event,SignUpPageEmailTextField.getText());
                 }
                 else
                 {

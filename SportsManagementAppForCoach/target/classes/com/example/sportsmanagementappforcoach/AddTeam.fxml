@@ -7,9 +7,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddTeam">
    <children>
-      <TextField fx:id="AddTeamTeamNameTextField" layoutX="226.0" layoutY="96.0" promptText="Team Name" />
-      <Button fx:id="AddTeamConfirmButton" layoutX="268.0" layoutY="158.0" mnemonicParsing="false" onAction="#OnAddTeamConfirmButtonClick" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Confirm" />
+      <TextField fx:id="AddTeamTeamNameTextField" layoutX="231.0" layoutY="157.0" promptText="Team Name" />
+      <Button fx:id="AddTeamConfirmButton" layoutX="274.0" layoutY="225.0" mnemonicParsing="false" onAction="#OnAddTeamConfirmButtonClick" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Confirm" />
       <Button fx:id="AddTeamBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnAddTeamBackButtonClick" style="-fx-background-color: orange;" text="Back" />
-      <Label fx:id="AddTeamInsertNameLabel" layoutX="226.0" layoutY="135.0" prefHeight="18.0" prefWidth="150.0" />
+      <Label fx:id="AddTeamInsertNameLabel" layoutX="225.0" layoutY="191.0" prefHeight="18.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
