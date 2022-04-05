@@ -9,7 +9,7 @@
    <children>
       <Button fx:id="AddPlayerBackButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnAddPlayerBackButtonClick" style="-fx-background-color: orange;" text="Back" />
       <Button fx:id="AddPlayerSubmitButton" layoutX="287.0" layoutY="238.0" mnemonicParsing="false" onAction="#OnAddPlayerSubmitButtonClick" style="-fx-background-color: orange;" text="Submit" />
-      <Label fx:id="AddPlayerPageCheckLabel" layoutX="183.0" layoutY="159.0" prefHeight="18.0" prefWidth="262.0" />
+      <Label fx:id="AddPlayerPageCheckLabel" layoutX="182.0" layoutY="200.0" prefHeight="18.0" prefWidth="262.0" />
       <TextField fx:id="AddPlayerNameTextField" layoutX="183.0" layoutY="164.0" prefHeight="26.0" prefWidth="262.0" promptText="Player Name" />
    </children>
 </AnchorPane>

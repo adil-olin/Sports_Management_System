@@ -1,5 +1,6 @@
 package com.example.sportsmanagementappforcoach;
 
+import PROFILE.Coach;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,54 +26,46 @@ public class SceneController {
         SwitchScene(event,"LoginPage.fxml");
     }
     public void SwitchToFirstPage(ActionEvent event) throws IOException {
-        root =  FXMLLoader.load(getClass().getResource("FirstPage.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SwitchScene(event,"FirstPage.fxml");
     }
     public void SwitchToSignUpPage(ActionEvent event) throws IOException {
-        root =  FXMLLoader.load(getClass().getResource("SignUpPage.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SwitchScene(event,"SignUpPage.fxml");
     }
-    public void SwitchToHomePage(ActionEvent event,String useremailid) throws IOException, SQLException {
+    public void SwitchToHomePage(ActionEvent event, Coach coach) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
         root = loader.load();
         HomePage homePage = loader.getController();
-        homePage.setUserNameLabel(useremailid);
+        homePage.setUserNameLabel(coach);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    public void SwitchToAddTeamPage(ActionEvent event ,String mailid) throws IOException, SQLException {
+    public void SwitchToAddTeamPage(ActionEvent event ,Coach coach) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddTeam.fxml"));
         root = loader.load();
         AddTeam addTeam = loader.getController();
-        addTeam.AddTeamSetCoach(mailid);
+        addTeam.AddTeamSetCoach(coach);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    public void SwitchToPlayerList(ActionEvent event,String mailid, String teamname) throws IOException, SQLException {
+    public void SwitchToPlayerList(ActionEvent event,Coach coach,int idx) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerList.fxml"));
         root = loader.load();
         PlayerList playerList = loader.getController();
-        playerList.PlayerListSetData(mailid,teamname);
+        playerList.PlayerListSetData(coach,idx);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    public void SwitchtoAddPlayerPage(ActionEvent event , String mailid , String teamname) throws IOException, SQLException {
+    public void SwitchtoAddPlayerPage(ActionEvent event , Coach coach,int idx) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddPlayerPage.fxml"));
         root = loader.load();
         AddPlayerPage addPlayerPage = loader.getController();
-        addPlayerPage.AddPlayerSetData(mailid,teamname);
+        addPlayerPage.AddPlayerSetData(coach,idx);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

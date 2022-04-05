@@ -1,6 +1,6 @@
 package com.example.sportsmanagementappforcoach;
 
-import COACH.Coach;
+import PROFILE.Coach;
 
 import DBUtil.DBResources;
 import javafx.event.ActionEvent;
@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -27,7 +26,7 @@ public class AddTeam implements Initializable {
 
     private DBResources AddTeamdbresources;
 
-    Coach coach;
+    private Coach AddTeamCoach;
 
     @FXML
     private Label AddTeamInsertNameLabel;
@@ -35,7 +34,7 @@ public class AddTeam implements Initializable {
     @FXML
     void OnAddTeamBackButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToHomePage(event,coach.getEmailId());
+        sceneController.SwitchToHomePage(event,AddTeamCoach);
     }
     @FXML
     void OnAddTeamConfirmButtonClick(ActionEvent event) throws SQLException, IOException {
@@ -45,10 +44,12 @@ public class AddTeam implements Initializable {
         }
         else
         {
-            if(this.addTeamModel.AddTeamModelAddTeam(AddTeamTeamNameTextField.getText(),coach))
+            if(this.addTeamModel.AddTeamModelAddTeam(AddTeamTeamNameTextField.getText(),AddTeamCoach))
             {
                 SceneController sceneController = new SceneController();
-                sceneController.SwitchToHomePage(event,coach.getEmailId());
+                DBResources dbResources = new DBResources();
+                AddTeamCoach.setTeamArrayList(dbResources.getTeamLists(AddTeamCoach));
+                sceneController.SwitchToHomePage(event,AddTeamCoach);
             }
             else
             {
@@ -56,10 +57,8 @@ public class AddTeam implements Initializable {
             }
         }
     }
-    void AddTeamSetCoach(String mailid) throws SQLException {
-        AddTeamdbresources = new DBResources();
-        coach = AddTeamdbresources.getCoachData(mailid);
-        System.out.println(coach.getEmailId());
+    void AddTeamSetCoach(Coach coach) throws SQLException {
+        AddTeamCoach = coach;
     }
 
     @Override

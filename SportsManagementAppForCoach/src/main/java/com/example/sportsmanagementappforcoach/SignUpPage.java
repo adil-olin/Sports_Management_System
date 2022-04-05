@@ -1,5 +1,7 @@
 package com.example.sportsmanagementappforcoach;
 
+import DBUtil.DBResources;
+import PROFILE.Coach;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -97,7 +99,9 @@ public class SignUpPage implements Initializable {
                 if(this.signUpModel.Signup(event,SignUpPageUserNameTextField.getText(),SignUpPageEmailTextField.getText(), SignUpPagePasswordTextField.getText()))
                 {
                     SceneController sceneController = new SceneController();
-                    sceneController.SwitchToHomePage(event,SignUpPageEmailTextField.getText());
+                    DBResources dbResources = new DBResources();
+                    Coach coach = dbResources.getCoachData(SignUpPageEmailTextField.getText());
+                    sceneController.SwitchToHomePage(event,coach);
                 }
                 else
                 {

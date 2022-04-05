@@ -1,6 +1,6 @@
 package com.example.sportsmanagementappforcoach;
 
-import COACH.Coach;
+import PROFILE.Coach;
 import DBUtil.DBConnection;
 
 import java.sql.Connection;
@@ -31,7 +31,7 @@ public class AddTeamModel{
         try
         {
             pr = this.connection.prepareStatement(sql);
-            pr.setString(1,coach.getEmailId());
+            pr.setString(1,coach.getEmailid());
             pr.setString(2,teamname);
             rs = pr.executeQuery();
             if(rs.next())
@@ -42,7 +42,7 @@ public class AddTeamModel{
             {
                 String sqlInsert = "INSERT INTO TeamForCoach (Emailid, TeamName) VALUES (?, ?)";
                 PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
-                stmt.setString(1,coach.getEmailId());
+                stmt.setString(1,coach.getEmailid());
                 stmt.setString(2,teamname);
                 stmt.executeUpdate();
                 stmt.close();

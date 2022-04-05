@@ -1,27 +1,25 @@
 package com.example.sportsmanagementappforcoach;
 
-import COACH.Coach;
+import PROFILE.Coach;
 import DBUtil.DBResources;
+import PROFILE.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class PlayerList {
 
-    Coach PlayerListcoach;
     DBResources PlayerListDBResources = new DBResources();
-    String PlayerListTeamName;
-    ArrayList<String>PlayerListPlayerNames;
+
+    private Coach PlayerListCoach;
+    private int PlayerListTeamNumber;
 
     @FXML
     private Label PlayerListTeamNameLabel;
@@ -44,13 +42,13 @@ public class PlayerList {
     @FXML
     void OnPlayerListAddPlayerButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        sceneController.SwitchtoAddPlayerPage(event,PlayerListcoach.getEmailId(),PlayerListTeamName);
+        sceneController.SwitchtoAddPlayerPage(event,PlayerListCoach,PlayerListTeamNumber);
     }
 
     @FXML
     void OnPlayerListBackButtonCLick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToHomePage(event , PlayerListcoach.getEmailId());
+        sceneController.SwitchToHomePage(event , PlayerListCoach);
     }
 
     @FXML
@@ -59,16 +57,16 @@ public class PlayerList {
         sceneController.SwitchToFirstPage(event);
     }
 
-    void PlayerListSetData(String emailid,String teamname) throws SQLException {
+    void PlayerListSetData(Coach coach,int idx) throws SQLException {
         DBResources dbResources = new DBResources();
-        PlayerListTeamName = teamname;
-        PlayerListTeamNameLabel.setText(PlayerListTeamName);
-        PlayerListcoach = dbResources.getCoachData(emailid);
-        PlayerListPlayerNames = dbResources.getPlayerLists(emailid,PlayerListTeamName);
-        for(int i=0;i<PlayerListPlayerNames.size();i++)
+        PlayerListCoach = coach;
+        PlayerListCoach.getTeamArrayList().get(idx).setPlayerArrayList(dbResources.getPlayerLists(coach.getEmailid(),coach.getTeamArrayList().get(idx).getName()));
+        System.out.println(coach.getTeamArrayList().get(idx).getPlayerArrayList().size()+" player in this team "+ coach.getTeamArrayList().get(idx).getName());
+        for(int i=0;i<PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().size();i++)
         {
-            System.out.println(PlayerListPlayerNames.get(i));
-            Button tempButton = new Button(PlayerListPlayerNames.get(i));
+            System.out.println(PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().get(i).getName());
+            Button tempButton = new Button(PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().get(i).getName());
+
             tempButton.setMaxWidth(Double.MAX_VALUE);
 
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -76,7 +74,6 @@ public class PlayerList {
                     System.out.println("You pressed the button "+tempButton.getText());
                 }
             });
-
             PlayerListPlayerNameButtonVbox.getChildren().add(tempButton);
         }
     }

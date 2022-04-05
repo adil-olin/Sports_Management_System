@@ -1,5 +1,6 @@
 package com.example.sportsmanagementappforcoach;
 
+import PROFILE.Coach;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,7 +59,8 @@ public class LoginPage implements Initializable {
         if(this.LoginPageloginModel.isLogin(UserName,UserPassword))
         {
             SceneController sceneController = new SceneController();
-            sceneController.SwitchToHomePage(event,UserName);
+            Coach coach = new Coach(UserName);
+            sceneController.SwitchToHomePage(event,coach);
         }
         else
         {

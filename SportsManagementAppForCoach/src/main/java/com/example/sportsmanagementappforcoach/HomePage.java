@@ -1,17 +1,15 @@
 package com.example.sportsmanagementappforcoach;
 
-import COACH.Coach;
+import PROFILE.Coach;
 import DBUtil.DBResources;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -26,14 +24,15 @@ public class HomePage {
     @FXML
     private Label HomePageUserNameLabel;
 
-    ArrayList<String>HomePageTeamNames;
+    private Coach HomePageCoach;
+
     @FXML
     private VBox HomePageTeamButtonVbox;
 
     @FXML
     void OnHomePageAddTeamButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToAddTeamPage(event,coach.getEmailId());
+        sceneController.SwitchToAddTeamPage(event,HomePageCoach);
     }
 
     @FXML
@@ -42,22 +41,19 @@ public class HomePage {
         sceneController.SwitchToFirstPage(event);
     }
 
-
-    private Coach coach;
-
-    void setUserNameLabel(String mailid) throws SQLException {
-        DBResources dbResources = new DBResources();
-        HomePageTeamNames = dbResources.getTeamLists(mailid);
-        for(int i=0;i<HomePageTeamNames.size();i++)
+    void setUserNameLabel(Coach coach){
+        HomePageCoach = coach;
+        for(int i=0;i<HomePageCoach.getTeamArrayList().size();i++)
         {
-            Button tempButton = new Button(HomePageTeamNames.get(i));
+            Button tempButton = new Button(HomePageCoach.getTeamArrayList().get(i).getName());
             tempButton.setMaxWidth(Double.MAX_VALUE);
 
+            int finalI = i;
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent event) {
                     SceneController sceneController = new SceneController();
                     try {
-                        sceneController.SwitchToPlayerList(event,coach.getEmailId(),tempButton.getText());
+                        sceneController.SwitchToPlayerList(event,HomePageCoach, finalI);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (SQLException e) {
@@ -68,8 +64,7 @@ public class HomePage {
 
             HomePageTeamButtonVbox.getChildren().add(tempButton);
         }
-        coach = dbResources.getCoachData(mailid);
-        this.HomePageUserNameLabel.setText(coach.getName());
+        this.HomePageUserNameLabel.setText(HomePageCoach.getName());
     }
     String getUserNameLabel()
     {

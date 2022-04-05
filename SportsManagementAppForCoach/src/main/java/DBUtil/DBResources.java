@@ -1,6 +1,9 @@
 package DBUtil;
 
-import COACH.Coach;
+import PROFILE.Coach;
+import PROFILE.Player;
+import PROFILE.PlayerSkilL;
+import PROFILE.Team;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +54,7 @@ public class DBResources {
     public void AddTeamForCoach(String teamname,Coach coach) throws SQLException {
         String sqlInsert = "INSERT INTO TeamForCoach (Emailid , TeamName) VALUES (?, ?)";
         PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
-        stmt.setString(1,coach.getEmailId());
+        stmt.setString(1,coach.getEmailid());
         stmt.setString(2,teamname);
         stmt.executeUpdate();
 
@@ -93,75 +96,109 @@ public class DBResources {
 
         ResultSet resultSet = null;
         resultSet = getDATA("*" , "Emailid" , emailid);
-        Coach coach = new Coach();
+        Coach coach = new Coach(emailid);
         coach.setId(resultSet.getInt("Id"));
         coach.setName(resultSet.getString("Username"));
-        coach.setEmailId(resultSet.getString("Emailid"));
+        coach.setEmailid(resultSet.getString("Emailid"));
         resultSet.close();
         return coach;
     }
-    public Coach getCoachData(int id) throws SQLException {
-        ResultSet rs = getDATA("*" , "Emailid" , id);
-        Coach coach = new Coach();
-        coach.setId(rs.getInt("Id"));
-        coach.setName(rs.getString("Username"));
-        coach.setEmailId(rs.getString("Emailid"));
-        return coach;
-    }
-    public ArrayList<String> getTeamLists(String maild) throws SQLException {
+
+    public ArrayList<Team> getTeamLists(Coach coach) throws SQLException {
         ResultSet rs = null;
         String sql = "SELECT * From TeamForCoach where Emailid = ?";
         PreparedStatement pr = this.connection.prepareStatement(sql);
-        pr.setString(1,maild);
+        pr.setString(1,coach.getEmailid());
         rs = pr.executeQuery();
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<Team> arr = new ArrayList<Team>();
         while (rs.next())
         {
-            arr.add(rs.getString("TeamName"));
+            Team tempteam = new Team();
+            tempteam.setName(rs.getString("TeamName"));
+            arr.add(tempteam);
         }
         rs.close();
+        for (int i=0;i<arr.size();i++)
+        {
+            arr.get(i).setPlayerArrayList(this.getPlayerLists(coach.getEmailid(),arr.get(i).getName()));
+        }
         return  arr;
     }
-    public ArrayList<String>getPlayerLists(String emailid,String teamname) throws SQLException {
+    public ArrayList<Team> getTeamLists(String emailid) throws SQLException {
         ResultSet rs = null;
-        String sql = "SELECT * From PlayerNameForTeam where Emailid = ? and TeamName = ?";
+        String sql = "SELECT * From TeamForCoach where Emailid = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,emailid);
+        rs = pr.executeQuery();
+        ArrayList<Team> arr = new ArrayList<Team>();
+        while (rs.next())
+        {
+            Team tempteam = new Team();
+            tempteam.setName(rs.getString("TeamName"));
+            arr.add(tempteam);
+        }
+        rs.close();
+        for (int i=0;i<arr.size();i++)
+        {
+            arr.get(i).setPlayerArrayList(this.getPlayerLists(emailid,arr.get(i).getName()));
+        }
+        return  arr;
+    }
+    public ArrayList<PlayerSkilL>getSkillList(String emailid,String teamname, String playername) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From PlayerDetails where Emailid = ? and TeamName = ? and PlayerName = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,emailid);
+        pr.setString(2,teamname);
+        pr.setString(1,playername);
+        rs = pr.executeQuery();
+        ArrayList<PlayerSkilL>temparr = new ArrayList<PlayerSkilL>();
+        while (rs.next())
+        {
+            PlayerSkilL playerSkilL = new PlayerSkilL(rs.getString("SkillName"),rs.getInt("SkillValue"));
+            temparr.add(playerSkilL);
+        }
+        rs.close();
+        return temparr;
+    }
+    public ArrayList<Player>getPlayerLists(String emailid,String teamname) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From PlayerInfo where Emailid = ? and TeamName = ?";
         PreparedStatement pr = this.connection.prepareStatement(sql);
         pr.setString(1,emailid);
         pr.setString(2,teamname);
         rs = pr.executeQuery();
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<Player> arr = new ArrayList<Player>();
         while (rs.next())
         {
-            arr.add(rs.getString("PlayerName"));
+            Player tempplayer = new Player(rs.getString("Role"));
+            tempplayer.setName(rs.getString("PlayerName"));
+            tempplayer.setAge(rs.getInt("Age"));
+            tempplayer.setHeight(rs.getInt("Height"));
+            tempplayer.setImagePath(rs.getString("PicPath"));
+            tempplayer.setEmailid(rs.getString("Emailid"));
+            tempplayer.setPlayerTeamName(teamname);
+            System.out.println(tempplayer.getName());
+            arr.add(tempplayer);
         }
         rs.close();
-
-        return  arr;
-    }
-    public ArrayList<String>getSkillList(String emailid ,String teamname) throws SQLException {
-        ResultSet rs = null;
-        String sql = "SELECT * From SkillsForTeam where Emailid = ? and TeamName = ?";
-        PreparedStatement pr = this.connection.prepareStatement(sql);
-        pr.setString(1,emailid);
-        pr.setString(2,teamname);
-        rs = pr.executeQuery();
-        ArrayList<String> arr = new ArrayList<String>();
-        while (rs.next())
+        for(int i=0;i<arr.size();i++)
         {
-            arr.add(rs.getString("SkillName"));
+            ArrayList<PlayerSkilL>tempskill = new ArrayList<PlayerSkilL>();
+            tempskill = this.getSkillList(emailid,teamname,arr.get(i).getName());
+            arr.get(i).setSkills(tempskill);
         }
-        rs.close();
         return  arr;
     }
-    public Boolean insertPlayer(String emailid, String teamname, String playername) throws SQLException {
+    public Boolean insertPlayer(Coach coach , int teamnumber, String playername) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM PlayerNameForTeam where Emailid = ? and TeamName = ? and PlayerName = ?";
+        String sql = "SELECT * FROM PlayerInfo where Emailid = ? and TeamName = ? and PlayerName = ?";
         try
         {
             pr = this.connection.prepareStatement(sql);
-            pr.setString(1,emailid);
-            pr.setString(2,teamname);
+            pr.setString(1,coach.getEmailid());
+            pr.setString(2,coach.getTeamArrayList().get(teamnumber).getName());
             pr.setString(3,playername);
             rs = pr.executeQuery();
             if(rs.next())
@@ -170,10 +207,10 @@ public class DBResources {
             }
             else
             {
-                String sqlInsert = "INSERT INTO PlayerNameForTeam (Emailid , TeamName , PlayerName) VALUES (?, ?, ?)";
+                String sqlInsert = "INSERT INTO PlayerInfo (Emailid , TeamName , PlayerName) VALUES (?, ?, ?)";
                 PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
-                stmt.setString(1,emailid);
-                stmt.setString(2,teamname);
+                stmt.setString(1,coach.getEmailid());
+                stmt.setString(2,coach.getTeamArrayList().get(teamnumber).getName());
                 stmt.setString(3,playername);
                 stmt.executeUpdate();
                 stmt.close();
@@ -187,4 +224,16 @@ public class DBResources {
         }
         return false;
     }
+
+    public String getUserNameForCoach(String mailid) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From LoginDB where Emailid = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,mailid);
+        rs = pr.executeQuery();
+        String name = rs.getString("Username");
+        rs.close();
+        return  name;
+    }
+
 }

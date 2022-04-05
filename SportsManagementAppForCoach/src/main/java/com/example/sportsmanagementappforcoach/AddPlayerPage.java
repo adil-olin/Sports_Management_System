@@ -1,22 +1,21 @@
 package com.example.sportsmanagementappforcoach;
 
-import COACH.Coach;
+import PROFILE.Coach;
 import DBUtil.DBResources;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class AddPlayerPage {
 
-    Coach AddPlayerCoach;
-    String AddPlayerTeamName;
+    private Coach AddPlayerCoach;
+    private String AddPlayerTeamName;
+    private int AddPlayerTeamNumber;
 
     @FXML
     private Button AddPlayerBackButton;
@@ -33,7 +32,7 @@ public class AddPlayerPage {
     @FXML
     void OnAddPlayerBackButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToPlayerList(event,AddPlayerCoach.getEmailId(),AddPlayerTeamName);
+        sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
     }
 
     @FXML
@@ -44,22 +43,20 @@ public class AddPlayerPage {
         {
             AddPlayerPageCheckLabel.setText("Please Insert A name");
         }
-        else if(dbResources.insertPlayer(AddPlayerCoach.getEmailId(),AddPlayerTeamName,name))
+        else if(dbResources.insertPlayer(AddPlayerCoach,AddPlayerTeamNumber,name))
         {
             SceneController sceneController = new SceneController();
-            sceneController.SwitchToPlayerList(event,AddPlayerCoach.getEmailId(),AddPlayerTeamName);
+            sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
         }
         else
         {
             AddPlayerPageCheckLabel.setText("This player Alredy exists on this team");
         }
-
     }
 
 
-    public void AddPlayerSetData(String emailid,String teamname) throws SQLException {
-        DBResources dbResources = new DBResources();
-        AddPlayerTeamName = teamname;
-        AddPlayerCoach = dbResources.getCoachData(emailid);
+    public void AddPlayerSetData(Coach coach, int idx) {
+        AddPlayerCoach = coach;
+        AddPlayerTeamNumber = idx;
     }
 }
