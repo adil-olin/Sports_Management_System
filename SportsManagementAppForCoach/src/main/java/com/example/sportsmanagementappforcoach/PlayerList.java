@@ -60,11 +60,8 @@ public class PlayerList {
     void PlayerListSetData(Coach coach,int idx) throws SQLException {
         DBResources dbResources = new DBResources();
         PlayerListCoach = coach;
-        PlayerListCoach.getTeamArrayList().get(idx).setPlayerArrayList(dbResources.getPlayerLists(coach.getEmailid(),coach.getTeamArrayList().get(idx).getName()));
-        System.out.println(coach.getTeamArrayList().get(idx).getPlayerArrayList().size()+" player in this team "+ coach.getTeamArrayList().get(idx).getName());
         for(int i=0;i<PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().size();i++)
         {
-            System.out.println(PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().get(i).getName());
             Button tempButton = new Button(PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().get(i).getName());
 
             tempButton.setMaxWidth(Double.MAX_VALUE);
