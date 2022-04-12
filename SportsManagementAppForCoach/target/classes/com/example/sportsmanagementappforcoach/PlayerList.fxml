@@ -7,27 +7,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="414.0" prefWidth="612.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.PlayerList">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.PlayerList">
    <children>
-      <Button fx:id="PlayerListLogOutButton" layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnPlayerListLogOutButtonClick" style="-fx-background-color: orange;" text="Log out" />
-      <Label layoutX="239.0" layoutY="17.0" prefHeight="18.0" prefWidth="138.0" text="Welcome Back, Coach! " />
-      <Label fx:id="UserNameLabel" layoutX="211.0" layoutY="17.0" prefHeight="18.0" prefWidth="164.0" />
-      <Label alignment="CENTER" graphicTextGap="10.0" layoutX="234.0" layoutY="62.0" lineSpacing="17.0" prefHeight="46.0" prefWidth="132.0" text="Players" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="234.0">
+      <Button fx:id="PlayerListLogOutButton" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#OnPlayerListLogOutButtonClick" style="-fx-background-color: orange;" text="Log out" />
+      <Label layoutX="243.0" layoutY="40.0" prefHeight="18.0" prefWidth="138.0" text="Welcome Back, Coach! " />
+      <Label fx:id="UserNameLabel" layoutX="209.0" layoutY="40.0" prefHeight="18.0" prefWidth="230.0" />
+      <Label alignment="CENTER" graphicTextGap="10.0" layoutX="234.0" layoutY="85.0" lineSpacing="17.0" prefHeight="46.0" prefWidth="132.0" text="Players" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="234.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <Button fx:id="PlayerListAddPlayerButton" layoutX="14.0" layoutY="49.0" mnemonicParsing="false" onAction="#OnPlayerListAddPlayerButtonClick" style="-fx-background-color: orange;" text="Add Player" />
       <Button fx:id="PlayerListBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnPlayerListBackButtonCLick" style="-fx-background-color: Orange;" text="Back" />
-      <Label fx:id="PlayerListTeamNameLabel" alignment="CENTER" layoutX="211.0" layoutY="40.0" prefHeight="18.0" prefWidth="190.0">
+      <Label fx:id="PlayerListTeamNameLabel" alignment="CENTER" layoutX="205.0" layoutY="58.0" prefHeight="18.0" prefWidth="190.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ScrollPane hbarPolicy="NEVER" layoutX="200.0" layoutY="146.0" prefHeight="273.0" prefWidth="612.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <content>
-            <VBox fx:id="PlayerListPlayerNameButtonVbox" alignment="TOP_CENTER" prefHeight="274.0" prefWidth="607.0" style="-fx-background-color: Grey;" />
-         </content>
+      <ScrollPane layoutX="200.0" layoutY="146.0" prefHeight="274.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="599.0">
+               <children>
+                  <VBox fx:id="PlayerListPlayerNameButtonVbox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </content>
       </ScrollPane>
-      <Button fx:id="PlayerListAddPlayerButton" layoutX="528.0" layoutY="382.0" mnemonicParsing="false" onAction="#OnPlayerListAddPlayerButtonClick" style="-fx-background-color: orange;" text="Add Player" />
    </children>
 </AnchorPane>

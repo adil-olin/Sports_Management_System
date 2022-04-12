@@ -41,16 +41,17 @@ public class HomePage {
         sceneController.SwitchToFirstPage(event);
     }
 
-    void setUserNameLabel(Coach coach){
+    void setUserNameLabel(Coach coach) throws SQLException {
         HomePageCoach = coach;
+        HomePageCoach.setTeamArrayList();
         for(int i=0;i<HomePageCoach.getTeamArrayList().size();i++)
         {
             Button tempButton = new Button(HomePageCoach.getTeamArrayList().get(i).getName());
             tempButton.setMaxWidth(Double.MAX_VALUE);
-
             int finalI = i;
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent event) {
+                    
                     SceneController sceneController = new SceneController();
                     try {
                         sceneController.SwitchToPlayerList(event,HomePageCoach, finalI);

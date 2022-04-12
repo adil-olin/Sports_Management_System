@@ -14,9 +14,16 @@ public class Coach extends Human {
     public Coach (String emailid) throws SQLException {
         super.setRole("COACH");
         super.setEmailid(emailid);
-        DBResources dbResources = new DBResources();
-        super.setName(dbResources.getUserNameForCoach(emailid));
+        setCoachName();
+    }
 
+    public void setCoachName() throws SQLException {
+        DBResources dbResources = new DBResources();
+        super.setName(dbResources.getUserNameForCoach(this.getEmailid()));
+    }
+
+    public void setTeamArrayList() throws SQLException {
+        DBResources dbResources = new DBResources();
         teamArrayList = dbResources.getTeamLists(this.getEmailid());
     }
 

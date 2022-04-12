@@ -201,5 +201,38 @@ public class DBResources {
         rs.close();
         return  name;
     }
-
+    public ArrayList<PlayerSkilL> getPlayerSkillListdb(Coach coach,int idx) throws SQLException {
+        ResultSet rs = null;
+        String sql = "SELECT * From SkillsForTeam where Emailid = ? and TeamName = ?";
+        PreparedStatement pr = this.connection.prepareStatement(sql);
+        pr.setString(1,coach.getEmailid());
+        pr.setString(2,coach.getTeamArrayList().get(idx).getName());
+        rs = pr.executeQuery();
+        ArrayList<PlayerSkilL> arr = new ArrayList<PlayerSkilL>();
+        while (rs.next())
+        {
+            PlayerSkilL tempplayerskill = new PlayerSkilL();
+            tempplayerskill.setSkillName(rs.getString("SkillName"));
+            arr.add(tempplayerskill);
+        }
+        rs.close();
+        return  arr;
+    }
+    public void InsertSkillList(Coach coach,String teamname,ArrayList<PlayerSkilL>SkillNames) throws SQLException {
+        try
+        {
+            for(int i=0;i<SkillNames.size();i++)
+            {
+                String sqlInsert = "INSERT INTO SkillsForTeam (Emailid , TeamName , SkillName) VALUES (?, ?, ?)";
+                PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
+                stmt.setString(1,coach.getEmailid());
+                stmt.setString(2,teamname);
+                stmt.setString(3,SkillNames.get(i).getSkillName());
+                stmt.executeUpdate();
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
