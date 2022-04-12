@@ -149,9 +149,8 @@ public class AddTeam implements Initializable {
         choicelist = new ArrayList<String>();
         choicelist.add("Value");
         choicelist.add("Percantage");
-        AddTeamSkillTypeChoiceBox = new ChoiceBox();
-        AddTeamSkillTypeChoiceBox.getItems().add("Value");
-        AddTeamSkillTypeChoiceBox.getItems().add("Percantage");
+        AddTeamSkillTypeChoiceBox.getItems().addAll(choicelist);
+        AddTeamSkillTypeChoiceBox.setValue("Value");
         System.out.println("The value is : "+ AddTeamSkillTypeChoiceBox.getItems().get(0));
         if(this.addTeamModel.isDataBaseConnected())
         {
