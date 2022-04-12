@@ -213,6 +213,7 @@ public class DBResources {
         {
             PlayerSkilL tempplayerskill = new PlayerSkilL();
             tempplayerskill.setSkillName(rs.getString("SkillName"));
+            tempplayerskill.setSkillValueType(rs.getInt("ValueType"));
             arr.add(tempplayerskill);
         }
         rs.close();

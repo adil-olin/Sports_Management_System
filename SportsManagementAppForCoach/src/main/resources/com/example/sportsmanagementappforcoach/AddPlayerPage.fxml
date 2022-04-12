@@ -4,12 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddPlayerPage">
    <children>
       <Button fx:id="AddPlayerBackButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnAddPlayerBackButtonClick" text="Back" />
-      <Button fx:id="AddPlayerSubmitButton" layoutX="278.0" layoutY="191.0" mnemonicParsing="false" onAction="#OnAddPlayerSubmitButtonClick" text="Submit" />
-      <Label fx:id="AddPlayerPageCheckLabel" layoutX="183.0" layoutY="159.0" prefHeight="18.0" prefWidth="262.0" />
-      <TextField fx:id="AddPlayerNameTextField" layoutX="186.0" layoutY="113.0" prefHeight="26.0" prefWidth="262.0" promptText="Player Name" />
+      <Button fx:id="AddPlayerSubmitButton" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnAddPlayerSubmitButtonClick" text="Submit" />
+      <TextField fx:id="AddPlayerNameTextField" layoutX="183.0" layoutY="33.0" prefHeight="26.0" prefWidth="262.0" promptText="Player Name" />
+      <Label fx:id="AddPlayerPageCheckLabel" alignment="CENTER" layoutX="250.0" layoutY="59.0" prefHeight="18.0" prefWidth="348.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <VBox fx:id="AddPlayerPageSKillVbox" layoutX="222.0" layoutY="95.0" prefHeight="305.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0" />
    </children>
 </AnchorPane>
