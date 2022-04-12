@@ -100,14 +100,16 @@ public class AddTeam implements Initializable {
             PlayerSkilL tempplayerskill = new PlayerSkilL(AddTeamSkillNameTextField.getText(),0);
             if(AddTeamSkillTypeChoiceBox.getValue().equals(choicelist.get(0)))
             {
+                System.out.println("The choice is "+AddTeamSkillTypeChoiceBox.getValue());
                 tempplayerskill.setSkillValueType(1);
             }
             else
             {
+                System.out.println("The choice is "+AddTeamSkillTypeChoiceBox.getValue());
                 tempplayerskill.setSkillValueType(2);
             }
             AddTeamSkillNameTextField.setText("");
-            AddTeamSkillTypeChoiceBox.setValue(choicelist.get(0));
+            AddTeamSkillTypeChoiceBox.setValue("Value");
             AddTeamPlayerSkill.add(tempplayerskill);
         }
     }
@@ -151,7 +153,6 @@ public class AddTeam implements Initializable {
         choicelist.add("Percantage");
         AddTeamSkillTypeChoiceBox.getItems().addAll(choicelist);
         AddTeamSkillTypeChoiceBox.setValue("Value");
-        System.out.println("The value is : "+ AddTeamSkillTypeChoiceBox.getItems().get(0));
         if(this.addTeamModel.isDataBaseConnected())
         {
             System.out.println("DataBase is connected to AddTeam Class");

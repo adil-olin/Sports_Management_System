@@ -223,11 +223,12 @@ public class DBResources {
         {
             for(int i=0;i<SkillNames.size();i++)
             {
-                String sqlInsert = "INSERT INTO SkillsForTeam (Emailid , TeamName , SkillName) VALUES (?, ?, ?)";
+                String sqlInsert = "INSERT INTO SkillsForTeam (Emailid , TeamName , SkillName , ValueType) VALUES (?, ?, ? ,?)";
                 PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
                 stmt.setString(1,coach.getEmailid());
                 stmt.setString(2,teamname);
                 stmt.setString(3,SkillNames.get(i).getSkillName());
+                stmt.setInt(4,SkillNames.get(i).getSkillValueType());
                 stmt.executeUpdate();
                 stmt.close();
             }
