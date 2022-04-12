@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddPlayerPage implements Initializable {
+public class AddPlayerPage {
 
     private Coach AddPlayerCoach;
     private String AddPlayerTeamName;
@@ -87,7 +87,7 @@ public class AddPlayerPage implements Initializable {
             Label newlabel = new Label(AddPlayerPagePlayerSkill.get(i).getSkillName());
             TextField newtextField = new TextField("Value");
             Button tmpbutton = new Button("Check");
-            System.out.println(AddPlayerPagePlayerSkill.get(i).getSkillName());
+          //  System.out.println(AddPlayerPagePlayerSkill.get(i).getSkillName());
             if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==2)
             {
                 newtextField.textProperty().addListener(new ChangeListener<String>() {
@@ -120,10 +120,5 @@ public class AddPlayerPage implements Initializable {
             HBox tmphBox = new HBox(newlabel,newtextField,tmpbutton);
             AddPlayerPageSKillVbox.getChildren().add(tmphBox);
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        AddPlayerPageSKillVbox = new VBox();
     }
 }
