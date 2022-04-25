@@ -2,6 +2,7 @@ package com.example.sportsmanagementappforcoach;
 
 import PROFILE.Coach;
 import DBUtil.DBResources;
+import PROFILE.Player;
 import PROFILE.PlayerSkilL;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,6 +26,7 @@ public class AddPlayerPage {
     private Coach AddPlayerCoach;
     private String AddPlayerTeamName;
     private int AddPlayerTeamNumber;
+    private Player AddPlayerPagePlayer;
     private ArrayList<PlayerSkilL>AddPlayerPagePlayerSkill;
 
     @FXML
@@ -65,7 +67,14 @@ public class AddPlayerPage {
                 int x = Integer.parseInt(textField.getText());
                 AddPlayerPagePlayerSkill.get(i).setValue(x);
             }
-            dbResources.InsertSkillList(AddPlayerCoach,AddPlayerTeamName,AddPlayerPagePlayerSkill);
+            AddPlayerPagePlayer = new Player();
+            AddPlayerPagePlayer.setPlayerTeamName(AddPlayerTeamName);
+            AddPlayerPagePlayer.setSkills(AddPlayerPagePlayerSkill);
+            AddPlayerPagePlayer.setName(name);
+            AddPlayerPagePlayer.setEmailid(AddPlayerCoach.getEmailid());
+
+            dbResources.InsertPlayerSkill(AddPlayerPagePlayer);
+            AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(AddPlayerCoach.getEmailid(),AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName()));
             SceneController sceneController = new SceneController();
             sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
         }
@@ -80,14 +89,13 @@ public class AddPlayerPage {
         DBResources dbResources = new DBResources();
         AddPlayerCoach = coach;
         AddPlayerTeamNumber = idx;
+        AddPlayerTeamName = AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName();
         AddPlayerPagePlayerSkill = new ArrayList<>();
         AddPlayerPagePlayerSkill = dbResources.getPlayerSkillListdb(coach,idx);
         for(int i=0;i<AddPlayerPagePlayerSkill.size();i++)
         {
             Label newlabel = new Label(AddPlayerPagePlayerSkill.get(i).getSkillName());
-            TextField newtextField = new TextField("Value");
-            Button tmpbutton = new Button("Check");
-          //  System.out.println(AddPlayerPagePlayerSkill.get(i).getSkillName());
+            TextField newtextField = new TextField();
             if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==2)
             {
                 newtextField.textProperty().addListener(new ChangeListener<String>() {
@@ -117,7 +125,7 @@ public class AddPlayerPage {
                     }
                 });
             }
-            HBox tmphBox = new HBox(newlabel,newtextField,tmpbutton);
+            HBox tmphBox = new HBox(newlabel,newtextField);
             AddPlayerPageSKillVbox.getChildren().add(tmphBox);
         }
     }
