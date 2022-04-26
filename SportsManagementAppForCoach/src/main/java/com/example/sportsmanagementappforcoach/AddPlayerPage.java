@@ -4,13 +4,16 @@ import PROFILE.Coach;
 import DBUtil.DBResources;
 import PROFILE.Player;
 import PROFILE.PlayerSkilL;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -62,10 +65,20 @@ public class AddPlayerPage {
         {
             for(int i=0;i<AddPlayerPageSKillVbox.getChildren().size();i++)
             {
-                HBox hbox = (HBox) AddPlayerPageSKillVbox.getChildren().get(i);
-                TextField textField = (TextField) hbox.getChildren().get(1);
-                int x = Integer.parseInt(textField.getText());
-                AddPlayerPagePlayerSkill.get(i).setValue(x);
+                if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==1)
+                {
+                    HBox hbox = (HBox) AddPlayerPageSKillVbox.getChildren().get(i);
+                    TextField textField = (TextField) hbox.getChildren().get(1);
+                    int x = Integer.parseInt(textField.getText());
+                    AddPlayerPagePlayerSkill.get(i).setValue(x);
+                }
+                else if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==2)
+                {
+                    HBox hbox = (HBox) AddPlayerPageSKillVbox.getChildren().get(i);
+                    Slider slider = (Slider) hbox.getChildren().get(1);
+                    int x = (int) slider.getValue();
+                    AddPlayerPagePlayerSkill.get(i).setValue(x);
+                }
             }
             AddPlayerPagePlayer = new Player();
             AddPlayerPagePlayer.setPlayerTeamName(AddPlayerTeamName);
@@ -92,41 +105,54 @@ public class AddPlayerPage {
         AddPlayerTeamName = AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName();
         AddPlayerPagePlayerSkill = new ArrayList<>();
         AddPlayerPagePlayerSkill = dbResources.getPlayerSkillListdb(coach,idx);
-        for(int i=0;i<AddPlayerPagePlayerSkill.size();i++)
-        {
+        AddPlayerPageSKillVbox.setSpacing(5);
+        for(int i=0;i<AddPlayerPagePlayerSkill.size();i++) {
             Label newlabel = new Label(AddPlayerPagePlayerSkill.get(i).getSkillName());
-            TextField newtextField = new TextField();
-            if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==2)
-            {
-                newtextField.textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        if (!newValue.matches("\\d*")) {
-                            newtextField.setText(newValue.replaceAll("[^\\d]", ""));
-                            int x = Integer.parseInt(newtextField.getText());
-                            if(x>100)
-                            {
-                                String s = newtextField.getText();
-                                s = s.substring(0, s.length() - 1);
-                                newtextField.setText(s);
+            newlabel.setPrefWidth(70);
+            Slider newslider;
+            if (AddPlayerPagePlayerSkill.get(i).getSkillValueType() == 1) {
+                TextField newtextField = new TextField();
+                newtextField.setPrefWidth(300);
+                if (AddPlayerPagePlayerSkill.get(i).getSkillValueType() == 2) {
+                    newtextField.textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                            if (!newValue.matches("\\d*")) {
+                                newtextField.setText(newValue.replaceAll("[^\\d]", ""));
                             }
                         }
-                    }
-                });
-            }
-            else
-            {
-                newtextField.textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        if (!newValue.matches("\\d*")) {
-                            newtextField.setText(newValue.replaceAll("[^\\d]", ""));
+                    });
+                } else {
+                    newtextField.textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                            if (!newValue.matches("\\d*")) {
+                                newtextField.setText(newValue.replaceAll("[^\\d]", ""));
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                HBox tmphBox = new HBox(newlabel, newtextField);
+                AddPlayerPageSKillVbox.getChildren().add(tmphBox);
             }
-            HBox tmphBox = new HBox(newlabel,newtextField);
-            AddPlayerPageSKillVbox.getChildren().add(tmphBox);
+            else if (AddPlayerPagePlayerSkill.get(i).getSkillValueType() == 2) {
+                    Label valuelabel = new Label();
+                    newslider = new Slider(0, 100, 50);
+                    valuelabel.textProperty().bind(
+                            Bindings.format(
+                                    "%.0f",
+                                    newslider.valueProperty()
+                            )
+                    );
+                    newslider.setBlockIncrement(1);
+                    newslider.setPrefWidth(300);
+                    newslider.setMajorTickUnit(10.0);
+                    newslider.setMinorTickCount(1);
+                    newslider.setShowTickMarks(true);
+                    newslider.setShowTickLabels(true);
+                    HBox tmphBox = new HBox(newlabel, newslider,valuelabel);
+                    AddPlayerPageSKillVbox.getChildren().add(tmphBox);
+            }
         }
     }
 }
