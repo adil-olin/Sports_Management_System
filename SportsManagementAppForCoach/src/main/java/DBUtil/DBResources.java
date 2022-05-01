@@ -107,17 +107,16 @@ public class DBResources {
     }
     public ArrayList<PlayerSkilL>getSkillList(String emailid,String teamname, String playername) throws SQLException {
         ResultSet rs = null;
-        String sql = "SELECT * From PlayerDetails where Emailid = ? and TeamName = ? and PlayerName = ?";
+        String sql = "SELECT * From PlayerDetails where Emailid = " + "\"" +emailid + "\"" +" and TeamName = "+"\""+teamname+"\""+" and PlayerName = "+"\""+playername+"\"";
         PreparedStatement pr = this.connection.prepareStatement(sql);
-        pr.setString(1,emailid);
-        pr.setString(2,teamname);
-        pr.setString(1,playername);
         rs = pr.executeQuery();
         ArrayList<PlayerSkilL>temparr = new ArrayList<PlayerSkilL>();
         while (rs.next())
         {
-            PlayerSkilL playerSkilL = new PlayerSkilL(rs.getString("SkillName"),rs.getInt("SkillValue"));
-            playerSkilL.setSkillValueType(rs.getInt("Skill"));
+            PlayerSkilL playerSkilL = new PlayerSkilL();
+            playerSkilL.setSkillValueType(rs.getInt("SkillValueType"));
+            playerSkilL.setSkillName(rs.getString("SkillName"));
+            playerSkilL.setValue(rs.getInt("SkillValue"));
             temparr.add(playerSkilL);
         }
         rs.close();

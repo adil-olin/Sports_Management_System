@@ -20,6 +20,10 @@ public class Team {
     public ArrayList<Player> getPlayerArrayList() {
         return playerArrayList;
     }
+    public ArrayList<Player> getDBPlayerArrayList(String emailid) throws SQLException {
+        DBResources dbResources = new DBResources();
+        return dbResources.getPlayerLists(emailid,Name);
+    }
 
     public void setPlayerArrayList(ArrayList<Player> playerArrayList) {
         this.playerArrayList = playerArrayList;
