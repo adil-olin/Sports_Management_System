@@ -1,6 +1,7 @@
 package com.example.sportsmanagementappforcoach;
 
 import PROFILE.Coach;
+import PROFILE.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -66,6 +67,16 @@ public class SceneController {
         root = loader.load();
         AddPlayerPage addPlayerPage = loader.getController();
         addPlayerPage.AddPlayerSetData(coach,idx);
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void SwitchtoPlayerDetailsPage(ActionEvent event, Coach coach , int id, Player player) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetails.fxml"));
+        root = loader.load();
+        PlayerDetails playerDetails = loader.getController();
+        playerDetails.setPlayerDetailsData(coach,id,player);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

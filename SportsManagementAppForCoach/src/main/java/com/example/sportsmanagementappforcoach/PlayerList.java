@@ -68,7 +68,24 @@ public class PlayerList {
 
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent event) {
-                    System.out.println("You pressed the button "+tempButton.getText());
+                    SceneController sceneController = new SceneController();
+                    DBResources dbResources = new DBResources();
+                    Player player = new Player();
+                    for(int i=0;i<PlayerListCoach.getTeamArrayList().get(PlayerListTeamNumber).getPlayerArrayList().size();i++)
+                    {
+                        if(tempButton.getText().equals(PlayerListCoach.getTeamArrayList().get(PlayerListTeamNumber).getPlayerArrayList().get(i).getName()))
+                        {
+                            player = PlayerListCoach.getTeamArrayList().get(PlayerListTeamNumber).getPlayerArrayList().get(i);
+                            break;
+                        }
+                    }
+                    try {
+                        sceneController.SwitchtoPlayerDetailsPage(event,PlayerListCoach,PlayerListTeamNumber,player);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
             PlayerListPlayerNameButtonVbox.getChildren().add(tempButton);

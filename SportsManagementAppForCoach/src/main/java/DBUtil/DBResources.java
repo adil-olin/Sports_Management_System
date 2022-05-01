@@ -117,6 +117,7 @@ public class DBResources {
         while (rs.next())
         {
             PlayerSkilL playerSkilL = new PlayerSkilL(rs.getString("SkillName"),rs.getInt("SkillValue"));
+            playerSkilL.setSkillValueType(rs.getInt("Skill"));
             temparr.add(playerSkilL);
         }
         rs.close();
@@ -209,6 +210,7 @@ public class DBResources {
             PlayerSkilL tempplayerskill = new PlayerSkilL();
             tempplayerskill.setSkillName(rs.getString("SkillName"));
             tempplayerskill.setSkillValueType(rs.getInt("ValueType"));
+            tempplayerskill.setSkillValueType(rs.getInt("ValueType"));
             arr.add(tempplayerskill);
         }
         rs.close();
@@ -237,7 +239,7 @@ public class DBResources {
         {
             for(int i=0;i<player.getSkills().size();i++)
             {
-                String sqlInsert = "INSERT INTO PlayerDetails (Emailid , TeamName , SkillName , SkillValue , PlayerName , Role) VALUES (?, ?, ? ,?, ?, ?)";
+                String sqlInsert = "INSERT INTO PlayerDetails (Emailid , TeamName , SkillName , SkillValue , PlayerName , Role , SkillValueType) VALUES (?, ?, ? ,?, ?, ? , ?)";
                 PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
                 stmt.setString(1,player.getEmailid());
                 stmt.setString(2,player.getPlayerTeamName());
@@ -245,6 +247,7 @@ public class DBResources {
                 stmt.setInt(4,player.getSkills().get(i).getValue());
                 stmt.setString(5,player.getName());
                 stmt.setString(6,player.getRole());
+                stmt.setInt(7,player.getSkills().get(i).getSkillValueType());
                 stmt.executeUpdate();
                 stmt.close();
             }
