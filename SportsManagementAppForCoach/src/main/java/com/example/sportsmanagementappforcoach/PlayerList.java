@@ -42,6 +42,7 @@ public class PlayerList {
     @FXML
     void OnPlayerListAddPlayerButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
+        System.out.println("Player List team numbner :"+PlayerListTeamNumber);
         sceneController.SwitchtoAddPlayerPage(event,PlayerListCoach,PlayerListTeamNumber);
     }
 
@@ -60,6 +61,8 @@ public class PlayerList {
     void PlayerListSetData(Coach coach,int idx) throws SQLException {
         DBResources dbResources = new DBResources();
         PlayerListCoach = coach;
+        PlayerListTeamNumber = idx;
+        PlayerListPlayerNameButtonVbox.setSpacing(5);
         for(int i=0;i<PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().size();i++)
         {
             Button tempButton = new Button(PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().get(i).getName());

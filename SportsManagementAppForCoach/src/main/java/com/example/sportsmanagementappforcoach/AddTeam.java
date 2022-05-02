@@ -96,6 +96,7 @@ public class AddTeam implements Initializable {
             });
 
             HBox tmphbox = new HBox(textField,tempButton);
+            tmphbox.setSpacing(5);
             AddTeamSkillListVbox.getChildren().add(tmphbox);
             PlayerSkilL tempplayerskill = new PlayerSkilL(AddTeamSkillNameTextField.getText(),0);
             if(AddTeamSkillTypeChoiceBox.getValue().equals(choicelist.get(0)))
@@ -153,6 +154,7 @@ public class AddTeam implements Initializable {
         choicelist.add("Percantage");
         AddTeamSkillTypeChoiceBox.getItems().addAll(choicelist);
         AddTeamSkillTypeChoiceBox.setValue("Value");
+        AddTeamSkillListVbox.setSpacing(5);
         if(this.addTeamModel.isDataBaseConnected())
         {
             System.out.println("DataBase is connected to AddTeam Class");

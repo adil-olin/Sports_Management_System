@@ -6,6 +6,8 @@ import PROFILE.Player;
 import PROFILE.PlayerSkilL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -14,9 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class PlayerDetails {
+public class PlayerDetails{
     private Player PlayerDetailssplayer;
     private Coach PlayerDetailsCoach;
     private int PlayerDetailsTeamid;
@@ -59,27 +63,34 @@ public class PlayerDetails {
         PlayerDetailsNameLabel.setText(player.getName());
         PlayerDetailsRoleLabel.setText(player.getRole());
         PlayerDetailsAgeLabel.setText(Integer.toString(player.getAge()));
-        PlayerDetailsSkillListVbox = new VBox();
+        PlayerDetailsSkillListVbox.setSpacing(5);
         DBResources dbResources = new DBResources();
         PlayerDetailssplayer.setSkills(dbResources.getSkillList(coach.getEmailid(),coach.getTeamArrayList().get(id).getName(),player.getName()));
         for (int i=0;i<PlayerDetailssplayer.getSkills().size();i++)
         {
-            PlayerSkilL skilL = new PlayerSkilL();
-            TextField skillname = new TextField(PlayerDetailssplayer.getSkills().get(i).getSkillName());
+            PlayerSkilL skilL = PlayerDetailssplayer.getSkills().get(i);
+            Label skillname = new Label(skilL.getSkillName());
             skillname.setPrefWidth(100);
+            skillname.setPrefHeight(30);
             if(skilL.getSkillValueType()==1)
             {
-                TextField skillvalue = new TextField(Integer.toString(PlayerDetailssplayer.getSkills().get(i).getValue()));
-                skillvalue.setPrefWidth(100);
+                Label skillvalue = new Label(Integer.toString(skilL.getValue()));
+                skillvalue.setPrefWidth(200);
+                skillvalue.setPrefHeight(30);
+                skillvalue.setAlignment(Pos.CENTER);
                 HBox tmphbox = new HBox(skillname,skillvalue);
                 PlayerDetailsSkillListVbox.getChildren().add(tmphbox);
             }
             else if(skilL.getSkillValueType()==2)
             {
-                ProgressBar progressBar = new ProgressBar(PlayerDetailssplayer.getSkills().get(i).getValue());
-                progressBar.setPrefWidth(80);
-                TextField skillvalue = new TextField(Integer.toString(PlayerDetailssplayer.getSkills().get(i).getValue())+"%");
-
+                ProgressBar progressBar = new ProgressBar();
+                double tot = skilL.getValue();
+                tot/=100.0;
+                progressBar.setProgress(tot);
+                progressBar.setPrefWidth(200);
+                progressBar.setPrefHeight(30);
+                Label skillvalue = new Label(Integer.toString(skilL.getValue()));
+                skillvalue.setPrefHeight(30);
                 skillvalue.setPrefWidth(20);
                 HBox tmphbox = new HBox(skillname,progressBar,skillvalue);
                 PlayerDetailsSkillListVbox.getChildren().add(tmphbox);
