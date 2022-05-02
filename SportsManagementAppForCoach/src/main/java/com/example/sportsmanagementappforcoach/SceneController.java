@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SceneController {
+public class SceneController<Public> {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -67,6 +67,16 @@ public class SceneController {
         root = loader.load();
         AddPlayerPage addPlayerPage = loader.getController();
         addPlayerPage.AddPlayerSetData(coach,idx);
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void SwitchtoUpdatePlayerSkill(ActionEvent event,Coach coach,int idx,Player player) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdatePlayerSkill.fxml"));
+        root = loader.load();
+        UpdatePlayerSkill updatePlayerSkill = loader.getController();
+        updatePlayerSkill.UpdatePlayerDataset(coach,idx,player);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

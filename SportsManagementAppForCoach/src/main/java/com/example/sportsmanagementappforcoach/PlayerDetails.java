@@ -20,6 +20,8 @@ public class PlayerDetails {
     private Player PlayerDetailssplayer;
     private Coach PlayerDetailsCoach;
     private int PlayerDetailsTeamid;
+    private Coach PlayerListCoach;
+    private int PlayerListTeamNumber;
 
     @FXML
     private Label PlayerDetailsAgeLabel;
@@ -46,8 +48,9 @@ public class PlayerDetails {
     }
 
     @FXML
-    void OnPlayerDetailsUpdateButtonClick(ActionEvent event) {
-
+    void OnPlayerDetailsUpdateButtonClick(ActionEvent event) throws SQLException, IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchtoUpdatePlayerSkill(event,PlayerDetailsCoach,PlayerDetailsTeamid,PlayerDetailssplayer);
     }
     public void setPlayerDetailsData(Coach coach , int id ,Player player ) throws SQLException {
         PlayerDetailsCoach = coach;
@@ -59,7 +62,6 @@ public class PlayerDetails {
         PlayerDetailsSkillListVbox = new VBox();
         DBResources dbResources = new DBResources();
         PlayerDetailssplayer.setSkills(dbResources.getSkillList(coach.getEmailid(),coach.getTeamArrayList().get(id).getName(),player.getName()));
-        System.out.println(PlayerDetailssplayer.getSkills().size());
         for (int i=0;i<PlayerDetailssplayer.getSkills().size();i++)
         {
             PlayerSkilL skilL = new PlayerSkilL();

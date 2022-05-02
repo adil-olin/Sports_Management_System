@@ -255,4 +255,25 @@ public class DBResources {
             e.printStackTrace();
         }
     }
+    public void UpdatePlayerSkill(Player player) throws SQLException {
+        try
+        {
+            for(int i=0;i<player.getSkills().size();i++)
+            {
+                String sqlInsert = "UPDATE PlayerDetails SET SkillValue = ? WHERE PlayerName = ? AND  Emailid = ? AND TeamName = ? AND SkillName = ? AND Role = ? AND SkillValueType=?";
+                PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
+                stmt.setInt(1,player.getSkills().get(i).getValue());
+                stmt.setString(2,player.getName());
+                stmt.setString(3,player.getEmailid());
+                stmt.setString(4,player.getPlayerTeamName());
+                stmt.setString(5,player.getSkills().get(i).getSkillName());
+                stmt.setString(6,player.getRole());
+                stmt.setInt(7,player.getSkills().get(i).getSkillValueType());
+                stmt.executeUpdate();
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

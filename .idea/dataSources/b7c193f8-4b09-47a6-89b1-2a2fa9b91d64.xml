@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="Coach.sqlite">
   <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.32">
-    <root id="1"/>
+    <root id="1">
+      <ServerVersion>3.36.0</ServerVersion>
+    </root>
     <collation id="2" parent="1" name="BINARY"/>
     <collation id="3" parent="1" name="NOCASE"/>
     <collation id="4" parent="1" name="RTRIM"/>
@@ -1283,75 +1285,182 @@
       <Position>1</Position>
     </argument>
     <table id="473" parent="163" name="LoginDB"/>
-    <table id="474" parent="163" name="TeamForCoach"/>
-    <table id="475" parent="163" name="sqlite_master">
+    <table id="474" parent="163" name="PlayerDetails"/>
+    <table id="475" parent="163" name="PlayerInfo"/>
+    <table id="476" parent="163" name="SkillsForTeam"/>
+    <table id="477" parent="163" name="TeamForCoach"/>
+    <table id="478" parent="163" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="476" parent="163" name="sqlite_sequence">
+    <table id="479" parent="163" name="sqlite_sequence">
       <System>1</System>
     </table>
-    <column id="477" parent="473" name="Id">
+    <column id="480" parent="473" name="Id">
       <DataType>INTEGER|0s</DataType>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="478" parent="473" name="Username">
+    <column id="481" parent="473" name="Username">
       <DataType>TEXT|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="479" parent="473" name="Emailid">
+    <column id="482" parent="473" name="Emailid">
       <DataType>TEXT|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="480" parent="473" name="Password">
+    <column id="483" parent="473" name="Password">
       <DataType>TEXT|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="481" parent="473">
+    <key id="484" parent="473">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="482" parent="474" name="Id">
+    <column id="485" parent="474" name="Id">
       <DataType>INTEGER|0s</DataType>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="483" parent="474" name="Emailid">
+    <column id="486" parent="474" name="Emailid">
       <DataType>TEXT|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="484" parent="474" name="TeamName">
+    <column id="487" parent="474" name="TeamName">
       <DataType>TEXT|0s</DataType>
       <Position>3</Position>
     </column>
-    <key id="485" parent="474">
+    <column id="488" parent="474" name="SkillName">
+      <DataType>TEXT|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="489" parent="474" name="SkillValue">
+      <DataType>DOUBLE|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="490" parent="474" name="PlayerName">
+      <DataType>TEXT|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="491" parent="474" name="Role">
+      <DataType>TEXT|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="492" parent="474" name="SkillValueType">
+      <DataType>INTEGER|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+      <Position>8</Position>
+    </column>
+    <key id="493" parent="474">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="486" parent="475" name="type">
+    <column id="494" parent="475" name="Id">
+      <DataType>INTEGER|0s</DataType>
+      <Position>1</Position>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="495" parent="475" name="PlayerName">
+      <DataType>TEXT|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="496" parent="475" name="Age">
+      <DataType>INTEGER|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+      <Position>3</Position>
+    </column>
+    <column id="497" parent="475" name="Height">
+      <DataType>INTEGER|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+      <Position>4</Position>
+    </column>
+    <column id="498" parent="475" name="PicPath">
+      <DataType>TEXT|0s</DataType>
+      <DefaultExpression>Path</DefaultExpression>
+      <Position>5</Position>
+    </column>
+    <column id="499" parent="475" name="Emailid">
+      <DataType>TEXT|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="500" parent="475" name="TeamName">
+      <DataType>TEXT|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="501" parent="475" name="Role">
+      <DataType>TEXT|0s</DataType>
+      <DefaultExpression>Player</DefaultExpression>
+      <Position>8</Position>
+    </column>
+    <key id="502" parent="475">
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="503" parent="476" name="Id">
+      <DataType>INTEGER|0s</DataType>
+      <Position>1</Position>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="504" parent="476" name="Emailid">
+      <DataType>TEXT|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="505" parent="476" name="TeamName">
+      <DataType>TEXT|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="506" parent="476" name="SkillName">
+      <DataType>TEXT|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="507" parent="476" name="ValueType">
+      <DataType>INTEGER|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <key id="508" parent="476">
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="509" parent="477" name="Id">
+      <DataType>INTEGER|0s</DataType>
+      <Position>1</Position>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="510" parent="477" name="Emailid">
+      <DataType>TEXT|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="511" parent="477" name="TeamName">
+      <DataType>TEXT|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <key id="512" parent="477">
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="513" parent="478" name="type">
       <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="487" parent="475" name="name">
+    <column id="514" parent="478" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="488" parent="475" name="tbl_name">
+    <column id="515" parent="478" name="tbl_name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="489" parent="475" name="rootpage">
+    <column id="516" parent="478" name="rootpage">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="490" parent="475" name="sql">
+    <column id="517" parent="478" name="sql">
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="491" parent="476" name="name">
+    <column id="518" parent="479" name="name">
       <Position>1</Position>
     </column>
-    <column id="492" parent="476" name="seq">
+    <column id="519" parent="479" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

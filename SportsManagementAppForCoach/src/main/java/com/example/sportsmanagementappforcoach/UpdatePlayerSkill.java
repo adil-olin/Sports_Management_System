@@ -24,7 +24,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddPlayerPage {
+public class UpdatePlayerSkill {
 
     private Coach AddPlayerCoach;
     private String AddPlayerTeamName;
@@ -57,12 +57,6 @@ public class AddPlayerPage {
     void OnAddPlayerSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
         DBResources dbResources = new DBResources();
         String name = AddPlayerNameTextField.getText();
-        if(name.isEmpty())
-        {
-            AddPlayerPageCheckLabel.setText("Please Insert A name");
-        }
-        else if(dbResources.insertPlayer(AddPlayerCoach,AddPlayerTeamNumber,name))
-        {
             for(int i=0;i<AddPlayerPageSKillVbox.getChildren().size();i++)
             {
                 if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==1)
@@ -87,20 +81,17 @@ public class AddPlayerPage {
             AddPlayerPagePlayer.setName(name);
             AddPlayerPagePlayer.setEmailid(AddPlayerCoach.getEmailid());
 
-            dbResources.InsertPlayerSkill(AddPlayerPagePlayer);
+            dbResources.UpdatePlayerSkill(AddPlayerPagePlayer);
             AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(AddPlayerCoach.getEmailid(),AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName()));
             SceneController sceneController = new SceneController();
             sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
-        }
-        else
-        {
-            AddPlayerPageCheckLabel.setText("This player Alredy exists on this team");
-        }
+
     }
 
 
-    public void AddPlayerSetData(Coach coach, int idx) throws SQLException {
+    public void UpdatePlayerDataset(Coach coach, int idx, Player player) throws SQLException {
         DBResources dbResources = new DBResources();
+        AddPlayerNameTextField.setText(player.getName());
         AddPlayerCoach = coach;
         AddPlayerTeamNumber = idx;
         AddPlayerTeamName = AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName();
