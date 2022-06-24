@@ -69,7 +69,6 @@ public class AddPlayerPage {
                 {
                     HBox hbox = (HBox) AddPlayerPageSKillVbox.getChildren().get(i);
                     TextField textField = (TextField) hbox.getChildren().get(1);
-                    System.out.println(textField.toString());
                     int x = Integer.parseInt(textField.getText());
                     AddPlayerPagePlayerSkill.get(i).setValue(x);
                 }
