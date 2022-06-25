@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../../../../../src/login%202.jpg" />
+            <Image url="@../../../../../src/login%20-%20Copy%20(2).jpg" />
          </image>
       </ImageView>
       <Button fx:id="SignUpPageBackButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#OnSignupPageBackButtonClick" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: white;" text="Back" />
