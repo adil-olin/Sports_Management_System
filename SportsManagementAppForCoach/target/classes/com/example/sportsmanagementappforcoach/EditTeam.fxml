@@ -23,9 +23,9 @@
     <ChoiceBox fx:id="EditTeamSkillTypeChoiceBox" layoutX="377.0" layoutY="113.0" prefHeight="28.0" prefWidth="113.0" />
     <Button fx:id="EditTeamAddSkillButton" layoutX="498.0" layoutY="113.0" mnemonicParsing="false" onAction="#OnEditTeamAddSkillButtonClick" text="Add Skill" />
     <Label fx:id="EditTeamSkillNameErrorLabel" layoutX="46.0" layoutY="143.0" prefHeight="18.0" prefWidth="386.0" />
-   <ScrollPane  hbarPolicy="NEVER" layoutX="344.0" layoutY="178.0" prefHeight="235.0" prefWidth="366.0">
+   <ScrollPane fx:id="EditTeamPlayerListVbox" hbarPolicy="NEVER" layoutX="344.0" layoutY="178.0" prefHeight="235.0" prefWidth="366.0">
       <content>
-         <VBox fx:id="EditTeamPlayerListVbox" alignment="TOP_RIGHT" prefHeight="235.0" prefWidth="373.0" />
+         <VBox alignment="TOP_RIGHT" prefHeight="235.0" prefWidth="373.0" />
       </content>
    </ScrollPane>
    <Label fx:id="EditTeamSkillsLabel" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="44.0" layoutY="153.0" prefHeight="17.0" prefWidth="219.0" text="Skills" textAlignment="RIGHT">
