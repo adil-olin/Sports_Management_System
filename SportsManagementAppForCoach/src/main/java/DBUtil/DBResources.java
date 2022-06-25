@@ -150,7 +150,6 @@ public class DBResources {
             tempplayer.setImagePath(rs.getString("PicPath"));
             tempplayer.setEmailid(rs.getString("Emailid"));
             tempplayer.setPlayerTeamName(teamname);
-            System.out.println(tempplayer.getName());
             arr.add(tempplayer);
         }
         rs.close();
@@ -259,7 +258,6 @@ public class DBResources {
                 stck.setString(3, teamname);
                 ResultSet rs = stck.executeQuery();
                 if (!rs.next()) {
-                    System.out.println("Yes");
                     String sqlInsert = "INSERT INTO SkillsForTeam (Emailid , TeamName , SkillName , ValueType) VALUES (?, ?, ? ,?)";
                     PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
                     stmt.setString(1, coach.getEmailid());
@@ -281,7 +279,6 @@ public class DBResources {
         {
             for(int i=0;i<player.getSkills().size();i++)
             {
-                System.out.println(player.getName()+" "+player.getEmailid()+" "+player.getSkills().get(i).getSkillName());
                 String skillcheck = "SELECT DISTINCT 1 FROM PlayerDetails where EmailId = ? and SkillName=? and TeamName=? and PlayerName = ?";
                 PreparedStatement stck = this.connection.prepareStatement(skillcheck);
                 stck.setString(1,player.getEmailid());
@@ -340,6 +337,24 @@ public class DBResources {
         }
         catch (SQLException e)
         {
+            e.printStackTrace();
         }
+    }
+    public void DeleteSkill(Coach coach,String TeamName, String skillname) throws SQLException {
+        String sqldelete = "DELETE FROM SkillsForTeam WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sqldelete);
+        stmt.setString(1,coach.getEmailid());
+        stmt.setString(2,TeamName);
+        stmt.setString(3,skillname);
+        stmt.executeUpdate();
+        stmt.close();
+        sqldelete = "DELETE FROM PlayerDetails WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+        stmt = this.connection.prepareStatement(sqldelete);
+        stmt.setString(1,coach.getEmailid());
+        stmt.setString(2,TeamName);
+        stmt.setString(3,skillname);
+        stmt.executeUpdate();
+        stmt.close();
+
     }
 }

@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/SportsManagementAppForCoach/Coach.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Coach.sqlite [2]" uuid="27d5c19b-c90c-4129-9fe0-bd382c118a7c">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/SportsManagementAppForCoach/Coach.sqlite</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

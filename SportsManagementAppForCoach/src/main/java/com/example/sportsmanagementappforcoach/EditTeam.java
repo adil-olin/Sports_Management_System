@@ -2,6 +2,7 @@ package com.example.sportsmanagementappforcoach;
 
 import DBUtil.DBResources;
 import PROFILE.Coach;
+import PROFILE.Player;
 import PROFILE.PlayerSkilL;
 import PROFILE.Team;
 import javafx.event.ActionEvent;
@@ -28,7 +29,9 @@ public class EditTeam implements Initializable {
 
     private Coach EditTeamCoach;
     private Team team;
+    private int TeamNumber;
     private ArrayList<PlayerSkilL> EditTeamPlayerSkill;
+    private ArrayList<Player> EditTeamPlayer;
     @FXML
     private Button EditTeamAddSkillButton;
 
@@ -67,7 +70,9 @@ public class EditTeam implements Initializable {
     private TextField EditTeamTeamNameTextField;
 
     List<String> choicelist;
-    Button tempButton = new Button("Delete");
+    private Button tempButton = new Button("Delete");
+    private ArrayList<String> deletedskills = new ArrayList<String>();
+    private ArrayList<Player> deletedplayer = new ArrayList<Player>();
 
 
     @FXML
@@ -136,6 +141,19 @@ public class EditTeam implements Initializable {
 
     @FXML
     void OnEditTeamConfirmButtonClick(ActionEvent event) throws SQLException, IOException {
+
+        for (int i = 0; i <deletedskills.size();i++)
+        {
+            DBResources dbResources = new DBResources();
+            dbResources.DeleteSkill(EditTeamCoach,EditTeamCoach.getTeamArrayList().get(TeamNumber).getName(),deletedskills.get(i));
+        }
+        for(int i = 0; i < deletedplayer.size();i++)
+        {
+            DBResources dbResources = new DBResources();
+            dbResources.DeletePlayer(deletedplayer.get(i));
+        }
+        deletedskills.removeAll(deletedskills);
+        deletedplayer.removeAll(deletedplayer);
         if(EditTeamTeamNameTextField.getText().trim().isEmpty())
         {
             EditTeamInsertNameLabel.setText("Put a name to the text field");
@@ -155,25 +173,50 @@ public class EditTeam implements Initializable {
             }
         }
     }
-    void EditTeamSetCoach(Coach coach, int TeamNumber) throws SQLException {
+    void EditTeamSetCoach(Coach coach, int teamNumber) throws SQLException {
         DBResources dbResources = new DBResources();
         EditTeamCoach = coach;
-        //EditTeamPlayerSkill=new ArrayList<>();
+        TeamNumber = teamNumber;
         EditTeamPlayerSkill=dbResources.getPlayerSkillListdb(EditTeamCoach,TeamNumber);
+        EditTeamPlayer=dbResources.getPlayerLists(coach.getEmailid(),coach.getTeamArrayList().get(TeamNumber).getName());
         team = EditTeamCoach.getTeamArrayList().get(TeamNumber);
         EditTeamTeamNameTextField.setText(team.getName());
-        for(int i = 0; i < coach.getTeamArrayList().get(TeamNumber).getPlayerArrayList().size();i++)
+        for(int i = 0; i < EditTeamPlayer.size();i++)
         {
-            Button tempButtom = new Button("Delete");
+            Button tempButton = new Button("Delete");
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent event) {
-                    System.out.println("yes");
+                    for(int i=0;i<EditTeamPlayerListVbox.getChildren().size();i++)
+                    {
+                        HBox tempHbox = (HBox) EditTeamPlayerListVbox.getChildren().get(i);
+                        Button tempbutton = (Button) tempHbox.getChildren().get(1);
+                        if(tempButton.equals(tempbutton))
+                        {
+                            //System.out.println();
+                            deletedplayer.add(EditTeamPlayer.get(i));
+                            EditTeamPlayerListVbox.getChildren().remove(tempHbox);
+                            EditTeamPlayer.remove(i);
+                            break;
+                        }
+                    }
+                }
+            });
+            HBox editplayer = new HBox(new TextField(coach.getTeamArrayList().get(TeamNumber).getPlayerArrayList().get(i).getName()),tempButton);
+            EditTeamPlayerListVbox.getChildren().add(editplayer);
+
+        }
+        for (int i = 0 ; i <EditTeamPlayerSkill.size();i++)
+        {
+            Button tempButton = new Button("Delete");
+            tempButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent event) {
                     for(int i=0;i<EditTeamSkillListVbox.getChildren().size();i++)
                     {
                         HBox tempHbox = (HBox) EditTeamSkillListVbox.getChildren().get(i);
                         Button tempbutton = (Button) tempHbox.getChildren().get(1);
                         if(tempButton.equals(tempbutton))
                         {
+                            deletedskills.add(EditTeamPlayerSkill.get(i).getSkillName());
                             EditTeamSkillListVbox.getChildren().remove(tempHbox);
                             EditTeamPlayerSkill.remove(i);
                             break;
@@ -181,14 +224,7 @@ public class EditTeam implements Initializable {
                     }
                 }
             });
-            HBox editplayer = new HBox(new TextField(coach.getTeamArrayList().get(TeamNumber).getPlayerArrayList().get(i).getName()),tempButtom);
-            EditTeamPlayerListVbox.getChildren().add(editplayer);
-
-        }
-        for (int i = 0 ; i <EditTeamPlayerSkill.size();i++)
-        {
-            Button tempbutton = new Button("Delete");
-            HBox edithbox = new HBox(new TextField(EditTeamPlayerSkill.get(i).getSkillName()),tempbutton);
+            HBox edithbox = new HBox(new TextField(EditTeamPlayerSkill.get(i).getSkillName()),tempButton);
             EditTeamSkillListVbox.getChildren().add(edithbox);
         }
     }
