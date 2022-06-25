@@ -8,10 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -43,8 +40,18 @@ public class PlayerDetails{
     private VBox PlayerDetailsSkillListVbox;
 
     @FXML
-    private Button PlayerListUpdateButton;
+    private Button PlayerDetailsUpdateButton;
 
+    @FXML
+    private Button PlayerDetailsDeleteButton;
+
+    @FXML
+    void OnPlayerDetailsDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
+        DBResources dbResources = new DBResources();
+        dbResources.DeletePlayer(PlayerDetailssplayer);
+        SceneController sceneController = new SceneController();
+       sceneController.SwitchToPlayerList(event,PlayerDetailsCoach,PlayerDetailsTeamid);
+    }
     @FXML
     void OnPlayerDetailsBackButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();

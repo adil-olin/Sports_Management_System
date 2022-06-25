@@ -20,6 +20,9 @@ public class PlayerList {
 
     private Coach PlayerListCoach;
     private int PlayerListTeamNumber;
+    private Player player;
+    @FXML
+    private Button PlayerListEditTeamButton;
 
     @FXML
     private Label PlayerListTeamNameLabel;
@@ -42,7 +45,6 @@ public class PlayerList {
     @FXML
     void OnPlayerListAddPlayerButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        System.out.println("Player List team numbner :"+PlayerListTeamNumber);
         sceneController.SwitchtoAddPlayerPage(event,PlayerListCoach,PlayerListTeamNumber);
     }
 
@@ -57,12 +59,18 @@ public class PlayerList {
         SceneController sceneController = new SceneController();
         sceneController.SwitchToFirstPage(event);
     }
-
+    @FXML
+    void  OnPlayerListEditTeamButtonClick(ActionEvent event) throws IOException, SQLException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToEditTeamPage(event,PlayerListCoach,PlayerListTeamNumber);
+    }
     void PlayerListSetData(Coach coach,int idx) throws SQLException {
         DBResources dbResources = new DBResources();
         PlayerListCoach = coach;
         PlayerListTeamNumber = idx;
+        this.player=player;
         PlayerListPlayerNameButtonVbox.setSpacing(5);
+        PlayerListCoach.getTeamArrayList().get(idx).setPlayerArrayList(dbResources.getPlayerLists(coach.getEmailid(),coach.getTeamArrayList().get(idx).getName()));
         for(int i=0;i<PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().size();i++)
         {
             Button tempButton = new Button(PlayerListCoach.getTeamArrayList().get(idx).getPlayerArrayList().get(i).getName());

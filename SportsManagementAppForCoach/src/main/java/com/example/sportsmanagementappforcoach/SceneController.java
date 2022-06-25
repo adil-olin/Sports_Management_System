@@ -52,6 +52,16 @@ public class SceneController<Public> {
         stage.setScene(scene);
         stage.show();
     }
+    public void SwitchToEditTeamPage(ActionEvent event,Coach coach, int idx) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditTeam.fxml"));
+        root = loader.load();
+        EditTeam editTeam = loader.getController();
+        editTeam.EditTeamSetCoach(coach, idx);
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void SwitchToPlayerList(ActionEvent event,Coach coach,int idx) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerList.fxml"));
         root = loader.load();
@@ -92,4 +102,5 @@ public class SceneController<Public> {
         stage.setScene(scene);
         stage.show();
     }
+
 }

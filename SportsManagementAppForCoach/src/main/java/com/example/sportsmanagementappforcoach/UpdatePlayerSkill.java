@@ -9,8 +9,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -19,93 +18,99 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class UpdatePlayerSkill {
 
-    private Coach AddPlayerCoach;
-    private String AddPlayerTeamName;
-    private int AddPlayerTeamNumber;
-    private Player AddPlayerPagePlayer;
-    private ArrayList<PlayerSkilL>AddPlayerPagePlayerSkill;
+    private Coach UpdatePlayerSkillCoach;
+    private String UpdatePlayerSkillTeamName;
+    private int UpdatePlayerSkillTeamNumber;
+    private Player UpdatePlayerSkillPagePlayer;
+    private ArrayList<PlayerSkilL>UpdatePlayerSkillPagePlayerSkill;
 
     @FXML
-    private Button AddPlayerBackButton;
+    private Button UpdatePlayerSkillBackButton;
 
     @FXML
-    private VBox AddPlayerPageSKillVbox;
+    private VBox UpdatePlayerSkillPageSKillVbox;
 
     @FXML
-    private TextField AddPlayerNameTextField;
+    private TextField UpdatePlayerSkillNameTextField;
 
     @FXML
-    private Button AddPlayerSubmitButton;
+    private Button UpdatePlayerSkillSubmitButton;
 
     @FXML
-    private Label AddPlayerPageCheckLabel;
+    private Label UpdatePlayerSkillPageCheckLabel;
 
     @FXML
-    void OnAddPlayerBackButtonClick(ActionEvent event) throws SQLException, IOException {
+    void OnUpdatePlayerSkillBackButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
+        sceneController.SwitchToPlayerList(event,UpdatePlayerSkillCoach,UpdatePlayerSkillTeamNumber);
     }
 
     @FXML
-    void OnAddPlayerSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
+    void OnUpdatePlayerSkillSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
         DBResources dbResources = new DBResources();
-        String name = AddPlayerNameTextField.getText();
-            for(int i=0;i<AddPlayerPageSKillVbox.getChildren().size();i++)
+        String name = UpdatePlayerSkillNameTextField.getText();
+        for(int i=0;i<UpdatePlayerSkillPageSKillVbox.getChildren().size();i++)
+        {
+            if(UpdatePlayerSkillPagePlayerSkill.get(i).getSkillValueType()==1)
             {
-                if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==1)
-                {
-                    HBox hbox = (HBox) AddPlayerPageSKillVbox.getChildren().get(i);
-                    TextField textField = (TextField) hbox.getChildren().get(1);
-                    System.out.println(textField.toString());
-                    int x = Integer.parseInt(textField.getText());
-                    AddPlayerPagePlayerSkill.get(i).setValue(x);
-                }
-                else if(AddPlayerPagePlayerSkill.get(i).getSkillValueType()==2)
-                {
-                    HBox hbox = (HBox) AddPlayerPageSKillVbox.getChildren().get(i);
-                    Slider slider = (Slider) hbox.getChildren().get(1);
-                    int x = (int) slider.getValue();
-                    AddPlayerPagePlayerSkill.get(i).setValue(x);
-                }
+                HBox hbox = (HBox) UpdatePlayerSkillPageSKillVbox.getChildren().get(i);
+                TextField textField = (TextField) hbox.getChildren().get(1);
+                int x = Integer.parseInt(textField.getText());
+                UpdatePlayerSkillPagePlayerSkill.get(i).setValue(x);
             }
-            AddPlayerPagePlayer = new Player();
-            AddPlayerPagePlayer.setPlayerTeamName(AddPlayerTeamName);
-            AddPlayerPagePlayer.setSkills(AddPlayerPagePlayerSkill);
-            AddPlayerPagePlayer.setName(name);
-            AddPlayerPagePlayer.setEmailid(AddPlayerCoach.getEmailid());
+            else if(UpdatePlayerSkillPagePlayerSkill.get(i).getSkillValueType()==2)
+            {
+                HBox hbox = (HBox) UpdatePlayerSkillPageSKillVbox.getChildren().get(i);
+                Slider slider = (Slider) hbox.getChildren().get(1);
+                int x = (int) slider.getValue();
+                UpdatePlayerSkillPagePlayerSkill.get(i).setValue(x);
+            }
+        }
+        UpdatePlayerSkillPagePlayer = new Player();
+        UpdatePlayerSkillPagePlayer.setPlayerTeamName(UpdatePlayerSkillTeamName);
+        UpdatePlayerSkillPagePlayer.setSkills(UpdatePlayerSkillPagePlayerSkill);
+        UpdatePlayerSkillPagePlayer.setName(name);
+        UpdatePlayerSkillPagePlayer.setEmailid(UpdatePlayerSkillCoach.getEmailid());
 
-            dbResources.UpdatePlayerSkill(AddPlayerPagePlayer);
-            AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(AddPlayerCoach.getEmailid(),AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName()));
-            SceneController sceneController = new SceneController();
-            sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
+        dbResources.InsertPlayerSkill(UpdatePlayerSkillPagePlayer);
+        UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(UpdatePlayerSkillCoach.getEmailid(),UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).getName()));
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchToPlayerList(event,UpdatePlayerSkillCoach,UpdatePlayerSkillTeamNumber);
 
     }
-
-
     public void UpdatePlayerDataset(Coach coach, int idx, Player player) throws SQLException {
         DBResources dbResources = new DBResources();
-        AddPlayerNameTextField.setText(player.getName());
-        AddPlayerCoach = coach;
-        AddPlayerTeamNumber = idx;
-        AddPlayerTeamName = AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName();
-        AddPlayerPagePlayerSkill = new ArrayList<>();
-        AddPlayerPagePlayerSkill = dbResources.getPlayerSkillListdb(coach,idx);
-        AddPlayerPageSKillVbox.setSpacing(5);
-        for(int i=0;i<AddPlayerPagePlayerSkill.size();i++) {
-            Label newlabel = new Label(AddPlayerPagePlayerSkill.get(i).getSkillName());
+        UpdatePlayerSkillNameTextField.setText(player.getName());
+        UpdatePlayerSkillCoach = coach;
+        UpdatePlayerSkillTeamNumber = idx;
+        UpdatePlayerSkillTeamName = UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).getName();
+        UpdatePlayerSkillPagePlayerSkill = new ArrayList<>();
+        UpdatePlayerSkillPagePlayerSkill = dbResources.getPlayerSkillListdb(coach,idx);
+        UpdatePlayerSkillPageSKillVbox.setSpacing(5);
+        for(int i=0;i<UpdatePlayerSkillPagePlayerSkill.size();i++) {
+            Label newlabel = new Label(UpdatePlayerSkillPagePlayerSkill.get(i).getSkillName());
             newlabel.setPrefWidth(70);
             Slider newslider;
-            if (AddPlayerPagePlayerSkill.get(i).getSkillValueType() == 1) {
+            PlayerSkilL skill = UpdatePlayerSkillPagePlayerSkill.get(i);
+            for(int j = 0; j < player.getSkills().size();j++)
+            {
+                if(skill.getSkillName().equals(player.getSkills().get(j).getSkillName()))
+                {
+                    skill=player.getSkills().get(j);
+                    break;
+                }
+            }
+            if (UpdatePlayerSkillPagePlayerSkill.get(i).getSkillValueType() == 1) {
                 TextField newtextField = new TextField();
                 newtextField.setPrefWidth(300);
-                if (AddPlayerPagePlayerSkill.get(i).getSkillValueType() == 2) {
+                newtextField.setAlignment(Pos.CENTER);
+                newtextField.setText(String.valueOf((int)skill.getValue()));
+                if (UpdatePlayerSkillPagePlayerSkill.get(i).getSkillValueType() == 2) {
                     newtextField.textProperty().addListener(new ChangeListener<String>() {
                         @Override
                         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -125,11 +130,12 @@ public class UpdatePlayerSkill {
                     });
                 }
                 HBox tmphBox = new HBox(newlabel, newtextField);
-                AddPlayerPageSKillVbox.getChildren().add(tmphBox);
+                UpdatePlayerSkillPageSKillVbox.getChildren().add(tmphBox);
             }
-            else if (AddPlayerPagePlayerSkill.get(i).getSkillValueType() == 2) {
+            else if (UpdatePlayerSkillPagePlayerSkill.get(i).getSkillValueType() == 2) {
                 Label valuelabel = new Label();
                 newslider = new Slider(0, 100, 50);
+                newslider.setValue(skill.getValue());
                 valuelabel.textProperty().bind(
                         Bindings.format(
                                 "%.0f",
@@ -143,8 +149,12 @@ public class UpdatePlayerSkill {
                 newslider.setShowTickMarks(true);
                 newslider.setShowTickLabels(true);
                 HBox tmphBox = new HBox(newlabel, newslider,valuelabel);
-                AddPlayerPageSKillVbox.getChildren().add(tmphBox);
+                UpdatePlayerSkillPageSKillVbox.getChildren().add(tmphBox);
             }
         }
+    }
+
+    private String toString(double value) {
+            return String.valueOf((int)value);
     }
 }

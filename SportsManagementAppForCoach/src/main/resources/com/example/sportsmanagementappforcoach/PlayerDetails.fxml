@@ -58,6 +58,7 @@
          </font>
       </Label>
       <Button fx:id="PlayerDetailsBackButton" layoutX="11.0" layoutY="8.0" mnemonicParsing="false" onAction="#OnPlayerDetailsBackButtonClick" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Back" />
-      <Button fx:id="PlayerListUpdateButton" layoutX="541.0" layoutY="381.0" mnemonicParsing="false" onAction="#OnPlayerDetailsUpdateButtonClick" style="-fx-background-color: grey; -fx-border-color: navy;" text="Update" />
+      <Button fx:id="PlayerDetailsUpdateButton" layoutX="530.0" layoutY="23.0" mnemonicParsing="false" onAction="#OnPlayerDetailsUpdateButtonClick" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Update" />
+      <Button fx:id="PlayerDetailsDeleteButton" layoutX="508.0" layoutY="381.0" mnemonicParsing="false" onAction="#OnPlayerDetailsDeleteButtonClick" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Delete" />
    </children>
 </AnchorPane>

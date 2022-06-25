@@ -26,9 +26,9 @@ public class DBResources {
             System.out.println("Connected");
         }
     }
-    public ResultSet getDATA(String x,String y,String val) {
-        PreparedStatement pr;
-        ResultSet rs;
+    public ResultSet getDATA(String x,String y,String val) throws SQLException {
+        PreparedStatement pr=null;
+        ResultSet rs=null;
         String sql = "SELECT "+x+" From LoginDB where "+y+" = ?";
         try {
             pr = this.connection.prepareStatement(sql);
@@ -38,8 +38,12 @@ public class DBResources {
         } catch (SQLException e) {
             return null;
         }
+        finally {
+            pr.close();
+            rs.close();
+        }
     }
-    public ResultSet getDATA(String x,String y,int val) {
+    public ResultSet getDATA(String x,String y,int val) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
         String sql = "SELECT "+x+" From LoginDB where "+y+" = ?";
@@ -51,6 +55,10 @@ public class DBResources {
 
         } catch (SQLException e) {
             return rs;
+        }
+        finally {
+            pr.close();
+            rs.close();
         }
     }
     public Coach getCoachData(String emailid) throws SQLException {
@@ -79,6 +87,7 @@ public class DBResources {
             arr.add(tempteam);
         }
         rs.close();
+        pr.close();
         for (int i=0;i<arr.size();i++)
         {
             arr.get(i).setPlayerArrayList(this.getPlayerLists(coach.getEmailid(),arr.get(i).getName()));
@@ -99,6 +108,7 @@ public class DBResources {
             arr.add(tempteam);
         }
         rs.close();
+        pr.close();
         for (int i=0;i<arr.size();i++)
         {
             arr.get(i).setPlayerArrayList(this.getPlayerLists(emailid,arr.get(i).getName()));
@@ -120,6 +130,7 @@ public class DBResources {
             temparr.add(playerSkilL);
         }
         rs.close();
+        pr.close();
         return temparr;
     }
     public ArrayList<Player>getPlayerLists(String emailid,String teamname) throws SQLException {
@@ -143,6 +154,7 @@ public class DBResources {
             arr.add(tempplayer);
         }
         rs.close();
+        pr.close();
         for(int i=0;i<arr.size();i++)
         {
             ArrayList<PlayerSkilL>tempskill = new ArrayList<PlayerSkilL>();
@@ -194,6 +206,7 @@ public class DBResources {
         rs = pr.executeQuery();
         String name = rs.getString("Username");
         rs.close();
+        pr.close();
         return  name;
     }
     public ArrayList<PlayerSkilL> getPlayerSkillListdb(Coach coach,int idx) throws SQLException {
@@ -213,8 +226,10 @@ public class DBResources {
             arr.add(tempplayerskill);
         }
         rs.close();
+        pr.close();
         return  arr;
     }
+
     public void InsertSkillList(Coach coach,String teamname,ArrayList<PlayerSkilL>SkillNames) throws SQLException {
         try
         {
@@ -233,46 +248,98 @@ public class DBResources {
             e.printStackTrace();
         }
     }
-    public void InsertPlayerSkill(Player player) throws SQLException {
+    public void InsertUpdateSkillList(Coach coach,String teamname,ArrayList<PlayerSkilL>SkillNames) throws SQLException {
         try
         {
-            for(int i=0;i<player.getSkills().size();i++)
-            {
-                String sqlInsert = "INSERT INTO PlayerDetails (Emailid , TeamName , SkillName , SkillValue , PlayerName , Role , SkillValueType) VALUES (?, ?, ? ,?, ?, ? , ?)";
-                PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
-                stmt.setString(1,player.getEmailid());
-                stmt.setString(2,player.getPlayerTeamName());
-                stmt.setString(3,player.getSkills().get(i).getSkillName());
-                stmt.setInt(4,player.getSkills().get(i).getValue());
-                stmt.setString(5,player.getName());
-                stmt.setString(6,player.getRole());
-                stmt.setInt(7,player.getSkills().get(i).getSkillValueType());
-                stmt.executeUpdate();
-                stmt.close();
+            for(int i=0;i<SkillNames.size();i++) {
+                String skillcheck = "SELECT DISTINCT 1 FROM SkillsForTeam where EmailId = ? and SkillName=? and TeamName=?";
+                PreparedStatement stck = this.connection.prepareStatement(skillcheck);
+                stck.setString(1,coach.getEmailid());
+                stck.setString(2, SkillNames.get(i).getSkillName());
+                stck.setString(3, teamname);
+                ResultSet rs = stck.executeQuery();
+                if (!rs.next()) {
+                    System.out.println("Yes");
+                    String sqlInsert = "INSERT INTO SkillsForTeam (Emailid , TeamName , SkillName , ValueType) VALUES (?, ?, ? ,?)";
+                    PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
+                    stmt.setString(1, coach.getEmailid());
+                    stmt.setString(2, teamname);
+                    stmt.setString(3, SkillNames.get(i).getSkillName());
+                    stmt.setInt(4, SkillNames.get(i).getSkillValueType());
+                    stmt.executeUpdate();
+                    stmt.close();
+                }
+                stck.close();
+                rs.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void UpdatePlayerSkill(Player player) throws SQLException {
+    public void InsertPlayerSkill(Player player) throws SQLException {
         try
         {
             for(int i=0;i<player.getSkills().size();i++)
             {
-                String sqlInsert = "UPDATE PlayerDetails SET SkillValue = ? WHERE PlayerName = ? AND  Emailid = ? AND TeamName = ? AND SkillName = ? AND Role = ? AND SkillValueType=?";
-                PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
-                stmt.setInt(1,player.getSkills().get(i).getValue());
-                stmt.setString(2,player.getName());
-                stmt.setString(3,player.getEmailid());
-                stmt.setString(4,player.getPlayerTeamName());
-                stmt.setString(5,player.getSkills().get(i).getSkillName());
-                stmt.setString(6,player.getRole());
-                stmt.setInt(7,player.getSkills().get(i).getSkillValueType());
-                stmt.executeUpdate();
-                stmt.close();
+                System.out.println(player.getName()+" "+player.getEmailid()+" "+player.getSkills().get(i).getSkillName());
+                String skillcheck = "SELECT DISTINCT 1 FROM PlayerDetails where EmailId = ? and SkillName=? and TeamName=? and PlayerName = ?";
+                PreparedStatement stck = this.connection.prepareStatement(skillcheck);
+                stck.setString(1,player.getEmailid());
+                stck.setString(2, player.getSkills().get(i).getSkillName());
+                stck.setString(3, player.getPlayerTeamName());
+                stck.setString(4,player.getName());
+                ResultSet rs = stck.executeQuery();
+                if(rs.next())
+                {
+                    String sqlUpdate="Update PlayerDetails SET SkillValue = ? WHERE SkillName = ? and Emailid =? and TeamName= ?";
+                    PreparedStatement stmt = this.connection.prepareStatement(sqlUpdate);
+                    stmt.setInt(1,player.getSkills().get(i).getValue());
+                    stmt.setString(2,player.getSkills().get(i).getSkillName());
+                    stmt.setString(3,player.getEmailid());
+                    stmt.setString(4,player.getPlayerTeamName());
+                    stmt.executeUpdate();
+                    stmt.close();
+                }
+                else {
+                    String sqlInsert = "INSERT INTO PlayerDetails (Emailid , TeamName , SkillName , SkillValue , PlayerName , Role , SkillValueType) VALUES (?, ?, ? ,?, ?, ? , ?)";
+                    PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
+                    stmt.setString(1, player.getEmailid());
+                    stmt.setString(2, player.getPlayerTeamName());
+                    stmt.setString(3, player.getSkills().get(i).getSkillName());
+                    stmt.setInt(4, player.getSkills().get(i).getValue());
+                    stmt.setString(5, player.getName());
+                    stmt.setString(6, player.getRole());
+                    stmt.setInt(7, player.getSkills().get(i).getSkillValueType());
+                    stmt.executeUpdate();
+                    stmt.close();
+                }
+                rs.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    public void DeletePlayer(Player player)
+    {
+        try
+        {
+            String sqlDelete = "DELETE FROM PlayerDetails where TeamName = ? and PlayerName = ? and Emailid = ?";
+            PreparedStatement stmt = this.connection.prepareStatement(sqlDelete);
+            stmt.setString(1,player.getPlayerTeamName());
+            stmt.setString(2,player.getName());
+            stmt.setString(3,player.getEmailid());
+            stmt.executeUpdate();
+            stmt.close();
+            sqlDelete = "DELETE FROM PlayerInfo where TeamName = ? and PlayerName = ? and Emailid = ?";
+            stmt = this.connection.prepareStatement(sqlDelete);
+            stmt.setString(1,player.getPlayerTeamName());
+            stmt.setString(2,player.getName());
+            stmt.setString(3,player.getEmailid());
+            stmt.executeUpdate();
+            stmt.close();
+        }
+        catch (SQLException e)
+        {
         }
     }
 }
