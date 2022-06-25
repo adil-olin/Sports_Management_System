@@ -341,20 +341,46 @@ public class DBResources {
         }
     }
     public void DeleteSkill(Coach coach,String TeamName, String skillname) throws SQLException {
-        String sqldelete = "DELETE FROM SkillsForTeam WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+            String sqldelete = "DELETE FROM SkillsForTeam WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+            PreparedStatement stmt = this.connection.prepareStatement(sqldelete);
+            stmt.setString(1,coach.getEmailid());
+            stmt.setString(2,TeamName);
+            stmt.setString(3,skillname);
+            stmt.executeUpdate();
+            stmt.close();
+            sqldelete = "DELETE FROM PlayerDetails WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+            stmt = this.connection.prepareStatement(sqldelete);
+            stmt.setString(1,coach.getEmailid());
+            stmt.setString(2,TeamName);
+            stmt.setString(3,skillname);
+            stmt.executeUpdate();
+            stmt.close();
+
+    }
+    public void DeleteTeam(Coach coach, Team team) throws SQLException {
+        String sqldelete = "DELETE FROM PlayerDetails WHERE Emailid = ? and TeamName = ?";
         PreparedStatement stmt = this.connection.prepareStatement(sqldelete);
         stmt.setString(1,coach.getEmailid());
-        stmt.setString(2,TeamName);
-        stmt.setString(3,skillname);
+        stmt.setString(2,team.getName());
         stmt.executeUpdate();
         stmt.close();
-        sqldelete = "DELETE FROM PlayerDetails WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+        sqldelete = "DELETE FROM PlayerInfo WHERE Emailid = ? and TeamName = ?";
         stmt = this.connection.prepareStatement(sqldelete);
         stmt.setString(1,coach.getEmailid());
-        stmt.setString(2,TeamName);
-        stmt.setString(3,skillname);
+        stmt.setString(2,team.getName());
         stmt.executeUpdate();
         stmt.close();
-
+        sqldelete = "DELETE FROM SkillsForTeam WHERE Emailid = ? and TeamName = ?";
+        stmt = this.connection.prepareStatement(sqldelete);
+        stmt.setString(1,coach.getEmailid());
+        stmt.setString(2,team.getName());
+        stmt.executeUpdate();
+        stmt.close();
+        sqldelete = "DELETE FROM TeamForCoach WHERE Emailid = ? and TeamName = ?";
+        stmt = this.connection.prepareStatement(sqldelete);
+        stmt.setString(1,coach.getEmailid());
+        stmt.setString(2,team.getName());
+        stmt.executeUpdate();
+        stmt.close();
     }
 }

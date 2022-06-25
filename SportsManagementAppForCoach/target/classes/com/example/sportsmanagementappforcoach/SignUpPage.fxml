@@ -5,31 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.SignUpPage">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" smooth="false">
-         <image>
-            <Image url="@../../../../../src/login%202.jpg" />
-         </image>
-      </ImageView>
-      <Button fx:id="SignUpPageBackButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#OnSignupPageBackButtonClick" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: white;" text="Back" />
+      <Button fx:id="SignUpPageBackButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#OnSignupPageBackButtonClick" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: orange;" text="Back" />
       <TextField fx:id="SignUpPageUserNameTextField" layoutX="210.0" layoutY="103.0" prefHeight="26.0" prefWidth="220.0" promptText="User Name" />
       <TextField fx:id="SignUpPagePasswordTextField" layoutX="210.0" layoutY="203.0" prefHeight="26.0" prefWidth="220.0" promptText="Password" />
-      <Button fx:id="SignUpPageSubmitButton" layoutX="496.0" layoutY="352.0" mnemonicParsing="false" onAction="#OnSignUpPageSubmitButtonClick" prefHeight="26.0" prefWidth="81.0" style="-fx-background-color: white;" text="Submit" />
+      <Button fx:id="SignUpPageSubmitButton" layoutX="492.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnSignUpPageSubmitButtonClick" prefHeight="26.0" prefWidth="81.0" style="-fx-background-color: orange;" text="Submit" />
       <TextField fx:id="SignUpPageEmailTextField" layoutX="210.0" layoutY="152.0" prefHeight="26.0" prefWidth="220.0" promptText="Email" />
       <Label fx:id="SignUpPageShowStatusLabel" layoutX="210.0" layoutY="319.0" prefHeight="18.0" prefWidth="220.0" />
       <TextField fx:id="SignUpPageConfirmPasswordTextField" layoutX="210.0" layoutY="261.0" prefHeight="26.0" prefWidth="220.0" promptText="Confirm Password" />
-      <CheckBox fx:id="SignUpPageShowPasswordCheckBox" layoutX="385.0" layoutY="236.0" mnemonicParsing="false" onAction="#OnSignUpPageShowPasswordCheckBoxClick" prefHeight="18.0" prefWidth="62.0" text="Show" textFill="#fffcfc">
+      <CheckBox fx:id="SignUpPageShowPasswordCheckBox" layoutX="385.0" layoutY="236.0" mnemonicParsing="false" onAction="#OnSignUpPageShowPasswordCheckBoxClick" prefHeight="18.0" prefWidth="62.0" text="Show">
          <font>
             <Font size="10.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="SignUpPageShowConfirmPasswordCheckBox" layoutX="385.0" layoutY="294.0" mnemonicParsing="false" onAction="#OnSignUpPageShowConfirmPasswordCheckBoxClick" prefHeight="18.0" prefWidth="62.0" text="Show" textFill="WHITE">
+      <CheckBox fx:id="SignUpPageShowConfirmPasswordCheckBox" layoutX="385.0" layoutY="294.0" mnemonicParsing="false" onAction="#OnSignUpPageShowConfirmPasswordCheckBoxClick" prefHeight="18.0" prefWidth="62.0" text="Show">
          <font>
             <Font size="10.0" />
          </font>

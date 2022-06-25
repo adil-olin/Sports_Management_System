@@ -33,5 +33,6 @@
         </content>
       </ScrollPane>
       <Label fx:id="HomePageUserNameLabel1" layoutX="355.0" layoutY="40.0" prefHeight="18.0" prefWidth="42.0" text="coach!" />
+      <Button fx:id="HomePageEditTeamListButton" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#OnHomePageEditTeamListButtonClick" prefHeight="26.0" prefWidth="108.0" text="Edit Team List" />
    </children>
 </AnchorPane>

@@ -210,7 +210,7 @@ public class EditTeam implements Initializable {
             Button tempButton = new Button("Delete");
             tempButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent event) {
-                    for(int i=0;i<EditTeamSkillListVbox.getChildren().size();i++)
+                     for(int i=0;i<EditTeamSkillListVbox.getChildren().size();i++)
                     {
                         HBox tempHbox = (HBox) EditTeamSkillListVbox.getChildren().get(i);
                         Button tempbutton = (Button) tempHbox.getChildren().get(1);

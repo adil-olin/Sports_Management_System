@@ -5,23 +5,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="470.0" prefWidth="669.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.AddTeam">
    <children>
-      <ImageView fitHeight="471.0" fitWidth="679.0" pickOnBounds="true" smooth="false">
-         <image>
-            <Image url="@../../../../../src/login%202.jpg" />
-         </image>
-      </ImageView>
       <TextField fx:id="AddTeamTeamNameTextField" layoutX="259.0" layoutY="52.0" promptText="Team Name" />
-      <Button fx:id="AddTeamConfirmButton" layoutX="601.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnAddTeamConfirmButtonClick" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: white;" text="Confirm" />
-      <Button fx:id="AddTeamBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnAddTeamBackButtonClick" style="-fx-background-color: white;" text="Back" />
+      <Button fx:id="AddTeamConfirmButton" layoutX="303.0" layoutY="429.0" mnemonicParsing="false" onAction="#OnAddTeamConfirmButtonClick" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: orange;" text="Confirm" />
+      <Button fx:id="AddTeamBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnAddTeamBackButtonClick" style="-fx-background-color: orange;" text="Back" />
       <Label fx:id="AddTeamInsertNameLabel" layoutX="385.0" layoutY="56.0" prefHeight="18.0" prefWidth="150.0" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="11.0" layoutY="163.0" prefHeight="246.0" prefWidth="654.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="14.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="234.0" layoutY="163.0" prefHeight="246.0" prefWidth="669.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <content>
             <VBox fx:id="AddTeamSkillListVbox" alignment="TOP_CENTER" prefHeight="246.0" prefWidth="658.0" />
          </content>

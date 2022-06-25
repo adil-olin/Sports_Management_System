@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.TeamListEdit">
+   <children>
+      <Label fx:id="TeamListEditTeamListLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="34.0" prefHeight="36.0" prefWidth="412.0" text="Team List">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="90.0" layoutY="79.0" prefHeight="267.0" prefWidth="406.0">
+         <content>
+            <VBox fx:id="TeamListEditTeamListVBox" alignment="CENTER" prefHeight="238.0" prefWidth="264.0" translateX="100.0" translateY="15.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="TeamListEditBackButton" layoutX="505.0" layoutY="34.0" mnemonicParsing="false" onAction="#OnTeamListEditBackButtonClick" text="Back" />
+      <Button fx:id="TeamListEditConfirmButton" layoutX="253.0" layoutY="361.0" mnemonicParsing="false" onAction="#OnTeamListEditConfirmButtonClick" prefHeight="26.0" prefWidth="67.0" text="Confirm" />
+   </children>
+</AnchorPane>

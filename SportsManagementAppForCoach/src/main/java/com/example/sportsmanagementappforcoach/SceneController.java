@@ -102,5 +102,16 @@ public class SceneController<Public> {
         stage.setScene(scene);
         stage.show();
     }
+    public void SwitchtoEditTeamListPage(ActionEvent event,Coach coach) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TeamListEdit.fxml"));
+        root = loader.load();
+        TeamListEdit teamListEdit = loader.getController();
+        teamListEdit.setTeamListEditData(coach);
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 }

@@ -30,6 +30,14 @@ public class HomePage {
     private VBox HomePageTeamButtonVbox;
 
     @FXML
+    private Button HomePageEditTeamListButton;
+
+    @FXML
+    void OnHomePageEditTeamListButtonClick(ActionEvent event) throws SQLException, IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchtoEditTeamListPage(event, HomePageCoach);
+    }
+    @FXML
     void OnHomePageAddTeamButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
         sceneController.SwitchToAddTeamPage(event,HomePageCoach);
