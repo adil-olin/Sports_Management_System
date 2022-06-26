@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.SignUpPage">
+<AnchorPane prefHeight="400.0" prefWidth="574.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.SignUpPage">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="400.0" fitWidth="608.0" layoutX="-8.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../../../../../src/login%20-%20Copy%20(2).jpg" />
          </image>
