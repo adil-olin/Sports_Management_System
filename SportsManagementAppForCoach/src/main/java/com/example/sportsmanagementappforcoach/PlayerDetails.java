@@ -50,7 +50,7 @@ public class PlayerDetails{
         DBResources dbResources = new DBResources();
         dbResources.DeletePlayer(PlayerDetailssplayer);
         SceneController sceneController = new SceneController();
-       sceneController.SwitchToPlayerList(event,PlayerDetailsCoach,PlayerDetailsTeamid);
+        sceneController.SwitchToPlayerList(event,PlayerDetailsCoach,PlayerDetailsTeamid);
     }
     @FXML
     void OnPlayerDetailsBackButtonClick(ActionEvent event) throws SQLException, IOException {

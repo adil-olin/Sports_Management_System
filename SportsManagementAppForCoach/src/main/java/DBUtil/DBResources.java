@@ -66,6 +66,7 @@ public class DBResources {
         ResultSet resultSet;
         resultSet = getDATA("*" , "Emailid" , emailid);
         Coach coach = new Coach(emailid);
+
         coach.setId(resultSet.getInt("Id"));
         coach.setName(resultSet.getString("Username"));
         coach.setEmailid(resultSet.getString("Emailid"));
@@ -288,16 +289,20 @@ public class DBResources {
                 ResultSet rs = stck.executeQuery();
                 if(rs.next())
                 {
-                    String sqlUpdate="Update PlayerDetails SET SkillValue = ? WHERE SkillName = ? and Emailid =? and TeamName= ?";
+                    System.out.println(player.getName()+" "+player.getSkills().get(i).getSkillName());
+                    String sqlUpdate="Update PlayerDetails SET SkillValue = ? WHERE SkillName = ? and Emailid =? and TeamName= ? and PlayerName = ?";
                     PreparedStatement stmt = this.connection.prepareStatement(sqlUpdate);
                     stmt.setInt(1,player.getSkills().get(i).getValue());
                     stmt.setString(2,player.getSkills().get(i).getSkillName());
                     stmt.setString(3,player.getEmailid());
                     stmt.setString(4,player.getPlayerTeamName());
+                    stmt.setString(5,player.getName());
                     stmt.executeUpdate();
                     stmt.close();
                 }
                 else {
+                    System.out.println(player.getName()+" "+player.getSkills().get(i).getSkillName());
+
                     String sqlInsert = "INSERT INTO PlayerDetails (Emailid , TeamName , SkillName , SkillValue , PlayerName , Role , SkillValueType) VALUES (?, ?, ? ,?, ?, ? , ?)";
                     PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
                     stmt.setString(1, player.getEmailid());
@@ -341,20 +346,20 @@ public class DBResources {
         }
     }
     public void DeleteSkill(Coach coach,String TeamName, String skillname) throws SQLException {
-            String sqldelete = "DELETE FROM SkillsForTeam WHERE Emailid = ? and TeamName = ? and SkillName = ?";
-            PreparedStatement stmt = this.connection.prepareStatement(sqldelete);
-            stmt.setString(1,coach.getEmailid());
-            stmt.setString(2,TeamName);
-            stmt.setString(3,skillname);
-            stmt.executeUpdate();
-            stmt.close();
-            sqldelete = "DELETE FROM PlayerDetails WHERE Emailid = ? and TeamName = ? and SkillName = ?";
-            stmt = this.connection.prepareStatement(sqldelete);
-            stmt.setString(1,coach.getEmailid());
-            stmt.setString(2,TeamName);
-            stmt.setString(3,skillname);
-            stmt.executeUpdate();
-            stmt.close();
+        String sqldelete = "DELETE FROM SkillsForTeam WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sqldelete);
+        stmt.setString(1,coach.getEmailid());
+        stmt.setString(2,TeamName);
+        stmt.setString(3,skillname);
+        stmt.executeUpdate();
+        stmt.close();
+        sqldelete = "DELETE FROM PlayerDetails WHERE Emailid = ? and TeamName = ? and SkillName = ?";
+        stmt = this.connection.prepareStatement(sqldelete);
+        stmt.setString(1,coach.getEmailid());
+        stmt.setString(2,TeamName);
+        stmt.setString(3,skillname);
+        stmt.executeUpdate();
+        stmt.close();
 
     }
     public void DeleteTeam(Coach coach, Team team) throws SQLException {
@@ -382,5 +387,35 @@ public class DBResources {
         stmt.setString(2,team.getName());
         stmt.executeUpdate();
         stmt.close();
+    }
+    public void sortPlayer(Coach coach,int idx, String sortPar) throws SQLException {
+        ArrayList<PlayerSkilL> skillset = new ArrayList<PlayerSkilL>();
+        DBUtil.DBResources dbResources =new DBUtil.DBResources();
+        skillset = dbResources.getPlayerSkillListdb(coach,idx);
+        System.out.println(sortPar);
+        for (int i = 0; i < skillset.size();i++)
+        {
+            if(skillset.get(i).getSkillName().equals(sortPar))
+            {
+                String sqlsort = "CREATE TABLE new as SELECT PlayerInfo.* FROM PlayerInfo LEFT JOIN PlayerDetails ON PlayerInfo.PlayerName=PlayerDetails.PlayerName and PlayerDetails.Emailid=PlayerInfo.Emailid and PlayerInfo.TeamName=PlayerDetails.TeamName and PlayerDetails.SkillName= ? ORDER BY PlayerDetails.SkillValue";
+                PreparedStatement stmt = this.connection.prepareStatement(sqlsort);
+                stmt.setString(1,sortPar);
+                stmt.executeUpdate();
+                stmt.close();
+                String sqldrop = "DROP TABLE PlayerInfo";
+                stmt=this.connection.prepareStatement(sqldrop);
+                stmt.executeUpdate();
+                stmt.close();
+                String sql = "CREATE TABLE PlayerInfo as SELECT * FROM new";
+                stmt=this.connection.prepareStatement(sql);
+                stmt.executeUpdate();
+                stmt.close();
+                sqldrop = "DROP TABLE new";
+                stmt = this.connection.prepareStatement(sqldrop);
+                stmt.executeUpdate();
+                stmt.close();
+                break;
+            }
+        }
     }
 }
