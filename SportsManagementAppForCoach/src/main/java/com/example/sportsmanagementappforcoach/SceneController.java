@@ -113,5 +113,16 @@ public class SceneController<Public> {
         stage.show();
 
     }
+    public void SwitchtoCompareStatPage(ActionEvent event,Coach coach, String teamName, Player player, int tdx) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CompareStat.fxml"));
+        root = loader.load();
+        CompareStat compareStat = loader.getController();
+        compareStat.SetCompareStatData(coach,teamName, player,tdx) ;
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 }

@@ -46,6 +46,15 @@ public class PlayerDetails{
     private Button PlayerDetailsDeleteButton;
 
     @FXML
+    private Button PlayerDetailsCompareButton;
+
+    @FXML
+    void OnPlayerDetailsCompareButtonClick(ActionEvent event) throws SQLException, IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchtoCompareStatPage(event,PlayerDetailsCoach, PlayerDetailsCoach.getTeamArrayList().get(PlayerDetailsTeamid).getName(), PlayerDetailssplayer, PlayerDetailsTeamid);
+    }
+
+    @FXML
     void OnPlayerDetailsDeleteButtonClick(ActionEvent event) throws SQLException, IOException {
         DBResources dbResources = new DBResources();
         dbResources.DeletePlayer(PlayerDetailssplayer);
