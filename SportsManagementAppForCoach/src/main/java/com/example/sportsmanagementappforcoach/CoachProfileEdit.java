@@ -54,7 +54,7 @@ public class CoachProfileEdit {
         CoachProfileEditEmailLabel.setText(coach.getEmailid());
         CoachProfileEditNameLabel.setText(coach.getName());
         CoachProfileEditAgeTextField.setText(Integer.toString(coach.getAge()));
-        CoachProfileEditChangePasswordPassField.setText("jim");
+        CoachProfileEditChangePasswordPassField.setText(dbResources.getPass(coach));
     }
 
 

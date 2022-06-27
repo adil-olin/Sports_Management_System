@@ -39,7 +39,8 @@ public class CoachProfile {
         DBResources dbResources = new DBResources();
         CoachProfileCoach = coach;
         CoachProfileNameLabel.setText(coach.getName());
-        CoachProfileAgeLabel.setText(Integer.toString(coach.getAge()));
+        CoachProfileAgeLabel.setText(Integer.toString(dbResources.getCoachtAge(coach.getEmailid())));
         CoachProfileEmailLabel.setText(coach.getEmailid());
+
     }
 }

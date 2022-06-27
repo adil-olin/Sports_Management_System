@@ -42,9 +42,9 @@ public class DBResources {
     public int getCoachtAge(String EmailId) throws SQLException {
         String sql = "SELECT * FROM LoginDB WHERE Emailid = ?";
         PreparedStatement stmt = this.connection.prepareStatement(sql);
-        stmt.setString(1,EmailId);
+        stmt.setString(1, EmailId);
         ResultSet res = stmt.executeQuery();
-        int resu= res.getInt("Age");
+        int resu = res.getInt("Age");
         res.close();
         stmt.close();
         return resu;
@@ -447,5 +447,15 @@ public class DBResources {
                 break;
             }
         }
+    }
+    public String getPass(Coach coach) throws SQLException {
+        String sql = "Select * From LoginDB where Emailid = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        stmt.setString(1,coach.getEmailid());
+        ResultSet rs = stmt.executeQuery();
+        String s = rs.getString("Password");
+        rs.close();
+        stmt.close();
+        return s;
     }
 }
