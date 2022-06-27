@@ -38,10 +38,6 @@ public class DBResources {
         } catch (SQLException e) {
             return null;
         }
-        finally {
-            pr.close();
-            rs.close();
-        }
     }
     public ResultSet getDATA(String x,String y,int val) throws SQLException {
         PreparedStatement pr = null;
@@ -55,10 +51,6 @@ public class DBResources {
 
         } catch (SQLException e) {
             return rs;
-        }
-        finally {
-            pr.close();
-            rs.close();
         }
     }
     public Coach getCoachData(String emailid) throws SQLException {
