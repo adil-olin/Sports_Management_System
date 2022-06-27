@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.SignUpPage">
    <children>
       <Button fx:id="SignUpPageBackButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#OnSignupPageBackButtonClick" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: orange;" text="Back" />
-      <TextField fx:id="SignUpPageUserNameTextField" layoutX="210.0" layoutY="103.0" prefHeight="26.0" prefWidth="220.0" promptText="User Name" />
+      <TextField fx:id="SignUpPageUserNameTextField" layoutX="210.0" layoutY="65.0" prefHeight="26.0" prefWidth="220.0" promptText="User Name" />
       <TextField fx:id="SignUpPagePasswordTextField" layoutX="210.0" layoutY="203.0" prefHeight="26.0" prefWidth="220.0" promptText="Password" />
       <Button fx:id="SignUpPageSubmitButton" layoutX="492.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnSignUpPageSubmitButtonClick" prefHeight="26.0" prefWidth="81.0" style="-fx-background-color: orange;" text="Submit" />
       <TextField fx:id="SignUpPageEmailTextField" layoutX="210.0" layoutY="152.0" prefHeight="26.0" prefWidth="220.0" promptText="Email" />
@@ -29,5 +29,6 @@
       </CheckBox>
       <PasswordField fx:id="SignUpPagePasswordPasswordField" layoutX="210.0" layoutY="203.0" prefHeight="26.0" prefWidth="220.0" promptText="Password" />
       <PasswordField fx:id="SignUpPageConfirmPasswordPasswordField" layoutX="210.0" layoutY="261.0" prefHeight="26.0" prefWidth="220.0" promptText="Confirm Password" />
+      <TextField fx:id="SignUpPageAgeTextField" layoutX="208.0" layoutY="108.0" prefHeight="26.0" prefWidth="226.0" promptText="Age" />
    </children>
 </AnchorPane>

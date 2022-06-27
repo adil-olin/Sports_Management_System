@@ -2,6 +2,8 @@ package com.example.sportsmanagementappforcoach;
 
 import DBUtil.DBResources;
 import PROFILE.Coach;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +17,8 @@ import java.util.ResourceBundle;
 public class SignUpPage implements Initializable {
     SignUpModel signUpModel = new SignUpModel();
 
+    @FXML
+    private TextField SignUpPageAgeTextField;
     @FXML
     private Button SignUpPageBackButton;
 
@@ -77,7 +81,17 @@ public class SignUpPage implements Initializable {
         SignUpPagePasswordPasswordField.setVisible(true);
         return;
     }
-
+    private int MakeInt(String num)
+    {
+        int ans = 0;
+        for(int i=0;i<num.length();i++)
+        {
+            ans*=10;
+            ans+=num.charAt(i);
+            ans-='0';
+        }
+        return ans;
+    }
     @FXML
     void OnSignUpPageSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
         if(!SignUpPageShowPasswordCheckBox.isSelected())
@@ -88,7 +102,7 @@ public class SignUpPage implements Initializable {
         {
             SignUpPageConfirmPasswordTextField.setText(SignUpPageConfirmPasswordPasswordField.getText());
         }
-        if(!SignUpPageUserNameTextField.getText().trim().isEmpty() && !SignUpPagePasswordTextField.getText().trim().isEmpty() && !SignUpPageEmailTextField.getText().trim().isEmpty() && !SignUpPageConfirmPasswordTextField.getText().trim().isEmpty())
+        if(!SignUpPageUserNameTextField.getText().trim().isEmpty() && !SignUpPagePasswordTextField.getText().trim().isEmpty() && !SignUpPageEmailTextField.getText().trim().isEmpty() && !SignUpPageConfirmPasswordTextField.getText().trim().isEmpty() && !SignUpPageAgeTextField.getText().trim().isEmpty())
         {
             if(!SignUpPagePasswordTextField.getText().equals( SignUpPageConfirmPasswordTextField.getText()))
             {
@@ -96,7 +110,7 @@ public class SignUpPage implements Initializable {
             }
             else
             {
-                if(this.signUpModel.Signup(event,SignUpPageUserNameTextField.getText(),SignUpPageEmailTextField.getText(), SignUpPagePasswordTextField.getText()))
+                if(this.signUpModel.Signup(event,SignUpPageUserNameTextField.getText(),SignUpPageEmailTextField.getText(), SignUpPagePasswordTextField.getText(),MakeInt(SignUpPageAgeTextField.getText())))
                 {
                     SceneController sceneController = new SceneController();
                     DBResources dbResources = new DBResources();
@@ -127,6 +141,14 @@ public class SignUpPage implements Initializable {
         SignUpPageConfirmPasswordTextField.setVisible(false);
         SignUpPagePasswordTextField.setVisible(false);
         SignUpPagePasswordPasswordField.setVisible(true);
+        SignUpPageAgeTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    SignUpPageAgeTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         if(this.signUpModel.isDataBaseConnected())
         {
             System.out.println("DataBase is connected in Signup Page");

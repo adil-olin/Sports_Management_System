@@ -22,7 +22,7 @@ public class SignUpModel {
     {
         return this.connection!=null;
     }
-    public boolean Signup(ActionEvent event, String username, String emailid, String password) throws SQLException {
+    public boolean Signup(ActionEvent event, String username, String emailid, String password , int age) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM LoginDB where Emailid = ?";
@@ -37,11 +37,12 @@ public class SignUpModel {
             }
             else
             {
-                String sqlInsert = "INSERT INTO LoginDB (Username, Emailid, Password) VALUES (?, ?, ?)";
+                String sqlInsert = "INSERT INTO LoginDB (Username, Emailid, Password, Age) VALUES (?, ?, ?, ?)";
                 PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
                 stmt.setString(1,username);
                 stmt.setString(2,emailid);
                 stmt.setString(3,password);
+                stmt.setInt(4,age);
                 stmt.executeUpdate();
                 stmt.close();
                 return true;
