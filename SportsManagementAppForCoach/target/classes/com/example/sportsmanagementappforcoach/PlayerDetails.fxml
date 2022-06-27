@@ -35,7 +35,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="139.0" fitWidth="198.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="PlayerDetailsImageView" fitHeight="139.0" fitWidth="190.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="PlayerDetailsNameLabel" layoutX="53.0" layoutY="163.0" prefHeight="18.0" prefWidth="131.0" />
                   <Label fx:id="PlayerDetailsRoleLabel" layoutX="53.0" layoutY="207.0" prefHeight="18.0" prefWidth="131.0" />
                   <Label fx:id="PlayerDetailsAgeLabel" layoutX="53.0" layoutY="255.0" prefHeight="18.0" prefWidth="58.0" />

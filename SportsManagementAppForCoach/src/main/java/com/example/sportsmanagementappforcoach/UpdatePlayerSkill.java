@@ -9,40 +9,100 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class UpdatePlayerSkill {
+public class UpdatePlayerSkill implements Initializable {
 
     private Coach UpdatePlayerSkillCoach;
     private String UpdatePlayerSkillTeamName;
     private int UpdatePlayerSkillTeamNumber;
     private Player UpdatePlayerSkillPagePlayer;
     private ArrayList<PlayerSkilL>UpdatePlayerSkillPagePlayerSkill;
+    @FXML
+    private Button UpdatePlayerSKillChoosePhotoButton;
+
+    @FXML
+    private AnchorPane UpdatePlayerSKillMainAnchorPane;
+
+    @FXML
+    private TextField UpdatePlayerSKillRoleTextFIeld;
+
+    @FXML
+    private TextField UpdatePlayerSkillAgeTextField;
 
     @FXML
     private Button UpdatePlayerSkillBackButton;
 
     @FXML
-    private VBox UpdatePlayerSkillPageSKillVbox;
+    private ImageView UpdatePlayerSkillImageView;
 
     @FXML
-    private TextField UpdatePlayerSkillNameTextField;
+    private Label UpdatePlayerSkillNameLabel;
+
+    @FXML
+    private Label UpdatePlayerSkillPageCheckLabel;
+
+    @FXML
+    private VBox UpdatePlayerSkillPageSKillVbox;
 
     @FXML
     private Button UpdatePlayerSkillSubmitButton;
 
     @FXML
-    private Label UpdatePlayerSkillPageCheckLabel;
+    void OnUpdatePlayerSkillChoosePhotoButtonClicked(ActionEvent event) {
+        FileChooser open= new FileChooser();
+        Stage stage=(Stage) UpdatePlayerSKillMainAnchorPane.getScene().getWindow();
+        File file=open.showOpenDialog(stage);
+        if(file!=null)
+        {
+            String img_path=file.getAbsolutePath();
+
+            img_path=img_path.replace("\\","\\\\");
+
+            Image image= new Image(file.toURI().toString(),120,120,false,true);
+            UpdatePlayerSkillImageView.setImage(image);
+            UpdatePlayerSkillPagePlayer.setImagePath(img_path);
+            System.out.println(UpdatePlayerSkillPagePlayer.getImagePath());
+        }
+        else
+        {
+            System.out.println("pic is missing");
+        }
+    }
+
+    private int MakeInt(String num)
+    {
+        int ans = 0 ;
+        for(int i=0;i<num.length();i++)
+        {
+            ans*=10;
+            ans+=num.charAt(i);
+            ans-='0';
+        }
+        return ans;
+    }
 
     @FXML
     void OnUpdatePlayerSkillBackButtonClick(ActionEvent event) throws SQLException, IOException {
@@ -53,7 +113,8 @@ public class UpdatePlayerSkill {
     @FXML
     void OnUpdatePlayerSkillSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
         DBResources dbResources = new DBResources();
-        String name = UpdatePlayerSkillNameTextField.getText();
+        UpdatePlayerSkillPagePlayer.setRole(UpdatePlayerSKillRoleTextFIeld.getText());
+        UpdatePlayerSkillPagePlayer.setAge(MakeInt(UpdatePlayerSkillAgeTextField.getText()));
         for(int i=0;i<UpdatePlayerSkillPageSKillVbox.getChildren().size();i++)
         {
             if(UpdatePlayerSkillPagePlayerSkill.get(i).getSkillValueType()==1)
@@ -71,27 +132,32 @@ public class UpdatePlayerSkill {
                 UpdatePlayerSkillPagePlayerSkill.get(i).setValue(x);
             }
         }
-        UpdatePlayerSkillPagePlayer = new Player();
-        UpdatePlayerSkillPagePlayer.setPlayerTeamName(UpdatePlayerSkillTeamName);
         UpdatePlayerSkillPagePlayer.setSkills(UpdatePlayerSkillPagePlayerSkill);
-        UpdatePlayerSkillPagePlayer.setName(name);
-        UpdatePlayerSkillPagePlayer.setEmailid(UpdatePlayerSkillCoach.getEmailid());
 
         dbResources.InsertPlayerSkill(UpdatePlayerSkillPagePlayer);
+        dbResources.playerInfoUpdate(UpdatePlayerSkillPagePlayer);
         UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(UpdatePlayerSkillCoach.getEmailid(),UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).getName()));
         SceneController sceneController = new SceneController();
         sceneController.SwitchToPlayerList(event,UpdatePlayerSkillCoach,UpdatePlayerSkillTeamNumber);
 
     }
-    public void UpdatePlayerDataset(Coach coach, int idx, Player player) throws SQLException {
+    public void UpdatePlayerDataset(Coach coach, int idx, Player player) throws SQLException, MalformedURLException {
+        UpdatePlayerSkillNameLabel.setText(player.getName());
         DBResources dbResources = new DBResources();
-        UpdatePlayerSkillNameTextField.setText(player.getName());
+        UpdatePlayerSkillNameLabel.setText(player.getName());
         UpdatePlayerSkillCoach = coach;
         UpdatePlayerSkillTeamNumber = idx;
         UpdatePlayerSkillTeamName = UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).getName();
         UpdatePlayerSkillPagePlayerSkill = new ArrayList<>();
         UpdatePlayerSkillPagePlayerSkill = dbResources.getPlayerSkillListdb(coach,idx);
         UpdatePlayerSkillPageSKillVbox.setSpacing(5);
+        UpdatePlayerSKillRoleTextFIeld.setText(player.getRole());
+        UpdatePlayerSkillAgeTextField.setText(toString(player.getAge()));
+        UpdatePlayerSkillPagePlayer = player;
+
+        Path imageFile = Paths.get(player.getImagePath());
+        UpdatePlayerSkillImageView.setImage(new Image(imageFile.toUri().toURL().toExternalForm()));
+
         for(int i=0;i<UpdatePlayerSkillPagePlayerSkill.size();i++) {
             Label newlabel = new Label(UpdatePlayerSkillPagePlayerSkill.get(i).getSkillName());
             newlabel.setPrefWidth(70);
@@ -156,5 +222,17 @@ public class UpdatePlayerSkill {
 
     private String toString(double value) {
             return String.valueOf((int)value);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        UpdatePlayerSkillAgeTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    UpdatePlayerSkillAgeTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 }

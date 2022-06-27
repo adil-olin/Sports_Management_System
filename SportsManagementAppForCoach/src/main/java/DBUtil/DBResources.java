@@ -155,7 +155,20 @@ public class DBResources {
         }
         return  arr;
     }
-    public Boolean insertPlayer(Coach coach , int teamnumber, String playername) throws SQLException {
+
+    public void playerInfoUpdate(Player player) throws SQLException {
+        String sql = "Update PlayerInfo SET Age = ? , PicPath = ? , Role = ? WHERE Emailid = ? and TeamName= ? and PlayerName = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        stmt.setInt(1,player.getAge());
+        stmt.setString(2,player.getImagePath());
+        stmt.setString(3,player.getRole());
+        stmt.setString(4,player.getEmailid());
+        stmt.setString(5,player.getPlayerTeamName());
+        stmt.setString(6,player.getName());
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    public Boolean insertPlayer(Coach coach , int teamnumber, Player player) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM PlayerInfo where Emailid = ? and TeamName = ? and PlayerName = ?";
@@ -164,7 +177,7 @@ public class DBResources {
             pr = this.connection.prepareStatement(sql);
             pr.setString(1,coach.getEmailid());
             pr.setString(2,coach.getTeamArrayList().get(teamnumber).getName());
-            pr.setString(3,playername);
+            pr.setString(3,player.getName());
             rs = pr.executeQuery();
             if(rs.next())
             {
@@ -172,11 +185,15 @@ public class DBResources {
             }
             else
             {
-                String sqlInsert = "INSERT INTO PlayerInfo (Emailid , TeamName , PlayerName) VALUES (?, ?, ?)";
+                String sqlInsert = "INSERT INTO PlayerInfo (Emailid , TeamName , PlayerName , Age , PicPath , Role) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement stmt = this.connection.prepareStatement(sqlInsert);
                 stmt.setString(1,coach.getEmailid());
                 stmt.setString(2,coach.getTeamArrayList().get(teamnumber).getName());
-                stmt.setString(3,playername);
+                stmt.setString(3,player.getName());
+                stmt.setInt(4,player.getAge());
+                stmt.setString(5,player.getImagePath());
+                stmt.setString(6,player.getRole());
+
                 stmt.executeUpdate();
                 stmt.close();
                 return true;

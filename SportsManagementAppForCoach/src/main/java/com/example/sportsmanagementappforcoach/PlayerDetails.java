@@ -9,11 +9,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -27,6 +32,8 @@ public class PlayerDetails{
     @FXML
     private Label PlayerDetailsAgeLabel;
 
+    @FXML
+    private ImageView PlayerDetailsImageView;
     @FXML
     private Button PlayerDetailsBackButton;
 
@@ -72,13 +79,15 @@ public class PlayerDetails{
         SceneController sceneController = new SceneController();
         sceneController.SwitchtoUpdatePlayerSkill(event,PlayerDetailsCoach,PlayerDetailsTeamid,PlayerDetailssplayer);
     }
-    public void setPlayerDetailsData(Coach coach , int id ,Player player ) throws SQLException {
+    public void setPlayerDetailsData(Coach coach , int id ,Player player ) throws SQLException, MalformedURLException {
         PlayerDetailsCoach = coach;
         PlayerDetailssplayer = player;
         PlayerDetailsTeamid = id;
         PlayerDetailsNameLabel.setText(player.getName());
         PlayerDetailsRoleLabel.setText(player.getRole());
         PlayerDetailsAgeLabel.setText(Integer.toString(player.getAge()));
+        Path imageFile = Paths.get(player.getImagePath());
+        PlayerDetailsImageView.setImage(new Image(imageFile.toUri().toURL().toExternalForm()));
         PlayerDetailsSkillListVbox.setSpacing(5);
         DBResources dbResources = new DBResources();
         PlayerDetailssplayer.setSkills(dbResources.getSkillList(coach.getEmailid(),coach.getTeamArrayList().get(id).getName(),player.getName()));

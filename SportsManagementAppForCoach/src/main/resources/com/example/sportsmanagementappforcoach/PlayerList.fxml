@@ -25,14 +25,10 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="200.0" layoutY="146.0" prefHeight="274.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="599.0">
-                    <children>
-                        <VBox fx:id="PlayerListPlayerNameButtonVbox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    </children>
-                </AnchorPane>
-            </content>
+        <ScrollPane hbarPolicy="NEVER" layoutX="200.0" layoutY="146.0" prefHeight="274.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <content>
+            <VBox fx:id="PlayerListPlayerNameButtonVbox" alignment="TOP_CENTER" prefHeight="274.0" prefWidth="597.0" style="-fx-background-color: Grey;" />
+         </content>
         </ScrollPane>
         <Button fx:id="PlayerListEditTeamButton" layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#OnPlayerListEditTeamButtonClick" prefHeight="26.0" prefWidth="98.0" text="Edit Team" />
         <ChoiceBox fx:id="PlayerListSortingChoiceBox" layoutX="402.0" layoutY="84.0" prefWidth="150.0" />

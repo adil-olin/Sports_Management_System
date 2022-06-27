@@ -19,18 +19,14 @@
          </font>
       </Label>
       <Button fx:id="HomePageAddTeamButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnHomePageAddTeamButtonClick" style="-fx-background-color: orange;" text="Add Team" />
-      <ScrollPane layoutX="141.0" layoutY="160.0" prefHeight="298.0" prefWidth="600.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="598.0">
-               <children>
-                  <VBox fx:id="HomePageTeamButtonVbox" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: Grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </content>
+      <ScrollPane hbarPolicy="NEVER" layoutX="141.0" layoutY="160.0" prefHeight="298.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <content>
+            <VBox fx:id="HomePageTeamButtonVbox" alignment="TOP_CENTER" prefHeight="299.0" prefWidth="594.0" spacing="10.0" style="-fx-background-color: Grey;">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
       </ScrollPane>
       <Label fx:id="HomePageUserNameLabel1" layoutX="355.0" layoutY="40.0" prefHeight="18.0" prefWidth="42.0" text="coach!" />
       <Button fx:id="HomePageEditTeamListButton" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#OnHomePageEditTeamListButtonClick" prefHeight="26.0" prefWidth="108.0" text="Edit Team List" />

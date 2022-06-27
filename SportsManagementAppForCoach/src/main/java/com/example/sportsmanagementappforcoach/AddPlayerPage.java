@@ -15,16 +15,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddPlayerPage {
+public class AddPlayerPage implements Initializable{
 
     private Coach AddPlayerCoach;
     private String AddPlayerTeamName;
@@ -36,16 +42,57 @@ public class AddPlayerPage {
     private Button AddPlayerBackButton;
 
     @FXML
-    private VBox AddPlayerPageSKillVbox;
+    private Label AddPlayerPageInsertPhotoLabel;
 
     @FXML
     private TextField AddPlayerNameTextField;
 
     @FXML
-    private Button AddPlayerSubmitButton;
+    private TextField AddPlayerPageAgeTextField;
 
     @FXML
     private Label AddPlayerPageCheckLabel;
+
+    @FXML
+    private Button AddPlayerPageChoosePhotoButton;
+
+    @FXML
+    private ImageView AddPlayerPageImageView;
+
+    @FXML
+    private AnchorPane AddPlayerPageMainAnchorPane;
+
+    @FXML
+    private TextField AddPlayerPageRoleTextfield;
+
+    @FXML
+    private VBox AddPlayerPageSKillVbox;
+
+    @FXML
+    private Button AddPlayerSubmitButton;
+
+
+    @FXML
+    void OnAddPlayerPageChoosePhotoButtonClicked(ActionEvent event) {
+        FileChooser open= new FileChooser();
+        Stage stage=(Stage) AddPlayerPageMainAnchorPane.getScene().getWindow();
+        File file=open.showOpenDialog(stage);
+        if(file!=null)
+        {
+            String img_path=file.getAbsolutePath();
+
+            img_path=img_path.replace("\\","\\\\");
+            
+            Image image= new Image(file.toURI().toString(),120,120,false,true);
+            AddPlayerPageImageView.setImage(image);
+            AddPlayerPagePlayer.setImagePath(img_path);
+            AddPlayerPageInsertPhotoLabel.setText("");
+        }
+        else
+        {
+            System.out.println("pic is missing");
+        }
+    }
 
     @FXML
     void OnAddPlayerBackButtonClick(ActionEvent event) throws SQLException, IOException {
@@ -53,15 +100,43 @@ public class AddPlayerPage {
         sceneController.SwitchToPlayerList(event,AddPlayerCoach,AddPlayerTeamNumber);
     }
 
+    private int MakeInt(String num)
+    {
+        int ans = 0 ;
+        for(int i=0;i<num.length();i++)
+        {
+            ans*=10;
+            ans+=num.charAt(i);
+            ans-='0';
+        }
+        return ans;
+    }
     @FXML
     void OnAddPlayerSubmitButtonClick(ActionEvent event) throws SQLException, IOException {
         DBResources dbResources = new DBResources();
         String name = AddPlayerNameTextField.getText();
+        AddPlayerPagePlayer.setPlayerTeamName(AddPlayerTeamName);
+        AddPlayerPagePlayer.setSkills(AddPlayerPagePlayerSkill);
+        AddPlayerPagePlayer.setName(name);
+        AddPlayerPagePlayer.setEmailid(AddPlayerCoach.getEmailid());
+        AddPlayerPagePlayer.setAge(MakeInt(AddPlayerPageAgeTextField.getText()));
         if(name.isEmpty())
         {
-            AddPlayerPageCheckLabel.setText("Please Insert A name");
+            AddPlayerPageCheckLabel.setText("Please Insert All Information");
         }
-        else if(dbResources.insertPlayer(AddPlayerCoach,AddPlayerTeamNumber,name))
+        else if(AddPlayerPageImageView.getImage().isError())
+        {
+            AddPlayerPageCheckLabel.setText("Please Insert All Information");
+        }
+        else if(AddPlayerPageAgeTextField.getText().isEmpty())
+        {
+            AddPlayerPageCheckLabel.setText("Please Insert All Information");
+        }
+        else if(AddPlayerPageRoleTextfield.getText().isEmpty())
+        {
+            AddPlayerPageCheckLabel.setText("Please Insert All Information");
+        }
+        else if(dbResources.insertPlayer(AddPlayerCoach,AddPlayerTeamNumber,AddPlayerPagePlayer))
         {
             for(int i=0;i<AddPlayerPageSKillVbox.getChildren().size();i++)
             {
@@ -80,11 +155,6 @@ public class AddPlayerPage {
                     AddPlayerPagePlayerSkill.get(i).setValue(x);
                 }
             }
-            AddPlayerPagePlayer = new Player();
-            AddPlayerPagePlayer.setPlayerTeamName(AddPlayerTeamName);
-            AddPlayerPagePlayer.setSkills(AddPlayerPagePlayerSkill);
-            AddPlayerPagePlayer.setName(name);
-            AddPlayerPagePlayer.setEmailid(AddPlayerCoach.getEmailid());
 
             dbResources.InsertPlayerSkill(AddPlayerPagePlayer);
             AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(AddPlayerCoach.getEmailid(),AddPlayerCoach.getTeamArrayList().get(AddPlayerTeamNumber).getName()));
@@ -154,5 +224,18 @@ public class AddPlayerPage {
                 AddPlayerPageSKillVbox.getChildren().add(tmphBox);
             }
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        AddPlayerPagePlayer = new Player();
+        AddPlayerPageAgeTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    AddPlayerPageAgeTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 }

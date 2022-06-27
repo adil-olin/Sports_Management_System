@@ -14,9 +14,9 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="90.0" layoutY="79.0" prefHeight="267.0" prefWidth="406.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="90.0" layoutY="73.0" prefHeight="284.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <content>
-            <VBox fx:id="TeamListEditTeamListVBox" alignment="CENTER" prefHeight="238.0" prefWidth="264.0" translateX="100.0" translateY="15.0" />
+            <VBox fx:id="TeamListEditTeamListVBox" prefHeight="283.0" prefWidth="596.0" />
          </content>
       </ScrollPane>
       <Button fx:id="TeamListEditBackButton" layoutX="505.0" layoutY="34.0" mnemonicParsing="false" onAction="#OnTeamListEditBackButtonClick" text="Back" />
