@@ -39,6 +39,27 @@ public class DBResources {
             return null;
         }
     }
+    public int getCoachtAge(String EmailId) throws SQLException {
+        String sql = "SELECT * FROM LoginDB WHERE Emailid = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        stmt.setString(1,EmailId);
+        ResultSet res = stmt.executeQuery();
+        int resu= res.getInt("Age");
+        res.close();
+        stmt.close();
+        return resu;
+
+    }
+    public void setCoachAge(String EmailId, int age,String Pass) throws SQLException {
+        String sql = "UPDATE LoginDB SET Age = ?, Password = ? where Emailid = ?";
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        System.out.println(age);
+        stmt.setInt(1,age);
+        stmt.setString(2,Pass);
+        stmt.setString(3,EmailId);
+        stmt.executeUpdate();
+        stmt.close();
+    }
     public ResultSet getDATA(String x,String y,int val) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;

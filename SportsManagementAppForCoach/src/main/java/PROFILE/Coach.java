@@ -26,7 +26,6 @@ public class Coach extends Human {
         DBResources dbResources = new DBResources();
         teamArrayList = dbResources.getTeamLists(this.getEmailid());
     }
-
     public void setId(int id) {
         Id = id;
     }

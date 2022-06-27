@@ -124,5 +124,27 @@ public class SceneController<Public> {
         stage.show();
 
     }
+    public void SwitchtoCoachProfile(ActionEvent event,Coach coach) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CoachProfile.fxml"));
+        root = loader.load();
+        CoachProfile coachProfile = loader.getController();
+        coachProfile.setCoachProfileData(coach); ;
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    public void SwitchtoCoachProfileEdit(ActionEvent event,Coach coach) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CoachProfileEdit.fxml"));
+        root = loader.load();
+        CoachProfileEdit coachProfileEdit = loader.getController();
+        coachProfileEdit.setCoachProfileEdit(coach) ;
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 }

@@ -33,9 +33,17 @@ public class HomePage {
     private Button HomePageEditTeamListButton;
 
     @FXML
+    private Button HomePageProfileButton;
+
+    @FXML
     void OnHomePageEditTeamListButtonClick(ActionEvent event) throws SQLException, IOException {
         SceneController sceneController = new SceneController();
         sceneController.SwitchtoEditTeamListPage(event, HomePageCoach);
+    }
+    @FXML
+    void OnHomePageProfileButtonClick(ActionEvent event) throws SQLException, IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.SwitchtoCoachProfile(event, HomePageCoach);
     }
     @FXML
     void OnHomePageAddTeamButtonClick(ActionEvent event) throws SQLException, IOException {

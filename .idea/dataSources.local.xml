@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-213.7172.25">
-    <data-source name="Coach.sqlite" uuid="750b4272-96bc-40ee-a368-ed35f6d52084">
+    <data-source name="Coach.sqlite" uuid="5a5e46c3-b08f-40fa-a5c5-c4e6fc4d9939">
       <database-info product="SQLite" version="3.36.0" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.36.0.3" dbms="SQLITE" exact-version="3.36.0" exact-driver-version="3.36">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
@@ -13,12 +13,6 @@
           <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
-    </data-source>
-    <data-source name="Coach.sqlite [2]" uuid="27d5c19b-c90c-4129-9fe0-bd382c118a7c">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
-      <secret-storage>master_key</secret-storage>
-      <auth-provider>no-auth</auth-provider>
-      <schema-mapping />
     </data-source>
   </component>
 </project>
