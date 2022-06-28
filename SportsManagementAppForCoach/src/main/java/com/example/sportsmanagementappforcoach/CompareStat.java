@@ -48,7 +48,7 @@ public class CompareStat {
     void OnCompareStatBackButtonClick(ActionEvent event) throws SQLException, IOException {
         setValueInt = 0;
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToHomePage(event,CompareStatCoach);
+        sceneController.SwitchtoPlayerDetailsPage(event,CompareStatCoach,TeamId,CompareStatPlayer1);
     }
     void SetCompareStatData(Coach coach, String teamname, Player player, int tdx) throws SQLException {
         CompareStatCoach = coach;

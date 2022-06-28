@@ -138,7 +138,7 @@ public class UpdatePlayerSkill implements Initializable {
         dbResources.playerInfoUpdate(UpdatePlayerSkillPagePlayer);
         UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).setPlayerArrayList(dbResources.getPlayerLists(UpdatePlayerSkillCoach.getEmailid(),UpdatePlayerSkillCoach.getTeamArrayList().get(UpdatePlayerSkillTeamNumber).getName()));
         SceneController sceneController = new SceneController();
-        sceneController.SwitchToPlayerList(event,UpdatePlayerSkillCoach,UpdatePlayerSkillTeamNumber);
+        sceneController.SwitchtoPlayerDetailsPage(event,UpdatePlayerSkillCoach,UpdatePlayerSkillTeamNumber,UpdatePlayerSkillPagePlayer);
 
     }
     public void UpdatePlayerDataset(Coach coach, int idx, Player player) throws SQLException, MalformedURLException {

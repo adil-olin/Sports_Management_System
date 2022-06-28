@@ -9,8 +9,8 @@ public class DBConnection {
     private static final String USERNAME = "dbuser";
     private static final String PASSWORD = "dbpassword";
     private static final String conn = "jdbc:mysql://localhost/login";
-    private static final String sqconn = "jdbc:sqlite:Coach.sqlite";
-    //private static final String sqconn = "jdbc:sqlite:/Users/galibmahmudjim/Documents/Sports_Management_System/SportsManagementAppForCoach/Coach.sqlite";
+    //private static final String sqconn = "jdbc:sqlite:Coach.sqlite";
+    private static final String sqconn = "jdbc:sqlite:/Users/galibmahmudjim/Documents/GitHub/Sports_Management_System/SportsManagementAppForCoach/Coach.sqlite";
     public static Connection getConnection()
     {
         try {
