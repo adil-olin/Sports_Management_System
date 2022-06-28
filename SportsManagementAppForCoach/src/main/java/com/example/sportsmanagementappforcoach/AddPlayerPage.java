@@ -120,6 +120,10 @@ public class AddPlayerPage implements Initializable{
         AddPlayerPagePlayer.setName(name);
         AddPlayerPagePlayer.setEmailid(AddPlayerCoach.getEmailid());
         AddPlayerPagePlayer.setAge(MakeInt(AddPlayerPageAgeTextField.getText()));
+        if(!AddPlayerPageRoleTextfield.getText().isEmpty())
+        {
+            AddPlayerPagePlayer.setRole(AddPlayerPageRoleTextfield.getText());
+        }
         if(name.isEmpty())
         {
             AddPlayerPageCheckLabel.setText("Please Insert All Information");
