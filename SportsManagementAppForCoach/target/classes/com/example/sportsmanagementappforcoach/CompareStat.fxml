@@ -5,24 +5,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="617.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.CompareStat">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="639.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.CompareStat">
     <children>
-        <SplitPane layoutX="5.0" layoutY="56.0" prefHeight="315.0" prefWidth="606.0" style="-fx-background-color: orange; -fx-border-color: navy;">
+      <ImageView fitHeight="428.0" fitWidth="646.0" layoutX="-5.0" layoutY="-10.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@login%202.jpg" />
+         </image>
+      </ImageView>
+        <SplitPane layoutX="19.0" layoutY="65.0" prefHeight="324.0" prefWidth="601.0" style="-fx-background-color: orange;">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="311.0" prefWidth="521.0" style="-fx-background-color: grey;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="311.0" prefWidth="521.0" style="-fx-background-color: white;">
                     <children>
-                        <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="258.0" prefWidth="288.0" vbarPolicy="ALWAYS">
+                        <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="258.0" prefWidth="294.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS">
                             <content>
-                                <VBox fx:id="CompareStatPlayerSkill1Vbox" prefHeight="236.0" prefWidth="271.0" translateY="20.0" />
+                                <VBox fx:id="CompareStatPlayerSkill1Vbox" prefHeight="236.0" prefWidth="271.0" style="-fx-background-color: white;" translateY="20.0" />
                             </content>
                         </ScrollPane>
-                        <ScrollPane hbarPolicy="NEVER" layoutX="293.0" layoutY="53.0" prefHeight="258.0" prefWidth="309.0" vbarPolicy="ALWAYS">
+                        <ScrollPane hbarPolicy="NEVER" layoutX="293.0" layoutY="53.0" prefHeight="258.0" prefWidth="306.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS">
                             <content>
-                                <VBox fx:id="CompareStatPlayerSkill2Vbox" prefHeight="235.0" prefWidth="271.0" translateY="20.0" />
+                                <VBox fx:id="CompareStatPlayerSkill2Vbox" prefHeight="235.0" prefWidth="271.0" style="-fx-background-color: white;" translateY="20.0" />
                             </content>
                         </ScrollPane>
                         <Label layoutX="14.0" layoutY="25.0" prefHeight="17.0" prefWidth="75.0" text="Player Name:" />
@@ -33,12 +40,12 @@
                 </AnchorPane>
             </items>
         </SplitPane>
-        <Label layoutX="274.0" layoutY="27.0" prefHeight="20.0" prefWidth="75.0" text="Compare">
+        <Label layoutX="284.0" layoutY="30.0" prefHeight="20.0" prefWidth="75.0" text="Compare" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button fx:id="CompareStatBackButton" layoutX="11.0" layoutY="8.0" mnemonicParsing="false" onAction="#OnCompareStatBackButtonClick" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Back" />
-        <ChoiceBox fx:id="CompareStatPlayerNameChoiceBox" layoutX="433.0" layoutY="25.0" prefWidth="150.0" />
+        <Button fx:id="CompareStatBackButton" layoutX="19.0" layoutY="11.0" mnemonicParsing="false" onAction="#OnCompareStatBackButtonClick" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: white;" text="Back" />
+        <ChoiceBox fx:id="CompareStatPlayerNameChoiceBox" layoutX="469.0" layoutY="24.0" prefWidth="150.0" style="-fx-background-color: white;" />
     </children>
 </AnchorPane>

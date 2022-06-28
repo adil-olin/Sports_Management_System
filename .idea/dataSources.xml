@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Coach.sqlite" uuid="5a5e46c3-b08f-40fa-a5c5-c4e6fc4d9939">
+    <data-source source="LOCAL" name="Coach.sqlite" uuid="a67f0b74-3517-4ee9-980c-59ae4a753fe5">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/SportsManagementAppForCoach/Coach.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../Sports_Management_System/SportsManagementAppForCoach/Coach.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

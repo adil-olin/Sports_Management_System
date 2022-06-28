@@ -4,16 +4,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="617.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.PlayerDetails">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="639.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportsmanagementappforcoach.PlayerDetails">
    <children>
-      <SplitPane dividerPositions="0.37702702702702695" layoutX="5.0" layoutY="56.0" prefHeight="315.0" prefWidth="606.0" style="-fx-background-color: orange; -fx-border-color: navy;">
+      <ImageView fitHeight="438.0" fitWidth="645.0" layoutY="-6.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@login%202.jpg" />
+         </image>
+      </ImageView>
+      <SplitPane dividerPositions="0.37702702702702695" layoutX="18.0" layoutY="56.0" prefHeight="315.0" prefWidth="607.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="219.0" style="-fx-background-color: grey;">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="219.0" style="-fx-background-color: white;">
                <children>
                   <Label layoutX="9.0" layoutY="161.0" text="Name: ">
                      <font>
@@ -45,21 +51,21 @@
                <children>
                   <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <VBox fx:id="PlayerDetailsSkillListVbox" prefHeight="310.0" prefWidth="370.0" />
+                        <VBox fx:id="PlayerDetailsSkillListVbox" prefHeight="310.0" prefWidth="370.0" style="-fx-background-color: white;" />
                      </content>
                   </ScrollPane>
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <Label layoutX="274.0" layoutY="27.0" prefHeight="20.0" prefWidth="52.0" text="Details">
+      <Label layoutX="274.0" layoutY="27.0" prefHeight="20.0" prefWidth="52.0" text="Details" textFill="#fcfafa">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="PlayerDetailsBackButton" layoutX="11.0" layoutY="8.0" mnemonicParsing="false" onAction="#OnPlayerDetailsBackButtonClick" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Back" />
-      <Button fx:id="PlayerDetailsUpdateButton" layoutX="530.0" layoutY="23.0" mnemonicParsing="false" onAction="#OnPlayerDetailsUpdateButtonClick" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Update" />
-      <Button fx:id="PlayerDetailsDeleteButton" layoutX="508.0" layoutY="381.0" mnemonicParsing="false" onAction="#OnPlayerDetailsDeleteButtonClick" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: grey; -fx-border-color: navy;" text="Delete" />
-      <Button fx:id="PlayerDetailsCompareButton" layoutX="189.0" layoutY="383.0" mnemonicParsing="false" onAction="#OnPlayerDetailsCompareButtonClick" prefHeight="26.0" prefWidth="172.0" text="Compare" />
+      <Button fx:id="PlayerDetailsBackButton" layoutX="15.0" layoutY="11.0" mnemonicParsing="false" onAction="#OnPlayerDetailsBackButtonClick" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: white;" text="Back" />
+      <Button fx:id="PlayerDetailsUpdateButton" layoutX="559.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnPlayerDetailsUpdateButtonClick" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: white;" text="Update" />
+      <Button fx:id="PlayerDetailsDeleteButton" layoutX="559.0" layoutY="382.0" mnemonicParsing="false" onAction="#OnPlayerDetailsDeleteButtonClick" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: white;" text="Delete" />
+      <Button fx:id="PlayerDetailsCompareButton" layoutX="240.0" layoutY="382.0" mnemonicParsing="false" onAction="#OnPlayerDetailsCompareButtonClick" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: orange;" text="Compare" />
    </children>
 </AnchorPane>
