@@ -23,7 +23,7 @@ public class DBConnection {
 
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(sqconn);
-            if(isTableExits("LoginDB")) createALL();
+            if(!isTableExits("LoginDB")) createALL();
             return connection;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -31,6 +31,43 @@ public class DBConnection {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+
+    static void createALL()
+    {
+        //new java.io.File(".").getCanonicalPath()
+        try {
+            PreparedStatement statement = null;
+            String command = "CREATE TABLE LoginDB(Id integer not null primary key autoincrement,  Username varchar, Emailid varchar, Password varchar, Age INTEGER)";
+            statement = connection.prepareStatement(command);
+            statement.executeUpdate();
+
+            command = "CREATE TABLE PlayerDetails(Id integer not null primary key autoincrement, Emailid varchar, TeamName varchar, SkillName varchar, SkillValue int, PlayerName varchar,Role varchar, SkillValueType int )";
+            statement = connection.prepareStatement(command);
+            statement.executeUpdate();
+
+            command = "CREATE TABLE PlayerInfo(Id integer not null primary key autoincrement, PlayerName varchar, Age int, Height int, PicPath varchar, Emailid varchar, TeamName varchar, Role varchar )";
+            statement = connection.prepareStatement(command);
+            statement.executeUpdate();
+
+            command = "CREATE TABLE SkillForTeam(Id integer not null primary key autoincrement, Emailid varchar, TeamName varchar, SkillName varchar, ValueType int)";
+            statement = connection.prepareStatement(command);
+            statement.executeUpdate();
+
+            command = "CREATE TABLE TeamForCoach(Id integer not null primary key autoincrement, Emailid varchar, TeamName varchar)";
+            statement = connection.prepareStatement(command);
+            statement.executeUpdate();
+
+
+
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     public static boolean isTableExits(String name){
@@ -49,38 +86,4 @@ public class DBConnection {
         }
     }
 
-    static void createALL()
-    {
-
-        try {
-            PreparedStatement statement = null;
-            String command = "CREATE TABLE LoginDB(id integer not null primary key autoincrement, id int, Username varchar, Emailid varchar, Password varchar, Age INTEGER)";
-            statement = connection.prepareStatement(command);
-            statement.executeUpdate();
-
-            command = "CREATE TABLE PlayerDetails(id integer not null primary key autoincrement, id int, Emailid varchar, TeamName varchar, SkillValue int,PlayerName varchar,Role varchar, SkillValueType int )";
-            statement = connection.prepareStatement(command);
-            statement.executeUpdate();
-
-            command = "CREATE TABLE PlayerInfo(no integer not null primary key autoincrement, id int, PlayerName varchar, Age int, Height int, PicPath varchar, Emailid varchar, TeamName varchar, Role varchar )";
-            statement = connection.prepareStatement(command);
-            statement.executeUpdate();
-
-            command = "CREATE TABLE SkillForTeam(no integer not null primary key autoincrement, id int, Emailid varchar, TeamName varchar, SkillName varchar, ValueType int)";
-            statement = connection.prepareStatement(command);
-            statement.executeUpdate();
-
-            command = "CREATE TABLE TeamForCoach(no integer not null primary key autoincrement, id int, Emailid varchar, Teamname varchar)";
-            statement = connection.prepareStatement(command);
-            statement.executeUpdate();
-
-
-
-
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-
-    }
 }
